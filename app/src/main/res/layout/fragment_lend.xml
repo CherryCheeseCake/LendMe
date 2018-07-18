@@ -40,13 +40,6 @@
         android:layout_marginLeft="7dp"
         android:src="@drawable/horizontal_line" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/imageView"
-        android:layout_marginTop="5dp"
-        android:id="@+id/name"
-        android:text="full name"/>
+
 
 </RelativeLayout>
