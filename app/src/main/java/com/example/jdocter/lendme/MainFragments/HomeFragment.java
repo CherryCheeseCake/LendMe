@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
                 }
         );
 
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.borrow);
     }
 
 }

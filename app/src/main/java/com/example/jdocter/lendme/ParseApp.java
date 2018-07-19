@@ -15,9 +15,9 @@ public class ParseApp extends Application {
         ParseObject.registerSubclass(Post.class);
 
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
-                .applicationId("jd_parstagram")
+                .applicationId("CanIBorrow")
                 .clientKey("qwe123!@#")
-                .server("http://jd-parstagram.herokuapp.com/parse")
+                .server("http://caniborrow.herokuapp.com/parse")
                 .build();
 
         Parse.initialize(configuration);
