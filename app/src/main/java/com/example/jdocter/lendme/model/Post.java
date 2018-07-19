@@ -14,7 +14,7 @@ import java.util.Date;
 public class Post extends ParseObject {
     public static final String descriptionKey = "description";
     public static final String imageKey = "image";
-    public static final String userKey = "ownerId";
+    public static final String ownerKey = "ownerId";
     public static final String priceKey = "price";
 
 
@@ -33,11 +33,11 @@ public class Post extends ParseObject {
     }
 
     public ParseUser getUser() {
-        return getParseUser(userKey);
+        return getParseUser(ownerKey);
     }
 
     public void setUser(ParseUser user) {
-        put(userKey,user);
+        put(ownerKey,user);
     }
 
     public String getTimestamp() { return getRelativeTimeAgo(getCreatedAt()); }
@@ -64,6 +64,11 @@ public class Post extends ParseObject {
 
         public Query withUser() {
             include("user");
+            return this;
+        }
+
+        public Query byUser(ParseUser user) {
+            whereEqualTo(ownerKey,user);
             return this;
         }
         // TODO user specified query

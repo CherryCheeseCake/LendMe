@@ -9,8 +9,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.jdocter.lendme.MainFragments.HomeFragment;
 import com.example.jdocter.lendme.MainFragments.LogoutFragment;
@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
     private ActionBarDrawerToggle drawerToggle;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
+
+        // initiate home fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
+
 
         drawerToggle = setupDrawerToggle();
         // Tie DrawerLayout events to the ActionBarToggle

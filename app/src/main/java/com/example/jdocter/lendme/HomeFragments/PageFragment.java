@@ -36,4 +36,6 @@ public class PageFragment extends Fragment {
         textView.setText("Fragment #" + mPage);
         return view;
     }
+
+
 }
