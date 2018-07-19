@@ -17,7 +17,21 @@ public class BorrowFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_borrow, container, false);
+
     }
+
+/*
+    private View cachedView;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (cachedView == null) {
+            // Inflate and populate
+            cachedView = inflater.inflate(R.layout.fragment_borrow, container, false);
+        }
+
+        return cachedView;
+    }*/
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -26,7 +40,7 @@ public class BorrowFragment extends Fragment {
 
             // Get the ViewPager and set it's PagerAdapter so that it can display items
             ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-            viewPager.setAdapter(new SampleFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
+            viewPager.setAdapter(new SampleFragmentPagerAdapter(getChildFragmentManager(),
                     getContext()));
 
             // Give the TabLayout the ViewPager
@@ -42,6 +56,6 @@ public class BorrowFragment extends Fragment {
             for (int i=0; i<imageResId.length; i++){
                 tabLayout.getTabAt(i).setIcon(imageResId[i]);
             }
-
     }
+
 }
