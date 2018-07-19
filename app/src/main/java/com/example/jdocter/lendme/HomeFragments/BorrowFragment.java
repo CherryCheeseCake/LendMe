@@ -33,21 +33,15 @@ public class BorrowFragment extends Fragment {
             TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
             tabLayout.setupWithViewPager(viewPager);
 
-    }
-/*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
 
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) getView().findViewById(R.id.viewpager);
-        viewPager.setAdapter(new SampleFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
-                BorrowFragment.this));
+            int[] imageResId={
+                    R.drawable.borrow_tending,
+                    R.drawable.borrow_favorite
+            };
 
-        // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) getView().findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+            for (int i=0; i<imageResId.length; i++){
+                tabLayout.getTabAt(i).setIcon(imageResId[i]);
+            }
+
     }
-    */
 }
