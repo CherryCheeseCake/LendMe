@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
 public class CalenderFragment extends Fragment {
 
     CalendarPickerView calendar;
@@ -31,10 +32,10 @@ public class CalenderFragment extends Fragment {
         calendar = (CalendarPickerView) view.findViewById(R.id.calendar_view);
 
         final Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 10);
+        nextYear.add(Calendar.YEAR, 1);
 
         final Calendar lastYear = Calendar.getInstance();
-        lastYear.add(Calendar.YEAR, -10);
+        lastYear.add(Calendar.YEAR, -1);
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
@@ -58,16 +59,16 @@ public class CalenderFragment extends Fragment {
         }
         arrayList.add(newdate);
         arrayList.add(newdate2);
-
-
+        
 
         calendar.init(lastYear.getTime(), nextYear.getTime()) //
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
-                .withSelectedDate(new Date())
+                .withSelectedDates(arrayList)
                 // deactivates given dates, non selectable
                 .withDeactivateDates(list)
                 // highlight dates in red color, mean they are aleady used.
-                .withHighlightedDates(arrayList);
+                .withHighlightedDates(arrayList)
+                .displayOnly();
 
         return view;
     }
