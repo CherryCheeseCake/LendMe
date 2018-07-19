@@ -66,6 +66,7 @@ public class Post extends ParseObject {
             include("user");
             return this;
         }
+        // TODO user specified query
     }
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
