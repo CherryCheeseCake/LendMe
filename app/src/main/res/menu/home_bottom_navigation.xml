@@ -4,25 +4,26 @@
     <item
         android:id="@+id/calender"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
-        android:title=""
+        android:icon="@drawable/calendar"
+        android:title="Calendar"
         app:showAsAction="always" />
     <item
         android:id="@+id/borrow"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
-        android:title=""
+        android:icon="@drawable/borrow"
+        android:title="Borrow"
         app:showAsAction="always" />
     <item
         android:id="@+id/lend"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
-        android:title=""
+        android:icon="@drawable/lend"
+        android:title="Lend"
         app:showAsAction="always" />
     <item
         android:id="@+id/message"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/messaging"
+        android:title="Messaging"
         app:showAsAction="always" />
 
 </menu>
