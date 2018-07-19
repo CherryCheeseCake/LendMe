@@ -6,40 +6,95 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragments.LendFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_launcher_background" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvLends"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@id/imageView"
-        android:layout_alignTop="@id/imageView"
-        android:layout_marginRight="7dp"
-        android:src="@drawable/horizontal_line" />
+        android:layout_alignParentTop="true" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@id/imageView"
-        android:layout_alignTop="@id/imageView"
-        android:layout_marginLeft="7dp"
-        android:src="@drawable/horizontal_line" />
+        android:layout_gravity="center_horizontal|top"
+        android:layout_margin="5dp"
+        android:background= "@android:color/transparent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_launcher_background" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/imageView"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/imageView"
+            android:src="@drawable/horizontal_line" />
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/imageView"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/imageView"
+            android:src="@drawable/horizontal_line" />
+
+        <TextView
+            android:id="@+id/tvname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Full Name"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="\@username"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/tvInterests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUsername"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Interests"
+            android:textSize="12dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tvInterests"
+            android:text="\+\nCreate"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif-smallcaps"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 </RelativeLayout>
