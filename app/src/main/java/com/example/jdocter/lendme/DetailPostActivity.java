@@ -1,7 +1,10 @@
 package com.example.jdocter.lendme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,19 +25,33 @@ public class DetailPostActivity extends AppCompatActivity {
     TextView tvDescription;
     TextView tvTitleItem;
     TextView tvPrice;
+    Button btRequest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_post);
 
-        tvfullName = (TextView)findViewById(R.id.tvname);
-        tvUsername = (TextView)findViewById(R.id.tvUsername);
+        tvfullName = (TextView) findViewById(R.id.tvname);
+        tvUsername = (TextView) findViewById(R.id.tvUsername);
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         ivItemImage = (ImageView) findViewById(R.id.ivItemImage);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvTitleItem = (TextView) findViewById(R.id.tvTitleItem);
         tvPrice = (TextView) findViewById(R.id.tvPrice);
+        btRequest = (Button) findViewById(R.id.btRequest);
+
+        btRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DetailPostActivity.this, ItemCalendarActivity.class);
+                startActivity(i);
+
+            }
+
+        });
+
 
         String objectId = getIntent().getStringExtra("objectId");
 

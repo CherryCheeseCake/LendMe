@@ -136,7 +136,6 @@ public class CalenderFragment extends Fragment {
                 .withSelectedDates(arrayList)
                 .displayOnly();
 
-
         return view;
     }
 
