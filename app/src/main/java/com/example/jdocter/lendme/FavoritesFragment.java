@@ -14,7 +14,7 @@ public class FavoritesFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         TextView textView = new TextView(container.getContext());
         // tab page content
-        textView.setText("Android Tab Content");
+        textView.setText("FAVORITES FRAGMENT");
         textView.setGravity(Gravity.CENTER);
         return textView;
     }
