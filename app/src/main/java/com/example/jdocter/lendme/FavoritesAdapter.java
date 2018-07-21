@@ -14,6 +14,7 @@ import com.example.jdocter.lendme.model.Post;
 
 import java.util.List;
 
+
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
 
@@ -24,14 +25,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         mPosts=posts;
     }
         @Override
-        public FavoritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             context = parent.getContext();
             LayoutInflater inflater = LayoutInflater.from(context);
 
-            // Inflate the custom layout
             View postView = inflater.inflate(R.layout.item_post_borrow, parent, false);
 
-            // Return a new holder instance
             ViewHolder viewHolder = new ViewHolder(postView);
             return viewHolder;
         }
