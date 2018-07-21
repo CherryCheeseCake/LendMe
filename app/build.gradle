@@ -46,7 +46,7 @@ dependencies {
     // AnimatedVectorDrawableCompat
     implementation "com.android.support:transition:${supportLibVersion}"
     implementation "com.android.support:support-annotations:${supportLibVersion}"
-    implementation 'com.squareup:android-times-square:1.6.5@aar'
+    //implementation 'com.squareup:android-times-square:1.6.5@aar'
 
 
 }
