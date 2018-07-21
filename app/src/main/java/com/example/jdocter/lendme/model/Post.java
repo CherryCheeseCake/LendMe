@@ -54,6 +54,8 @@ public class Post extends ParseObject {
     public void setPrice(Float price) { put(priceKey, price); }
 
 
+
+
     public static class Query extends ParseQuery<Post> {
         public Query() {
             super(Post.class);
