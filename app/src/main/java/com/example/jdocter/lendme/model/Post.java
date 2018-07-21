@@ -11,6 +11,7 @@ import com.parse.ParseUser;
 import java.util.Date;
 
 @ParseClassName("Post")
+
 public class Post extends ParseObject {
     public static final String descriptionKey = "description";
     public static final String imageKey = "image";

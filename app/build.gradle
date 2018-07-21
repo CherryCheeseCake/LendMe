@@ -47,5 +47,7 @@ dependencies {
     implementation "com.android.support:transition:${supportLibVersion}"
     implementation "com.android.support:support-annotations:${supportLibVersion}"
     implementation 'com.squareup:android-times-square:1.6.5@aar'
+    implementation 'org.parceler:parceler-api:1.1.11'
+    annotationProcessor 'org.parceler:parceler:1.1.11'
 
 }

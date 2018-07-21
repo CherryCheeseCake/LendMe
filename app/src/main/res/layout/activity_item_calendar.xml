@@ -21,4 +21,15 @@
         app:tsquare_headerTextColor="@color/dateTimeRangePickerHeaderTextColor"
         />
 
+    <Button
+        android:id="@+id/btConfirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="@+id/calendar_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

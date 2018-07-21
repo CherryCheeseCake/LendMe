@@ -65,7 +65,6 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            // TODO stuff here
             int position=getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Post post = mLends.get(position);

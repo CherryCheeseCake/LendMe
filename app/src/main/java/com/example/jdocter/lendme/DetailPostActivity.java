@@ -42,10 +42,13 @@ public class DetailPostActivity extends AppCompatActivity {
         tvPrice = (TextView) findViewById(R.id.tvPrice);
         btRequest = (Button) findViewById(R.id.btRequest);
 
+        final String objectId = getIntent().getStringExtra("objectId");
+
         btRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(DetailPostActivity.this, ItemCalendarActivity.class);
+                i.putExtra("objectId",objectId);
                 startActivity(i);
 
             }
@@ -53,7 +56,6 @@ public class DetailPostActivity extends AppCompatActivity {
         });
 
 
-        String objectId = getIntent().getStringExtra("objectId");
 
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.getInBackground(objectId, new GetCallback<Post>() {
@@ -74,7 +76,7 @@ public class DetailPostActivity extends AppCompatActivity {
                     try {
                         tvfullName.setText(post.getUser().fetchIfNeeded().getString("fullName"));
                     } catch (ParseException e2) {
-                        e.printStackTrace();
+                        e2.printStackTrace();
                     }
                     try {
                         String profileUrl = post.getUser().fetchIfNeeded().getParseFile("profileImage").getUrl();
@@ -83,7 +85,7 @@ public class DetailPostActivity extends AppCompatActivity {
                                 .apply(new RequestOptions().transform(new CircleTransform(DetailPostActivity.this)))
                                 .into(ivProfileImage);
                     } catch (ParseException e3) {
-                        e.printStackTrace();
+                        e3.printStackTrace();
                     }
                     tvDescription.setText(post.getDescription());
                     tvTitleItem.setText(post.getItem());
