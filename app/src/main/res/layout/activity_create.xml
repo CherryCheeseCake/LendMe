@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateActivity">
+
+    <ImageView
+        android:id="@+id/ivPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/camera"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <EditText
+        android:id="@+id/etItemName"
+        android:layout_width="wrap_content"
+        android:textColorHighlight="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPostImage"
+        android:fontFamily="cursive"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/etPrice"
+        android:hint="Item name"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/etItemName"
+        android:fontFamily="cursive"
+        android:textColorHighlight="@color/colorPrimary"
+        android:hint="Description of your item"
+        android:textSize="14sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:layout_alignParentEnd="true"
+        android:textColorHighlight="@color/colorPrimary"
+        android:id="@+id/etPrice"
+        android:layout_below="@+id/ivPostImage"
+        android:hint="Price (per day)"
+        android:inputType="numberDecimal"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvAvailability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etDescription"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="cursive"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="Select item availability"
+        android:textColor="@color/darkGrey" />
+
+    <CheckedTextView
+        android:id="@+id/ctSunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_margin="9dp"
+        android:layout_toStartOf="@+id/ctMonday"
+        android:checked="false"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:gravity="center_horizontal"
+        android:onClick="onDayCheckboxClicked"
+        android:text=" S"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+    <CheckedTextView
+        android:id="@+id/ctMonday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_toStartOf="@+id/ctTuesday"
+        android:layout_margin="9dp"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:gravity="center_horizontal"
+        android:checked="false"
+        android:onClick="onDayCheckboxClicked"
+        android:text=" M"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+
+    <CheckedTextView
+        android:id="@+id/ctTuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_toStartOf="@+id/ctWednesday"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:gravity="center_horizontal"
+        android:onClick="onDayCheckboxClicked"
+        android:checked="false"
+        android:layout_margin="9dp"
+        android:text=" T"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+    <CheckedTextView
+        android:id="@+id/ctWednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:layout_margin="9dp"
+        android:checked="false"
+        android:gravity="center_horizontal"
+        android:onClick="onDayCheckboxClicked"
+        android:text=" W"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+    <CheckedTextView
+        android:id="@+id/ctThursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_toEndOf="@+id/ctWednesday"
+        android:layout_margin="9dp"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:checked="false"
+        android:gravity="center_horizontal"
+        android:onClick="onDayCheckboxClicked"
+        android:text=" Th"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+    <CheckedTextView
+        android:id="@+id/ctFriday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_margin="9dp"
+        android:layout_toEndOf="@+id/ctThursday"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:gravity="center_horizontal"
+        android:checked="false"
+        android:onClick="onDayCheckboxClicked"
+        android:text=" F"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+    <CheckedTextView
+        android:id="@+id/ctSaturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAvailability"
+        android:layout_margin="9dp"
+        android:layout_toEndOf="@+id/ctFriday"
+        android:checked="false"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="cursive"
+        android:gravity="center_horizontal"
+        android:layoutDirection="ltr"
+        android:onClick="onDayCheckboxClicked"
+        android:text=" S"
+        android:textColor="@color/darkGrey"
+        android:textSize="10sp" />
+
+    <ImageButton
+        android:id="@+id/ibCamera"
+        android:layout_width="43dp"
+        android:layout_height="44dp"
+        android:layout_alignBottom="@+id/ivPostImage"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/camera" />
+
+    <Button
+        android:id="@+id/btnLend"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/createbuttongradient"
+        android:fontFamily="cursive"
+        android:text="Lend"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp" />
+
+
+</RelativeLayout>

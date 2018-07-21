@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme.HomeFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.CircleTransform;
+import com.example.jdocter.lendme.CreateActivity;
 import com.example.jdocter.lendme.LendAdapter;
 import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.model.Post;
@@ -35,6 +38,8 @@ public class LendFragment extends Fragment {
     TextView tvfullName;
     TextView tvUsername;
     ImageView ivProfileImage;
+    Button btnCreate;
+    String launchCamera = "launchcamera";
 
 
 
@@ -56,6 +61,7 @@ public class LendFragment extends Fragment {
         tvfullName = view.findViewById(R.id.tvname);
         tvUsername = view.findViewById(R.id.tvUsername);
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
+        btnCreate = view.findViewById(R.id.btnCreate);
         ParseUser user = ParseUser.getCurrentUser();
 
 
@@ -71,6 +77,17 @@ public class LendFragment extends Fragment {
             e.printStackTrace();
         }
         tvUsername.setText(user.getUsername());
+
+        // create new post onclick listener
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateActivity.class);
+                intent.putExtra(launchCamera,true);
+                startActivity(intent);
+
+            }
+        });
 
         // load image using glide
         Glide.with(getActivity())
