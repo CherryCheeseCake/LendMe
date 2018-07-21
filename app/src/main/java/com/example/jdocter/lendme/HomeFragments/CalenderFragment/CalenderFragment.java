@@ -1,4 +1,4 @@
-package com.example.jdocter.lendme.HomeFragments;
+package com.example.jdocter.lendme.HomeFragments.CalenderFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+//import com.squareup.timessquare.CalendarCellDecorator;
+//import com.squareup.timessquare.CalendarPickerView;
 
 public class CalenderFragment extends Fragment {
 
@@ -27,23 +31,20 @@ public class CalenderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view= inflater.inflate(R.layout.fragment_calender, container, false);
+        final View view = inflater.inflate(R.layout.fragment_calender, container, false);
         calendar = (CalendarPickerView) view.findViewById(R.id.calendar_view);
 
         final Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 10);
+        nextYear.add(Calendar.YEAR, 1);
 
         final Calendar lastYear = Calendar.getInstance();
-        lastYear.add(Calendar.YEAR, -10);
-
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        calendar.deactivateDates(list);
+        lastYear.add(Calendar.YEAR, -1);
 
         ArrayList<Date> arrayList = new ArrayList<>();
         SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-        String strdate = "22-2-2018";
+        String strdate = "7-2-2018";
         String strdate2 = "23-2-2018";
+
         Date newdate = null;
         try {
             newdate = dateformat.parse(strdate);
@@ -61,17 +62,17 @@ public class CalenderFragment extends Fragment {
 
 
 
-        calendar.init(lastYear.getTime(), nextYear.getTime()) //
+        //calendar.setCustomDayView(new SampleDayViewAdapter());
+        //calendar.setDecorators(Arrays.<CalendarCellDecorator>asList(new SampleDecorator()));
+        calendar.init(lastYear.getTime(), nextYear.getTime(),new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
-                .withSelectedDate(new Date())
-                // deactivates given dates, non selectable
-                .withDeactivateDates(list)
-                // highlight dates in red color, mean they are aleady used.
-                .withHighlightedDates(arrayList);
+                .withSelectedDates(arrayList)
+                .displayOnly();
+
 
         return view;
     }
+
+
 }
-
-
 

@@ -1,6 +1,7 @@
 package com.example.jdocter.lendme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,7 +65,15 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            // TODO stuff here
+            int position=getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Post post = mLends.get(position);
+                Intent intent = new Intent(context, DetailPostActivity.class);
+                intent.putExtra("objectId", post.getObjectId());
+                // show the activity
+                context.startActivity(intent);
+            }
+
         }
     }
 }

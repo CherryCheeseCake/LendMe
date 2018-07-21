@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragments.CalenderFragment">
+    tools:context=".HomeFragments.CalenderFragment.CalenderFragment">
 
     <com.savvi.rangedatepicker.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,5 +24,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tsquare_dividerColor="@color/colorPrimary"
         app:tsquare_headerTextColor="@color/android:black" />
+    <!--<com.squareup.timessquare.CalendarPickerView-->
+        <!--android:id="@+id/calendar_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--/>-->
+
 
 </android.support.constraint.ConstraintLayout>

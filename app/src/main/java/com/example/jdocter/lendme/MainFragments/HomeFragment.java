@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jdocter.lendme.HomeFragments.BorrowFragment;
-import com.example.jdocter.lendme.HomeFragments.CalenderFragment;
+import com.example.jdocter.lendme.HomeFragments.CalenderFragment.CalenderFragment;
 import com.example.jdocter.lendme.HomeFragments.LendFragment;
 import com.example.jdocter.lendme.HomeFragments.MessageFragment;
 import com.example.jdocter.lendme.R;
@@ -51,7 +51,6 @@ public class HomeFragment extends Fragment {
 
         bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
 
-
         // handle navigation selection
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,6 +70,7 @@ public class HomeFragment extends Fragment {
                             case R.id.message:
                                 fragmentTransaction.replace(R.id.homeContainer, messageFragment).commit();
                                 return true;
+
                         }
                         return true; // TODO this supposed to be here?
                     }

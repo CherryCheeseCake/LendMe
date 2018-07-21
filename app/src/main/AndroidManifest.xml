@@ -30,6 +30,8 @@
                 android:resource="@xml/file_paths">
             </meta-data>
         </provider>
+        <activity android:name=".DetailPostActivity" />
+        <activity android:name=".ItemCalendarActivity"></activity>
     </application>
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
