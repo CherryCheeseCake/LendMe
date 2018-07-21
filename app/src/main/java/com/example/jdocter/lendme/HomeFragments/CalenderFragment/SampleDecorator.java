@@ -1,13 +1,11 @@
 package com.example.jdocter.lendme.HomeFragments.CalenderFragment;
 
+import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.format.DateFormat;
 import android.text.style.RelativeSizeSpan;
-import android.view.LayoutInflater;
-import android.view.View;
 
-import com.example.jdocter.lendme.R;
 import com.squareup.timessquare.CalendarCellDecorator;
 import com.squareup.timessquare.CalendarCellView;
 
@@ -23,10 +21,11 @@ public class SampleDecorator implements CalendarCellDecorator {
     String monthNumber = (String) DateFormat.format("MM", date); // 06
     String year = (String) DateFormat.format("yyyy", date); // 2013
 
-    if (year.equals("2018") && day.equals("25")) {
+    if (year.equals("2018") && day.equals("25")&& monthNumber.equals("06")) {
+      //cellView.getDayOfMonthTextView().setBackgroundColor(Color.RED);
       return  "Lend";
     } else {
-      if (year.equals("2018") && day.equals("29")) {
+      if (year.equals("2018") && day.equals("29")&& monthNumber.equals("06")) {
         return "Borrow";
       }
       return "";}
@@ -34,19 +33,15 @@ public class SampleDecorator implements CalendarCellDecorator {
   }
 
 
-  public View setSampleDayView(CalendarCellView cellView, Date date) {
+  public void setSampleDayView(CalendarCellView cellView, Date date) {
 //    Calendar cal = Calendar.getInstance();
 //    cal.setTime(date);
     String day = (String) DateFormat.format("dd", date); // 20
-//    String day = Integer.toString(date.getDate());
-
     String year = (String) DateFormat.format("yyyy", date); // 2013
     if(day.equals("25")&&year.equals("2018") && (cellView.isSelectable())) {
-      LayoutInflater inflater = LayoutInflater.from(cellView.getContext());
-      return inflater.inflate(R.layout.day_view_borrow_end, cellView, false);
+
+      cellView.getDayOfMonthTextView().setBackgroundColor(Color.RED);
     }
-    LayoutInflater inflater = LayoutInflater.from(cellView.getContext());
-    return inflater.inflate(R.layout.day_view_borrow_start, cellView, false);
   }
 
 
@@ -56,7 +51,8 @@ public class SampleDecorator implements CalendarCellDecorator {
     SpannableString string = new SpannableString(dateString + "\n" + ifBorrowLend(cellView,date));
     string.setSpan(new RelativeSizeSpan(0.5f), 0, dateString.length(),
             Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+    //setSampleDayView(cellView,date);
     cellView.getDayOfMonthTextView().setText(string);
-    //cellView.addView(setSampleDayView(cellView, date));
+
   }
 }

@@ -36,15 +36,18 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    //implementation 'com.savvi.datepicker:rangepicker:1.2.0'
+    implementation 'com.savvi.datepicker:rangepicker:1.2.0'
     implementation 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     implementation 'it.neokree:MaterialTabs:0.11'
     implementation "com.android.support:percent:${supportLibVersion}"
-    implementation "com.android.support:support-vector-drawable:${supportLibVersion}" // VectorDrawableCompat
-    implementation "com.android.support:animated-vector-drawable:${supportLibVersion}" // AnimatedVectorDrawableCompat
+    implementation "com.android.support:support-vector-drawable:${supportLibVersion}"
+    // VectorDrawableCompat
+    implementation "com.android.support:animated-vector-drawable:${supportLibVersion}"
+    // AnimatedVectorDrawableCompat
     implementation "com.android.support:transition:${supportLibVersion}"
     implementation "com.android.support:support-annotations:${supportLibVersion}"
     implementation 'com.squareup:android-times-square:1.6.5@aar'
+    implementation 'org.parceler:parceler-api:1.1.11'
+    annotationProcessor 'org.parceler:parceler:1.1.11'
 
 }
-

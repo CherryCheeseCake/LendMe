@@ -11,18 +11,25 @@ import com.parse.ParseUser;
 import java.util.Date;
 
 @ParseClassName("Post")
+
 public class Post extends ParseObject {
     public static final String descriptionKey = "description";
     public static final String imageKey = "image";
     public static final String ownerKey = "ownerId";
     public static final String priceKey = "price";
-
+    public static final String itemKey = "itemName";
 
     public String getDescription() {
         return getString(descriptionKey);
     }
 
     public void setDescription(String description) { put(descriptionKey,description); }
+
+    public String getItem() {
+        return getString(itemKey);
+    }
+
+    public void setItem(String description) { put(itemKey,description); }
 
     public ParseFile getImage() {
         return getParseFile(imageKey);
@@ -71,6 +78,9 @@ public class Post extends ParseObject {
             whereEqualTo(ownerKey,user);
             return this;
         }
+
+        // TODO query by geoloc
+
         // TODO user specified query
     }
 
