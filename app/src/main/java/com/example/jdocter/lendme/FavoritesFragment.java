@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +27,8 @@ public class FavoritesFragment extends Fragment{
     FavoritesAdapter postAdapter;
     RecyclerView rvPost;
 
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,12 +40,18 @@ public class FavoritesFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         rvPost = view.findViewById(R.id.rvFavorites);
+        rvPost.setHasFixedSize(true);
         posts = new ArrayList<>();
         postAdapter = new FavoritesAdapter(posts);
 
+        staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        rvPost.setLayoutManager(staggeredGridLayoutManager);
+
+
         ParseUser user= ParseUser.getCurrentUser();
         rvPost.setAdapter(postAdapter);
-        rvPost.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        //rvPost.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
+        //rvPost.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
         loadTopPosts(user);
 

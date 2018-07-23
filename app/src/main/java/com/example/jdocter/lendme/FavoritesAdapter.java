@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.model.Post;
 
 import java.util.List;
@@ -43,14 +41,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             final Post post = (Post) mPosts.get(position);
             //TODO set price
             System.out.println("POST PRICE ******************************  "+post.getPrice());
-            String x=""+post.getPrice();
+            String x="$"+post.getPrice();
             viewHolder.tvBorrowPrice.setText(x);
 
             String imageUrl = post.getImage().getUrl();
             // load image using glide
             Glide.with(context)
                     .load(imageUrl)
-                    .apply(new RequestOptions().transform(new RoundedCorners(10)))
+                    //.apply(new RequestOptions().override(250).centerCrop())
+                    //.apply(new RequestOptions().transform(new RoundedCorners(10)))
                     .into(viewHolder.ivBorrowImage);
 
 
