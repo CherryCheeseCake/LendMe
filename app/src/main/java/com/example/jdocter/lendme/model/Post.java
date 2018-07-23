@@ -18,6 +18,7 @@ public class Post extends ParseObject {
     public static final String ownerKey = "ownerId";
     public static final String priceKey = "price";
     public static final String itemKey = "itemName";
+    public static final String transactionsKey = "transactions";
 
     public String getDescription() {
         return getString(descriptionKey);
@@ -52,6 +53,19 @@ public class Post extends ParseObject {
     public int getPrice() { return getInt(priceKey); }
 
     public void setPrice(Float price) { put(priceKey, price); }
+
+    public void addTransaction(Transaction transaction){
+        getRelation(transactionsKey).add(transaction);
+    }
+
+    public void cancelTransaction(Transaction transaction){
+        getRelation(transactionsKey).remove(transaction);
+    }
+
+    public ParseQuery<ParseObject> getTransactions(){
+        return getRelation(transactionsKey).getQuery();
+
+    }
 
 
 
