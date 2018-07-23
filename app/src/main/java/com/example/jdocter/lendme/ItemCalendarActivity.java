@@ -98,6 +98,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
             start.setTime(transaction.getStartDate());
             Calendar end = Calendar.getInstance();
             end.setTime(transaction.getEndDate());
+            end.add(Calendar.DATE, 1);
 
             for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
                 finalArrayList.add(date);
