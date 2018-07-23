@@ -48,8 +48,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             // load image using glide
             Glide.with(context)
                     .load(imageUrl)
-                    //.apply(new RequestOptions().override(250).centerCrop())
-                    //.apply(new RequestOptions().transform(new RoundedCorners(10)))
                     .into(viewHolder.ivBorrowImage);
 
 
