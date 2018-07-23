@@ -46,13 +46,10 @@ public class FavoritesFragment extends Fragment{
 
         staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         rvPost.setLayoutManager(staggeredGridLayoutManager);
+        rvPost.setAdapter(postAdapter);
 
 
         ParseUser user= ParseUser.getCurrentUser();
-        rvPost.setAdapter(postAdapter);
-        //rvPost.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
-        //rvPost.setLayoutManager(new GridLayoutManager(getActivity(),3));
-
         loadTopPosts(user);
 
     }
