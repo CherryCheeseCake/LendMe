@@ -44,9 +44,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    >
-
+    android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/ivBorrowImage"
@@ -62,13 +60,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivBorrowImage"
-        android:background="#1976D2"
+        android:backgroundTint="#000000"
+        android:background="@drawable/text_shape"
         android:gravity="center_horizontal"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:text="Price"
         android:textColor="#ffffff"
-        android:textSize="13sp" />
+        android:textSize="15sp" />
     <!--
     <TextView
         android:id="@+id/tvBorrowPrice"
