@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.jdocter.lendme.FavoritesFragment;
 import com.example.jdocter.lendme.R;
@@ -43,13 +44,15 @@ public class BorrowFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager){
         Adapter adapter= new Adapter(getChildFragmentManager());
-        adapter.addFragment(new FavoritesFragment(), "{Favorites Fragment");
+        adapter.addFragment(new FavoritesFragment(), "Favorites Fragment");
         adapter.addFragment(new TrendingFragment(), "Trending Fragment");
+        //adapter.addFragment(new FavoritesFragment(), );
         viewPager.setAdapter(adapter);
     }
 static class Adapter extends FragmentPagerAdapter{
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
+        private final List<ImageView> imageViewList = new ArrayList<>();
 
         public Adapter(FragmentManager manager){
             super(manager);
@@ -64,10 +67,12 @@ static class Adapter extends FragmentPagerAdapter{
     public int getCount() {
         return mFragmentList.size();
     }
-
+    //TODO- add third item to fragment
     public void addFragment(Fragment fragment, String title){
+        //public void addFragment(Fragment fragment, String title, ImageView imageView){
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
+            //imageViewList.add(imageView);
     }
 
     @Nullable
