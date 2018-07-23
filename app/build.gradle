@@ -48,5 +48,4 @@ dependencies {
     implementation "com.android.support:support-annotations:${supportLibVersion}"
     //implementation 'com.squareup:android-times-square:1.6.5@aar'
 
-
 }

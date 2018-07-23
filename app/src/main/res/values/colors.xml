@@ -5,7 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="appColorDark">#558639</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="darkGrey">#595959</color>
+    <color name="black">#000000</color>
     <color name="background_color">#A8DF94</color>
     <color name="border_color">#38831C</color>
     <color name="login_button">#5297EA</color>
+    <color name="transparent">#00c4c4c4</color>
 </resources>
