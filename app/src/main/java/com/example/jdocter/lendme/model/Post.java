@@ -9,6 +9,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.Date;
+import java.util.List;
 
 @ParseClassName("Post")
 
@@ -19,6 +20,10 @@ public class Post extends ParseObject {
     public static final String priceKey = "price";
     public static final String itemKey = "itemName";
     public static final String transactionsKey = "transactions";
+    public static final String availableDaysKey = "availableDays";
+
+
+
 
     public String getDescription() {
         return getString(descriptionKey);
@@ -54,6 +59,10 @@ public class Post extends ParseObject {
 
     public void setPrice(Float price) { put(priceKey, price); }
 
+    public List<Integer> getAvailableDays() { return getList(availableDaysKey); }
+
+    public void setAvailableDays(List<Integer> availableDays) { put(availableDaysKey,availableDays); }
+
     public void addTransaction(Transaction transaction){
         getRelation(transactionsKey).add(transaction);
     }
@@ -62,7 +71,7 @@ public class Post extends ParseObject {
         getRelation(transactionsKey).remove(transaction);
     }
 
-    public ParseQuery<ParseObject> getTransactions(){
+    public ParseQuery<ParseObject> getTransactionQuery(){
         return getRelation(transactionsKey).getQuery();
 
     }

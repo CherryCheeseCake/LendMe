@@ -84,7 +84,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
 
         List<ParseObject> transactions = new ArrayList<>();
 
-        ParseQuery<ParseObject> query1 = mPost.getTransactions();
+        ParseQuery<ParseObject> query1 = mPost.getTransactionQuery();
         try {
             String name = mPost.getItem();
             transactions = query1.find();
