@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ParseUser.logOut();
+        
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String username = etUsername.getText().toString();
                 final String password = etPassword.getText().toString();
+
                 login(username,password);
             }
         });

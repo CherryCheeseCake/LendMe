@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.model.Post;
 
 import java.util.List;
@@ -40,12 +39,19 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
             // Get the data model based on position
             final Post post = (Post) mPosts.get(position);
+            //TODO set price
+            System.out.println("POST PRICE ******************************  "+post.getPrice());
+
+            String x="$"+post.getPrice();
+            viewHolder.tvBorrowPrice.setText(x);
+
             String imageUrl = post.getImage().getUrl();
             // load image using glide
             Glide.with(context)
                     .load(imageUrl)
-                    .apply(new RequestOptions().transform(new RoundedCorners(10)))
                     .into(viewHolder.ivBorrowImage);
+
+
         }
 
         // Returns the total count of items in the list
@@ -57,10 +63,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivBorrowImage;
+        public TextView tvBorrowPrice;
+
 
         public ViewHolder(View itemView) {
           super(itemView);
           ivBorrowImage= (ImageView) itemView.findViewById(R.id.ivBorrowImage);
+          tvBorrowPrice= (TextView) itemView.findViewById(R.id.tvBorrowPrice);
         }
     }
 }

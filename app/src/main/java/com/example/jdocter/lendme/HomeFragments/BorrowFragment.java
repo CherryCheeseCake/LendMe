@@ -36,6 +36,15 @@ public class BorrowFragment extends Fragment {
         setupViewPager(viewPager);
         TabLayout tabs = (TabLayout) view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
+
+
+        final int[] ICONS = new int[]{
+                R.drawable.borrow_favorite,
+                R.drawable.borrow_tending
+        };
+        tabs.getTabAt(0).setIcon(ICONS[0]);
+        tabs.getTabAt(1).setIcon(ICONS[1]);
+
         return view;
         //return inflater.inflate(R.layout.fragment_borrow, container, false);
 
@@ -43,13 +52,17 @@ public class BorrowFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager){
         Adapter adapter= new Adapter(getChildFragmentManager());
-        adapter.addFragment(new FavoritesFragment(), "{Favorites Fragment");
-        adapter.addFragment(new TrendingFragment(), "Trending Fragment");
+        adapter.addFragment(new FavoritesFragment());
+        adapter.addFragment(new TrendingFragment());
+
+        /*adapter.addFragment(new FavoritesFragment(), "Favorites");
+        adapter.addFragment(new TrendingFragment(), "Trending");
+        */
         viewPager.setAdapter(adapter);
     }
 static class Adapter extends FragmentPagerAdapter{
         private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        //private final List<String> mFragmentTitleList = new ArrayList<>();
 
         public Adapter(FragmentManager manager){
             super(manager);
@@ -65,16 +78,23 @@ static class Adapter extends FragmentPagerAdapter{
         return mFragmentList.size();
     }
 
-    public void addFragment(Fragment fragment, String title){
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+    public void addFragment(Fragment fragment){
+        mFragmentList.add(fragment);
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mFragmentTitleList.get(position);
-    }
+    //THIS IS THE CODE TO SHOW A TITLE ON TABS
+
+    /*public void addFragment(Fragment fragment, String title){
+        //public void addFragment(Fragment fragment, String title, ImageView imageView){
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+    }*/
+
+   // @Nullable
+    //@Override
+    //public CharSequence getPageTitle(int position) {
+     //   return mFragmentTitleList.get(position);
+    //}
 }
 
     @Override

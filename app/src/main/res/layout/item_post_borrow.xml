@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/ivBorrowImage"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="4dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
-        app:srcCompat="@android:drawable/sym_def_app_icon"
-        tools:layout_editor_absoluteX="0dp" />
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
-        android:id="@+id/etBorrowPrice"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvBorrowPrice"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="12dp"
-        android:background="@drawable/text_border"
-        android:padding="10dp"
-        android:text="$10.00"
-        android:textColor="#1C5E04"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBorrowImage"
-        app:layout_constraintStart_toStartOf="@+id/ivBorrowImage" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivBorrowImage"
+        android:backgroundTint="#000000"
+        android:background="@drawable/text_shape"
+        android:gravity="center_horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="Price"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+</RelativeLayout>
+
