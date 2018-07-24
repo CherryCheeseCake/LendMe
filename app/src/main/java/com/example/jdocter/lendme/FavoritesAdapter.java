@@ -41,6 +41,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             final Post post = (Post) mPosts.get(position);
             //TODO set price
             System.out.println("POST PRICE ******************************  "+post.getPrice());
+
             String x="$"+post.getPrice();
             viewHolder.tvBorrowPrice.setText(x);
 

@@ -55,7 +55,10 @@ public class Post extends ParseObject {
 
     public String getTimestamp() { return getRelativeTimeAgo(getCreatedAt()); }
 
-    public int getPrice() { return getInt(priceKey); }
+    public double getPrice() {
+        return getDouble(priceKey);
+        //return getInt(priceKey);
+        }
 
     public void setPrice(Float price) { put(priceKey, price); }
 
