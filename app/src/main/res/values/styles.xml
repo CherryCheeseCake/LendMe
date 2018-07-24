@@ -12,4 +12,9 @@
         <item name="textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">SANS_SERIF</item>
+    </style>
+
 </resources>

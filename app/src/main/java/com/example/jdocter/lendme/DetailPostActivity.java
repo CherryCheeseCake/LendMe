@@ -89,7 +89,7 @@ public class DetailPostActivity extends AppCompatActivity {
                     }
                     tvDescription.setText(post.getDescription());
                     tvTitleItem.setText(post.getItem());
-                    tvPrice.setText("$"+Integer.toString(post.getPrice()));
+                    tvPrice.setText("$"+Float.toString(post.getPrice()));
 
                 } else {
                     e.printStackTrace();

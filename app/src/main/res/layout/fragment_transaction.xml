@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainFragments.TransactionFragment">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fitsSystemWindows="true"
+tools:context=".MainFragments.TransactionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/MyCustomTextAppearance"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/white"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/white">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tiHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="History" />
+
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tiFuture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcomming" />
+
+        </android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/flTransaction"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Transaction Fragment" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appBar">
+
+    </FrameLayout>
+
 
 </RelativeLayout>

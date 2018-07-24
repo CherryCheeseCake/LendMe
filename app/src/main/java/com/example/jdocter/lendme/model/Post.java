@@ -20,6 +20,10 @@ public class Post extends ParseObject {
     public static final String priceKey = "price";
     public static final String availableDaysKey = "availableDays";
     public static final String itemKey = "itemName";
+    public static final String transactionsKey = "transactions";
+    public static final String transactionStartDateKey = "startDate";
+    public static final String transactionEndDateKey = "endDate";
+
 
     public String getDescription() {
         return getString(descriptionKey);
@@ -51,7 +55,7 @@ public class Post extends ParseObject {
 
     public String getTimestamp() { return getRelativeTimeAgo(getCreatedAt()); }
 
-    public int getPrice() { return getInt(priceKey); }
+    public float getPrice() { return (float) getNumber(priceKey); }
 
     public void setPrice(Float price) { put(priceKey, price); }
 
@@ -59,6 +63,13 @@ public class Post extends ParseObject {
 
     public void setAvailableDays(List<Integer> availableDays) { put(availableDaysKey,availableDays); }
 
+    public ParseQuery getTransactionQuery(){
+        return getRelation(transactionsKey).getQuery();
+    }
+
+    public ParseQuery getPastTransactionQuery() { return getTransactionQuery().whereLessThan(transactionStartDateKey,new Date()).orderByDescending(transactionEndDateKey); }
+
+    public ParseQuery getFutureTransactionQuery() { return getTransactionQuery().whereGreaterThanOrEqualTo(transactionStartDateKey,new Date()).orderByDescending(transactionEndDateKey); }
 
 
     public static class Query extends ParseQuery<Post> {

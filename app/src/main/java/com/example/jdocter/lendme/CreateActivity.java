@@ -52,7 +52,7 @@ public class CreateActivity extends AppCompatActivity {
     private EditText etDescription;
     private EditText etItemName;
     private EditText etPrice;
-    CheckedTextView[] ctArray = new CheckedTextView[]{ctSunday,ctMonday,ctTuesday,ctWednesday,ctThursday,ctFriday,ctSaturday};
+
 
 
 
@@ -111,10 +111,12 @@ public class CreateActivity extends AppCompatActivity {
                 final String itemName = etItemName.getText().toString();
                 final Float price = Float.valueOf(etPrice.getText().toString());
                 List<Integer> availableDays = new ArrayList<>();
+                CheckedTextView[] ctArray = new CheckedTextView[]{ctSunday,ctMonday,ctTuesday,ctWednesday,ctThursday,ctFriday,ctSaturday};
 
-                for (int i = 1; i<8;i++) {
-                    if (ctArray[i].isChecked()== true) {
-                        availableDays.add(i);
+                for (int i = 0; i<7;i++) {
+                    CheckedTextView x = ctArray[i];
+                    if (x.isChecked()== true) {
+                        availableDays.add(i+1);
                     }
                 }
 
@@ -124,7 +126,7 @@ public class CreateActivity extends AppCompatActivity {
                     file = getImageFile(bitmapPostImage);
                     final ParseFile parseFile = new ParseFile(file);
                     // create post
-                    createPost(parseFile,user,description,price,availableDays);
+                    createPost(parseFile,user,description,itemName,price,availableDays);
                 } catch (IOException e) {
                     Log.e("MainActivity","Bit map could not be converted to ParseFile");
                     e.printStackTrace();
@@ -212,12 +214,13 @@ public class CreateActivity extends AppCompatActivity {
         }
     }
 
-    private void createPost(ParseFile parseFile,ParseUser user,String description,Float price,List<Integer> availableDays) {
+    private void createPost(ParseFile parseFile,ParseUser user,String description,String item, Float price,List<Integer> availableDays) {
         final Post newPost = new Post();
         newPost.setDescription(description);
         newPost.setUser(user);
         newPost.setImage(parseFile);
         newPost.setPrice(price);
+        newPost.setItem(item);
         newPost.setAvailableDays(availableDays);
 
         newPost.saveInBackground(new SaveCallback() {

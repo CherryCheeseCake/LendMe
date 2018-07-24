@@ -20,36 +20,36 @@
     <EditText
         android:id="@+id/etItemName"
         android:layout_width="wrap_content"
-        android:textColorHighlight="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPostImage"
         android:fontFamily="cursive"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/etPrice"
         android:hint="Item name"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_below="@+id/etItemName"
         android:fontFamily="cursive"
-        android:textColorHighlight="@color/colorPrimary"
         android:hint="Description of your item"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_alignParentEnd="true"
-        android:textColorHighlight="@color/colorPrimary"
         android:id="@+id/etPrice"
         android:layout_below="@+id/ivPostImage"
         android:hint="Price (per day)"
         android:inputType="numberDecimal"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvAvailability"
