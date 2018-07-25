@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miCompose"
-        android:icon="@drawable/borrow"
+        android:id="@+id/search_bar"
+        android:icon="@drawable/search"
         app:showAsAction="ifRoom"
-        android:title="Compose">
+        android:title="Search">
     </item>
     <item
-        android:id="@+id/miProfile"
+        android:id="@+id/add_button"
         android:icon="@drawable/ic_action_name"
         app:showAsAction="ifRoom|withText"
-        android:title="Profile">
+        android:title="Create Post">
     </item>
 </menu>
