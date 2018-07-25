@@ -24,7 +24,7 @@ public class HistoryAdapter extends TransactionAdapter {
 
         final Transaction transaction = (Transaction) mTransactions.get(i);
         Post post = (Post) transaction.getItemPost();
-        final String cost = Float.toString(transaction.getCost());
+        final String cost = Double.toString(transaction.getCost());
         final String item = post.getItem();
 
         // different input depending on borrow vs lent

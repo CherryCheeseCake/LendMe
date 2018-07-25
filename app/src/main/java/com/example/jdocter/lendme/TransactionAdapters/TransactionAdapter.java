@@ -45,44 +45,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                     .into(viewHolder.ivTransactionImage);
             viewHolder.tvStartDate.setText(simpleDate(transaction.getStartDate()));
             viewHolder.tvEndDate.setText(simpleDate(transaction.getEndDate()));
-
-
-//            // different input depending on borrow vs lent
-//            if (post.getUser() == user) {
-//                if (transaction.getEndDate().compareTo(now) < 0){
-//                    final String borrower = transaction.getBorrower().getString(fullNameKey);
-//                    final String blurb = "Lent " + item + " to " + borrower;
-//                    final String costWithSign = "+ $" + cost;
-//
-//                    viewHolder.tvBlurb.setText(blurb);
-//                    viewHolder.tvPrice.setText(costWithSign);
-//
-//                } else {
-//                    final String borrower = transaction.getBorrower().getString(fullNameKey);
-//                    final String blurb = "Lending " + item + " to " + borrower;
-//                    final String costWithSign = "pending...";
-//
-//                    viewHolder.tvBlurb.setText(blurb);
-//                    viewHolder.tvPrice.setText(costWithSign);
-//                }
-//            } else {
-//                if (transaction.getEndDate().compareTo(now) < 0){
-//                    final String lender = transaction.getLender().getString(fullNameKey);
-//                    final String blurb = "Borrowed " + item + " from " + lender;
-//                    final String costWithSign = "- $" + cost;
-//
-//                    viewHolder.tvBlurb.setText(blurb);
-//                    viewHolder.tvPrice.setText(costWithSign);
-//
-//                } else {
-//                    final String lender = transaction.getLender().getString(fullNameKey);
-//                    final String blurb = "Borrowing " + item + " from " + lender;
-//                    final String costWithSign = "pending...";
-//
-//                    viewHolder.tvBlurb.setText(blurb);
-//                    viewHolder.tvPrice.setText(costWithSign);
-//                }
-//            }
             
         }
 
@@ -135,4 +97,5 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public String simpleDate(Date date) {
             return new SimpleDateFormat("MM/dd/yyyy").format(date);
         }
+
     }

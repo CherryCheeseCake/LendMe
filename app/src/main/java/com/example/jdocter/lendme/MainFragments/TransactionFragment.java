@@ -5,25 +5,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.example.jdocter.lendme.HistoryUpcomingFragment;
 import com.example.jdocter.lendme.R;
+import com.example.jdocter.lendme.TransactionFragments.HistoryFragment;
+import com.example.jdocter.lendme.TransactionFragments.UpcomingFragment;
 
 public class TransactionFragment extends Fragment {
 
-
-    Fragment historyFragment;
-    Fragment upcomingFragment;
-    FragmentManager fragmentManager;
-    FrameLayout flTransactions;
-    TabLayout tabs;
-    public static String isHistoryKey= "isHistory";
+    ViewPager pager;
+    TabLayout tabLayout;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,43 +29,20 @@ public class TransactionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        flTransactions = view.findViewById(R.id.flTransaction);
-        tabs =view.findViewById(R.id.tabs);
-        fragmentManager = getActivity().getSupportFragmentManager();
+        pager = (ViewPager) view.findViewById(R.id.pager);
+        setupViewPager(pager);
 
-        // history fragment and bundle
-        historyFragment = new HistoryUpcomingFragment();
-        Bundle historyBundle = new Bundle();
-        historyBundle.putBoolean(isHistoryKey,true);
-        historyFragment.setArguments(historyBundle);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(pager);
 
-        // upcoming fragment and bundle
-        upcomingFragment = new HistoryUpcomingFragment();
-        Bundle upcomingBundle = new Bundle();
-        upcomingBundle.putBoolean(isHistoryKey,false);
-        upcomingFragment.setArguments(upcomingBundle);
+    }
 
 
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                switch (tab.getPosition()) {
-                    case 0: fragmentTransaction.replace(R.id.flTransaction, historyFragment).commit();
-                    case 1: fragmentTransaction.replace(R.id.flTransaction, upcomingFragment).commit();
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) { }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
-
-        });
-
-        tabs.getTabAt(0).select();
-
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new HistoryFragment(), "History");
+        adapter.addFragment(new UpcomingFragment(), "Upcoming");
+        viewPager.setAdapter(adapter);
     }
 
 }

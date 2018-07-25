@@ -1,4 +1,4 @@
-package com.example.jdocter.lendme;
+package com.example.jdocter.lendme.TransactionFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jdocter.lendme.TransactionAdapters.HistoryAdapter;
+import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.TransactionAdapters.TransactionAdapter;
-import com.example.jdocter.lendme.TransactionAdapters.UpcomingAdapter;
 import com.example.jdocter.lendme.model.Post;
 import com.example.jdocter.lendme.model.Transaction;
 import com.parse.ParseException;
@@ -26,16 +25,11 @@ import java.util.List;
 
 public class HistoryUpcomingFragment extends Fragment {
 
-    public Boolean isHistory;
-    public static String isHistoryKey = "isHistory";
+
     TransactionAdapter adapter;
     RecyclerView rvTransactions;
     List<Post> userPosts;
     List<Transaction> userTransactions;
-
-    public void newInstance(boolean history) {
-        isHistory = history;
-    }
 
 
     @Override
@@ -49,13 +43,12 @@ public class HistoryUpcomingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        isHistory = this.getArguments().getBoolean(isHistoryKey);
         userPosts = new ArrayList<>();
         userTransactions = new ArrayList<>();
         rvTransactions = view.findViewById(R.id.rvTransaction);
         rvTransactions.setLayoutManager(new LinearLayoutManager(getActivity()));
         // get correct adapter depending on situation
-        adapter = isHistory ? new HistoryAdapter(userTransactions) : new UpcomingAdapter(userTransactions);
+        adapter = getAdapter();
         rvTransactions.setAdapter(adapter);
         loadTransactions();
 
@@ -78,7 +71,7 @@ public class HistoryUpcomingFragment extends Fragment {
         // iterate through posts and get all transactions
         for (Post post: userPosts) {
             // get correct query depending on situation
-            ParseQuery query = isHistory ? post.getPastTransactionQuery() : post.getFutureTransactionQuery();
+            ParseQuery query = getQuery(post);
             try {
                 List<Transaction> postTransactions = query.find();
                 userTransactions.addAll(postTransactions);
@@ -88,4 +81,13 @@ public class HistoryUpcomingFragment extends Fragment {
             }
         }
     }
+
+    public ParseQuery getQuery(Post post) {
+        return post.getTransactionQuery();
+    }
+
+    public TransactionAdapter getAdapter() {
+        return new TransactionAdapter(userTransactions);
+    }
+
 }

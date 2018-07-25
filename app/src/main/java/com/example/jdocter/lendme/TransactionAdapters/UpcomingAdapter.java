@@ -17,6 +17,7 @@ public class UpcomingAdapter extends TransactionAdapter {
     public UpcomingAdapter(List<Transaction> transactions) {
         super(transactions);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         super.onBindViewHolder(viewHolder, i);

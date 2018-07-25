@@ -69,9 +69,9 @@ public class Post extends ParseObject {
         return getRelation(transactionsKey).getQuery();
     }
 
-    public ParseQuery getPastTransactionQuery() { return getTransactionQuery().whereLessThan(transactionStartDateKey,new Date()).orderByDescending(transactionEndDateKey); }
+    public ParseQuery getPastTransactionQuery() { return getTransactionQuery().whereLessThan(transactionEndDateKey,new Date()).orderByDescending(transactionEndDateKey); }
 
-    public ParseQuery getFutureTransactionQuery() { return getTransactionQuery().whereGreaterThanOrEqualTo(transactionStartDateKey,new Date()).orderByDescending(transactionEndDateKey); }
+    public ParseQuery getFutureTransactionQuery() { return getTransactionQuery().whereGreaterThanOrEqualTo(transactionEndDateKey,new Date()).orderByDescending(transactionEndDateKey); }
 
     public void addTransaction(Transaction transaction){
         getRelation(transactionsKey).add(transaction);
