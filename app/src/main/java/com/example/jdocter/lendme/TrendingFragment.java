@@ -57,7 +57,7 @@ public class TrendingFragment extends Fragment {
 
     private void loadTopPosts(ParseUser user){
         final Post.Query postQuery = new Post.Query();
-        postQuery.dec().withUser().byUser(user);
+        postQuery.dec().withUser().byUser(user).getTrend();
 
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
