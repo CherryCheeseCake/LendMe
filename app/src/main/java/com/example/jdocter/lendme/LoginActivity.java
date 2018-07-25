@@ -23,8 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //ParseUser.logOut();
         
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {

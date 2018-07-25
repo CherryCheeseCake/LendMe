@@ -1,21 +1,23 @@
 package com.example.jdocter.lendme.model;
 
+import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.Date;
 
 @ParseClassName("Transaction")
-public class Transaction extends ParseObject {
+public class Transaction extends ParseObject implements Comparable<Transaction> {
     public static final String startKey = "startDate";
     public static final String endKey = "endDate";
     public static final String lenderKey = "lender";
     public static final String borrowerKey = "borrower";
     public static final String itemKey = "item";
+    public static final String costKey = "cost";
+
 
 
     public Date getStartDate(){
@@ -48,6 +50,10 @@ public class Transaction extends ParseObject {
         put(borrowerKey,user);
     }
 
+    public double getCost() { return getDouble(costKey); }
+
+    public void setCost(Float price) { put(costKey, price); }
+
     public ParseObject getItemPost(){
         return getParseObject(itemKey);
 
@@ -60,18 +66,6 @@ public class Transaction extends ParseObject {
     public String getTimestamp() { return getRelativeTimeAgo(getCreatedAt()); }
 
 
-    public static class Query extends ParseQuery<Post> {
-        public Query() {
-            super(Post.class);
-        }
-
-        public Query getTop() {
-            setLimit(20);
-            return this;
-        }
-
-
-    }
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public static String getRelativeTimeAgo(Date date) {
@@ -83,5 +77,11 @@ public class Transaction extends ParseObject {
 
 
         return relativeDate;
+    }
+
+    // Comparable for sorting a list of transactions
+    @Override
+    public int compareTo(@NonNull Transaction transaction) {
+        return transaction.getStartDate().compareTo(this.getStartDate());
     }
 }

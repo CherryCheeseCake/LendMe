@@ -102,7 +102,6 @@ public class LendFragment extends Fragment {
 
         // load user's items
         loadUserPosts(user);
-
     }
 
     private void loadUserPosts(ParseUser user) {
