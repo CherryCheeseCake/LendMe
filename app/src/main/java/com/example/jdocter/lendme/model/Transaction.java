@@ -50,7 +50,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
         put(borrowerKey,user);
     }
 
-    public float getCost() { return (float) getNumber(costKey); }
+    public double getCost() { return getDouble(costKey); }
 
     public void setCost(Float price) { put(costKey, price); }
 

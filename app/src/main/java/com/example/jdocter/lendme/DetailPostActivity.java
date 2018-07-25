@@ -27,6 +27,8 @@ public class DetailPostActivity extends AppCompatActivity {
     TextView tvPrice;
     Button btRequest;
 
+    boolean isImageFitToScreen;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class DetailPostActivity extends AppCompatActivity {
         tvTitleItem = (TextView) findViewById(R.id.tvTitleItem);
         tvPrice = (TextView) findViewById(R.id.tvPrice);
         btRequest = (Button) findViewById(R.id.btRequest);
-
+        isImageFitToScreen=false;
         final String objectId = getIntent().getStringExtra("objectId");
 
         btRequest.setOnClickListener(new View.OnClickListener() {
