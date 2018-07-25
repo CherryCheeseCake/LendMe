@@ -25,6 +25,7 @@ public class Post extends ParseObject {
     public static final String transactionEndDateKey = "endDate";
     public static final String availableDaysKey = "availableDays";
     public static final String KEY_LIKEPOST="likePost";
+    public static final String favorKey="favoritePosts";
 
 
 
@@ -88,8 +89,10 @@ public class Post extends ParseObject {
         getRelation(KEY_LIKEPOST).remove(ParseUser.getCurrentUser());
     }
 
-    public void likePost() {
+    public void likePost(ParseUser user) {
 
+        user.getRelation(favorKey).add(this);
+        user.saveInBackground();
         getRelation(KEY_LIKEPOST).add(ParseUser.getCurrentUser());
 
     }
@@ -141,6 +144,7 @@ public class Post extends ParseObject {
             whereEqualTo(ownerKey,user);
             return this;
         }
+
 
 
 

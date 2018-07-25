@@ -111,7 +111,7 @@ public class DetailPostActivity extends AppCompatActivity {
                         mPost.saveInBackground();
                     } else {
                         ibLikes.setImageResource(R.drawable.ufi_heart_active);
-                        mPost.likePost();
+                        mPost.likePost(user);
                         mPost.saveInBackground();
 
                     }
