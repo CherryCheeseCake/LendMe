@@ -42,7 +42,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             // Get the data model based on position
             final Post post = (Post) mPosts.get(position);
             //TODO set price
-            System.out.println("POST PRICE ******************************  "+post.getPrice());
+            //System.out.println("POST PRICE ******************************  "+post.getPrice());
 
             String x="$"+post.getPrice();
             viewHolder.tvBorrowPrice.setText(x);

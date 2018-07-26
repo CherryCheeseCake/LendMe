@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jdocter.lendme.model.Post;
+import com.example.jdocter.lendme.model.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -33,6 +34,8 @@ public class FavoritesFragment extends Fragment{
     RecyclerView rvPost;
 
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
+
+    final User parseUser = (User) ParseUser.getCurrentUser();
 
 
     @Override
@@ -58,7 +61,7 @@ public class FavoritesFragment extends Fragment{
         rvPost.setAdapter(postAdapter);
 
         ParseUser user= ParseUser.getCurrentUser();
-        loadTopPosts(user);
+        loadTopPosts();
 
     }
 
@@ -75,6 +78,7 @@ public class FavoritesFragment extends Fragment{
 
                 try {
                     fetchItemsByCloseness(query);
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -86,20 +90,30 @@ public class FavoritesFragment extends Fragment{
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
+
+        });
+
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                posts.clear();
+                loadTopPosts();
+                return true;
+            }
+
         });
     }
 
-//    public void fetchItemsByCloseness(String keyword) throws ParseException {
-//        posts.clear();
-//        final Post.Query postQuery = new Post.Query();
-//        List<Post> items = postQuery.byItem(keyword).find();
-//        posts.addAll(items);
-//        postAdapter.notifyDataSetChanged();
-//
-//    }
-     public void fetchItemsByCloseness(String keyword) throws ParseException {
 
-            final Post.Query query = new Post.Query();
+
+    public void fetchItemsByCloseness(String keyword) throws ParseException {
+
+            final User.QueryFavorites query = new User.QueryFavorites(parseUser.getFavoritePostsQuery());
             query.byItem(keyword);
             query.findInBackground(new FindCallback<Post>() {
                 public void done(List<Post> itemList, ParseException e) {
@@ -118,9 +132,10 @@ public class FavoritesFragment extends Fragment{
 
 
 
-    private void loadTopPosts(ParseUser user){
-        final Post.Query postQuery = new Post.Query();
-        postQuery.dec().withUser().byUser(user);
+    private void loadTopPosts(){
+
+        final User.QueryFavorites postQuery = new User.QueryFavorites(parseUser.getFavoritePostsQuery());
+        postQuery.dec().getTop();
 
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
@@ -128,8 +143,9 @@ public class FavoritesFragment extends Fragment{
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
                         posts.add(objects.get(i));
-                        postAdapter.notifyItemInserted(posts.size() - 1);
+//                        postAdapter.notifyItemInserted();
                     }
+                    postAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }
