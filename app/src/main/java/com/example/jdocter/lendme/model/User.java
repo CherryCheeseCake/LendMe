@@ -12,4 +12,13 @@ public class User extends ParseUser {
     public ParseQuery getFavoritePostsQuery() {
         return getRelation(favoritePostsKey).getQuery();
     }
+
+    public class FavoritesQuery extends ParseQuery {
+
+        public FavoritesQuery() {
+            super(User.this.getFavoritePostsQuery());
+        }
+
+    }
+
 }

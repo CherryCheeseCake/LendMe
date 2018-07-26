@@ -153,15 +153,11 @@ public class Post extends ParseObject {
             return this;
         }
 
-
-
-
-
-
         // TODO wuery by geoloc
-//        public Query byProximity() {
-//            whereNear(locationKey, )
-//        }
+        public Query byProximity(ParseGeoPoint g) {
+            whereNear(locationKey,g);
+            return this;
+        }
 
         // TODO user specified query
     }
