@@ -222,7 +222,7 @@ public class CreateActivity extends AppCompatActivity {
         newPost.setPrice(price);
         newPost.setItem(item);
         newPost.setAvailableDays(availableDays);
-        newPost.setLocation();
+        newPost.setDefaultLocation(); // location of user's home location
 
         newPost.saveInBackground(new SaveCallback() {
             @Override

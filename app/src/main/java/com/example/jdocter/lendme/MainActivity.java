@@ -23,6 +23,7 @@ import com.example.jdocter.lendme.MainFragments.LogoutFragment;
 import com.example.jdocter.lendme.MainFragments.PaymentFragment;
 import com.example.jdocter.lendme.MainFragments.ProfileFragment;
 import com.example.jdocter.lendme.MainFragments.TransactionFragment;
+import com.example.jdocter.lendme.model.User;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -35,15 +36,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseUser;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback {
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private LocationRequest mLocationRequest;
-    private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
+    private long UPDATE_INTERVAL = 10000 * 1000;  /* 10000 secs - assumes don't need constant updates */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     private ActionBarDrawerToggle drawerToggle;
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
@@ -66,19 +70,14 @@ public class MainActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
+        // user location
+        startLocationUpdates();
 
-        // initiate home fragment
-        // toolbar.setBackgroundColor(Color.TRANSPARENT);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
 
 
         drawerToggle = setupDrawerToggle();
         // Tie DrawerLayout events to the ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
-
-        // user location
-        startLocationUpdates();
 
     }
 
@@ -217,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
         Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(locationSettingsRequest);
 
+
         task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onLocationResult(LocationResult locationResult) {
                                 // do work here
                                 onLocationChanged(locationResult.getLastLocation());
+                                initiatHomeFragment();
                             }
                         },
                         Looper.myLooper());
@@ -249,10 +250,32 @@ public class MainActivity extends AppCompatActivity {
                         // Ignore the error.
                     }
                 }
+
+                // default location = user's home location
+                ParseGeoPoint userHomeLoc = null;
+                try {
+                    userHomeLoc = ParseUser.getCurrentUser().fetch().getParseGeoPoint("location");
+                    userLatLng = new LatLng(userHomeLoc.getLatitude(),userHomeLoc.getLongitude());
+
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
+                initiatHomeFragment();
             }
+
         });
 
 
+    }
+
+    public void initiatHomeFragment() {
+        // initiate home fragment
+        if (ParseUser.getCurrentUser() != null) {
+            // toolbar.setBackgroundColor(Color.TRANSPARENT);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
+        }
     }
 
     public void onLocationChanged(Location location) {
@@ -268,6 +291,12 @@ public class MainActivity extends AppCompatActivity {
         Log.e("MainActivity","Testing");
     }
 
+
+    @Override
+    public ParseGeoPoint getLiveLoc() {
+        ParseGeoPoint userGeoPoint = new ParseGeoPoint(userLatLng.latitude,userLatLng.longitude);
+        return userGeoPoint;
+    }
 
 }
 
