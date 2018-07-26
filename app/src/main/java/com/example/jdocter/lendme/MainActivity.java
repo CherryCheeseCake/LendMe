@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     private ActionBarDrawerToggle drawerToggle;
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
+    private boolean initialHomeIntent = false;
     LatLng userLatLng;
 
     @Override
@@ -271,10 +272,11 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
     public void initiatHomeFragment() {
         // initiate home fragment
-        if (ParseUser.getCurrentUser() != null) {
+        if (ParseUser.getCurrentUser() != null && initialHomeIntent == false) {
             // toolbar.setBackgroundColor(Color.TRANSPARENT);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
+            initialHomeIntent = true;
         }
     }
 
