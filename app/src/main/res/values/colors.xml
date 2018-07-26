@@ -12,4 +12,5 @@
     <color name="border_color">#38831C</color>
     <color name="login_button">#5297EA</color>
     <color name="transparent">#00c4c4c4</color>
+    <color name="hamburgerBlack">#ffffff</color>
 </resources>

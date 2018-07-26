@@ -6,7 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
         <!--
         <item name="colorAccent">@color/white</item>
         -->
@@ -19,6 +19,10 @@
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="android:fontFamily">SANS_SERIF</item>
+    </style>
+
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/hamburgerBlack</item>
     </style>
 
 </resources>

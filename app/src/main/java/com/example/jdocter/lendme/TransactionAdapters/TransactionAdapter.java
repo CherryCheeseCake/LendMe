@@ -74,7 +74,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             public ViewHolder(View itemView) {
                 super(itemView);
                 // perform findViewById lookups
-                ivTransactionImage = (ImageView) itemView.findViewById(R.id.ivTransactionImage);
+                ivTransactionImage = itemView.findViewById(R.id.ivTransactionImage);
                 tvStartDate = itemView.findViewById(R.id.tvDateStart);
                 tvEndDate = itemView.findViewById(R.id.tvDateEnd);
                 tvPrice = itemView.findViewById(R.id.tvCost);
