@@ -46,35 +46,6 @@ public class ItemCalendarActivity extends AppCompatActivity {
         final String objectId = getIntent().getStringExtra("objectId");
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         final ArrayList<Date> finalArrayList = arrayList;
-//        query.getInBackground(objectId, new GetCallback<Post>() {
-//            public void done(Post post, ParseException e) {
-//                if (e == null) {
-//                    mPost = post;
-//                    final List<Transaction> transactions = new ArrayList<>();
-//
-//                    ParseQuery<ParseObject> query1= mPost.getTransactions();
-//                    query1.findInBackground(new FindCallback<ParseObject>() {
-//                        @Override
-//                        public void done(List<ParseObject> objects, ParseException e) {
-//                            for (int i = 0; i < objects.size();i++) {
-//                                transactions.add((Transaction) objects.get(i));
-//                                Transaction transaction = (Transaction)transactions;
-//                                finalArrayList.add(transaction.getStartDate());
-//
-//
-//                            initCalender(finalArrayList);
-//                            }
-//
-//                        }
-//                    });
-//
-//
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        });
 
         try {
             mPost = (Post) query.get(objectId);

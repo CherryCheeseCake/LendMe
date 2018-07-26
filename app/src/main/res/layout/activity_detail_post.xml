@@ -178,9 +178,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/ibBookMark"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
+                    android:id="@+id/ibLikes"
+                    android:layout_width="34dp"
+                    android:layout_height="31dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@android:color/transparent"
@@ -208,13 +208,14 @@
 
                 <Button
                     android:id="@+id/btDistance"
-                    android:layout_width="wrap_content"
+                    android:layout_width="84dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="36dp"
                     android:background="@android:color/transparent"
                     android:text="1.4 mi"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    app:layout_constraintEnd_toStartOf="@+id/ibMessage"
                     app:layout_constraintStart_toEndOf="@+id/tvTitleItem"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -223,9 +224,11 @@
                     android:layout_width="42dp"
                     android:layout_height="35dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginStart="276dp"
                     android:layout_marginTop="8dp"
                     android:background="@android:color/transparent"
-                    app:layout_constraintEnd_toStartOf="@+id/ibBookMark"
+                    app:layout_constraintEnd_toStartOf="@+id/ibLikes"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/messaging" />
             </android.support.constraint.ConstraintLayout>
