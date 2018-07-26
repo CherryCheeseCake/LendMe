@@ -4,6 +4,7 @@ import android.text.format.DateUtils;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -23,8 +24,14 @@ public class Post extends ParseObject {
     public static final String transactionStartDateKey = "startDate";
     public static final String transactionEndDateKey = "endDate";
     public static final String availableDaysKey = "availableDays";
+    public static final String locationKey = "location";
+    public static final String userLocationKey = "Location";
 
 
+
+    public ParseGeoPoint getLocation() { return getParseGeoPoint(locationKey); }
+
+    public void setLocation() { put(locationKey,getUser().getParseGeoPoint(userLocationKey)); }
 
     public String getDescription() {
         return getString(descriptionKey);
@@ -64,7 +71,6 @@ public class Post extends ParseObject {
 
     public void setAvailableDays(List<Integer> availableDays) { put(availableDaysKey,availableDays); }
 
-
     public ParseQuery getTransactionQuery(){
         return getRelation(transactionsKey).getQuery();
     }
@@ -80,7 +86,6 @@ public class Post extends ParseObject {
     public void cancelTransaction(Transaction transaction){
         getRelation(transactionsKey).remove(transaction);
     }
-
 
 
     public static class Query extends ParseQuery<Post> {
@@ -108,7 +113,11 @@ public class Post extends ParseObject {
             return this;
         }
 
-        // TODO query by geoloc
+
+        // TODO wuery by geoloc
+//        public Query byProximity() {
+//            whereNear(locationKey, )
+//        }
 
         // TODO user specified query
     }

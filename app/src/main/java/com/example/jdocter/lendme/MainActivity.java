@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // initiate home fragment
+        // toolbar.setBackgroundColor(Color.TRANSPARENT);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
 
@@ -93,13 +94,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (drawerToggle.onOptionsItemSelected(item)) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 
     private void setupDrawerContent(NavigationView navigationView) {
