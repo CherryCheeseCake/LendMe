@@ -85,6 +85,22 @@ public class TrendingFragment extends Fragment {
                 return false;
             }
         });
+
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                posts.clear();
+                loadTopPosts(ParseUser.getCurrentUser());
+                return true;
+            }
+
+        });
+
     }
 
 
@@ -118,8 +134,9 @@ public class TrendingFragment extends Fragment {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
                         posts.add(objects.get(i));
-                        postAdapter.notifyItemInserted(posts.size() - 1);
+//                        postAdapter.notifyItemInserted(posts.size() - 1);
                     }
+                    postAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }

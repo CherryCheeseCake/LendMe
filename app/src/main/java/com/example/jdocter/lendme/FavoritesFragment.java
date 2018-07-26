@@ -61,7 +61,7 @@ public class FavoritesFragment extends Fragment{
         rvPost.setAdapter(postAdapter);
 
         ParseUser user= ParseUser.getCurrentUser();
-        loadTopPosts(user);
+        loadTopPosts();
 
     }
 
@@ -78,6 +78,7 @@ public class FavoritesFragment extends Fragment{
 
                 try {
                     fetchItemsByCloseness(query);
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -89,11 +90,28 @@ public class FavoritesFragment extends Fragment{
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
+
+        });
+
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                posts.clear();
+                loadTopPosts();
+                return true;
+            }
+
         });
     }
 
 
-     public void fetchItemsByCloseness(String keyword) throws ParseException {
+
+    public void fetchItemsByCloseness(String keyword) throws ParseException {
 
             final User.QueryFavorites query = new User.QueryFavorites(parseUser.getFavoritePostsQuery());
             query.byItem(keyword);
@@ -114,7 +132,7 @@ public class FavoritesFragment extends Fragment{
 
 
 
-    private void loadTopPosts(ParseUser user){
+    private void loadTopPosts(){
 
         final User.QueryFavorites postQuery = new User.QueryFavorites(parseUser.getFavoritePostsQuery());
         postQuery.dec().getTop();
@@ -125,8 +143,9 @@ public class FavoritesFragment extends Fragment{
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
                         posts.add(objects.get(i));
-                        postAdapter.notifyItemInserted(posts.size() - 1);
+//                        postAdapter.notifyItemInserted();
                     }
+                    postAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }
