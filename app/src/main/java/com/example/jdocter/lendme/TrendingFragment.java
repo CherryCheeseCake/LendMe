@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -52,6 +57,54 @@ public class TrendingFragment extends Fragment {
         ParseUser user= ParseUser.getCurrentUser();
         loadTopPosts(user);
 
+        setHasOptionsMenu(true);
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search_bar);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                try {
+                    fetchItemsByCloseness(query);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                searchView.clearFocus();
+
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+
+    public void fetchItemsByCloseness(String keyword) throws ParseException {
+
+        final Post.Query query = new Post.Query();
+        query.byItem(keyword);
+        query.findInBackground(new FindCallback<Post>() {
+            public void done(List<Post> itemList, ParseException e) {
+                if (e == null) {
+                    posts.clear();
+                    for (Post item:itemList){
+                        posts.add(item);
+                    }
+                    postAdapter.notifyDataSetChanged();
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
 

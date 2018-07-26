@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jdocter.lendme.model.Post;
+import com.example.jdocter.lendme.model.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -33,6 +34,8 @@ public class FavoritesFragment extends Fragment{
     RecyclerView rvPost;
 
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
+
+    final User parseUser = (User) ParseUser.getCurrentUser();
 
 
     @Override
@@ -92,7 +95,7 @@ public class FavoritesFragment extends Fragment{
 
      public void fetchItemsByCloseness(String keyword) throws ParseException {
 
-            final Post.Query query = new Post.Query();
+            final User.QueryFavorites query = new User.QueryFavorites(parseUser.getFavoritePostsQuery());
             query.byItem(keyword);
             query.findInBackground(new FindCallback<Post>() {
                 public void done(List<Post> itemList, ParseException e) {
@@ -112,8 +115,9 @@ public class FavoritesFragment extends Fragment{
 
 
     private void loadTopPosts(ParseUser user){
-        final Post.Query postQuery = new Post.Query();
-        postQuery.dec().withUser().byUser(user);
+
+        final User.QueryFavorites postQuery = new User.QueryFavorites(parseUser.getFavoritePostsQuery());
+        postQuery.dec().getTop();
 
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
