@@ -32,6 +32,7 @@
         </provider>
         <activity android:name=".DetailPostActivity" />
         <activity android:name=".ItemCalendarActivity"></activity>
+        <activity android:name=".LenderProfileActivity"></activity>
     </application>
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
