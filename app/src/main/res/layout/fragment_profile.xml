@@ -47,5 +47,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="262dp" />
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="105dp"
+        android:checked="false"
+        android:text="My Profile View" />
+
 
 </RelativeLayout>
