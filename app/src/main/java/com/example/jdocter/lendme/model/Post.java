@@ -144,6 +144,10 @@ public class Post extends ParseObject {
             whereEqualTo(ownerKey,user);
             return this;
         }
+        public Query byItem(String keyword){
+            whereEqualTo(itemKey,keyword);
+            return this;
+        }
 
 
 
