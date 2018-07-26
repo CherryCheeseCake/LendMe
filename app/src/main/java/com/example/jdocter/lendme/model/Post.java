@@ -3,6 +3,7 @@ package com.example.jdocter.lendme.model;
 import android.text.format.DateUtils;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -26,6 +27,8 @@ public class Post extends ParseObject {
     public static final String availableDaysKey = "availableDays";
     public static final String locationKey = "location";
     public static final String userLocationKey = "Location";
+    public static final String KEY_LIKEPOST="likePost";
+    public static final String favorKey="favoritePosts";
 
 
 
@@ -87,6 +90,39 @@ public class Post extends ParseObject {
         getRelation(transactionsKey).remove(transaction);
     }
 
+    public void unlikePost() {
+        getRelation(KEY_LIKEPOST).remove(ParseUser.getCurrentUser());
+    }
+
+    public void likePost(ParseUser user) {
+
+        user.getRelation(favorKey).add(this);
+        user.saveInBackground();
+        getRelation(KEY_LIKEPOST).add(ParseUser.getCurrentUser());
+
+    }
+
+    public boolean hasLiked() {
+        try {
+            int likeCount = getRelation(KEY_LIKEPOST)
+                    .getQuery()
+                    .whereEqualTo("objectId", ParseUser.getCurrentUser().getObjectId())
+                    .count();
+            return likeCount != 0;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int getLikeCount() {
+        try {
+            return getRelation(KEY_LIKEPOST).getQuery().count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
     public static class Query extends ParseQuery<Post> {
         public Query() {
@@ -112,6 +148,14 @@ public class Post extends ParseObject {
             whereEqualTo(ownerKey,user);
             return this;
         }
+        public Query byItem(String keyword){
+            whereEqualTo(itemKey,keyword);
+            return this;
+        }
+
+
+
+
 
 
         // TODO wuery by geoloc
