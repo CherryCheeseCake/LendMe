@@ -89,14 +89,7 @@ public class FavoritesFragment extends Fragment{
         });
     }
 
-//    public void fetchItemsByCloseness(String keyword) throws ParseException {
-//        posts.clear();
-//        final Post.Query postQuery = new Post.Query();
-//        List<Post> items = postQuery.byItem(keyword).find();
-//        posts.addAll(items);
-//        postAdapter.notifyDataSetChanged();
-//
-//    }
+
      public void fetchItemsByCloseness(String keyword) throws ParseException {
 
             final Post.Query query = new Post.Query();
