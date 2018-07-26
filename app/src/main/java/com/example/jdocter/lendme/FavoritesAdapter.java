@@ -82,7 +82,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
             Post post=mPosts.get(getAdapterPosition());
             Intent intent=new Intent(context, DetailPostActivity.class);
-            intent.putExtra("objectID",post.getObjectId());
+            intent.putExtra("objectId",post.getObjectId());
             context.startActivity(intent);
         }
     }
