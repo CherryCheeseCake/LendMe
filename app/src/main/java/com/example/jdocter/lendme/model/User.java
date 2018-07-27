@@ -18,6 +18,7 @@ public class User extends ParseUser {
 
     public ParseGeoPoint getLocation() { return getParseGeoPoint(locationKey); }
 
+
     public ParseQuery getFavoritePostsQuery() {
         return getRelation(favoritePostsKey).getQuery();
     }

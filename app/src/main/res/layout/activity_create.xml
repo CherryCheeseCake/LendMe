@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/ivPostImage"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="308dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
@@ -23,7 +23,8 @@
         android:backgroundTint="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPostImage"
-        android:fontFamily="cursive"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-condensed"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/etPrice"
         android:hint="Item name"
@@ -33,18 +34,19 @@
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_below="@+id/etItemName"
-        android:fontFamily="cursive"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="sans-serif-condensed"
         android:hint="Description of your item"
         android:textSize="18sp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         android:backgroundTint="@color/colorPrimary"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
         android:id="@+id/etPrice"
         android:layout_below="@+id/ivPostImage"
         android:hint="Price (per day)"
@@ -52,131 +54,171 @@
         android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:text="Location:"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_below="@+id/etDescription"/>
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvLocation"
+        android:layout_toEndOf="@+id/tvLocation"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:layout_marginLeft="5dp"
+        android:text="City" />
+
+    <Button
+        android:id="@+id/btnChangeLocation"
+        android:layout_width="66dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tvLocation"
+        android:background="@drawable/createbuttongradient"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Change"
+        android:layout_marginRight="5dp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/tvAvailability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etDescription"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="cursive"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvLocation"
+        android:layout_alignStart="@+id/tvLocation"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="5dp"
-        android:text="Select item availability"
+        android:text="Item availability: "
         android:textColor="@color/darkGrey" />
 
     <CheckedTextView
         android:id="@+id/ctSunday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
-        android:layout_margin="9dp"
-        android:layout_toStartOf="@+id/ctMonday"
+        android:layout_alignTop="@+id/tvAvailability"
+        android:layout_toEndOf="@+id/tvAvailability"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
         android:checked="false"
         android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:onClick="onDayCheckboxClicked"
         android:text=" S"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <CheckedTextView
         android:id="@+id/ctMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
-        android:layout_toStartOf="@+id/ctTuesday"
-        android:layout_margin="9dp"
-        android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
-        android:gravity="center_horizontal"
+        android:layout_alignTop="@+id/tvAvailability"
+        android:layout_toEndOf="@+id/ctSunday"
+        android:layout_marginRight="15dp"
         android:checked="false"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_horizontal"
         android:onClick="onDayCheckboxClicked"
         android:text=" M"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
 
     <CheckedTextView
         android:id="@+id/ctTuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
-        android:layout_toStartOf="@+id/ctWednesday"
+        android:layout_alignTop="@+id/tvAvailability"
+        android:layout_toEndOf="@+id/ctMonday"
+        android:checked="false"
         android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:onClick="onDayCheckboxClicked"
-        android:checked="false"
-        android:layout_margin="9dp"
+        android:layout_marginRight="15dp"
         android:text=" T"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <CheckedTextView
         android:id="@+id/ctWednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
-        android:layout_centerHorizontal="true"
-        android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
-        android:layout_margin="9dp"
+        android:layout_alignTop="@+id/tvAvailability"
+        android:layout_toEndOf="@+id/ctTuesday"
+        android:layout_marginRight="15dp"
         android:checked="false"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:onClick="onDayCheckboxClicked"
         android:text=" W"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <CheckedTextView
         android:id="@+id/ctThursday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
+        android:layout_alignTop="@+id/tvAvailability"
         android:layout_toEndOf="@+id/ctWednesday"
-        android:layout_margin="9dp"
-        android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
         android:checked="false"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:onClick="onDayCheckboxClicked"
         android:text=" Th"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <CheckedTextView
         android:id="@+id/ctFriday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
-        android:layout_margin="9dp"
+        android:layout_alignTop="@+id/tvAvailability"
+        android:layout_marginLeft="15dp"
         android:layout_toEndOf="@+id/ctThursday"
-        android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
-        android:gravity="center_horizontal"
         android:checked="false"
+        android:drawableTop="@drawable/checkboxbutton_unchecked"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_horizontal"
         android:onClick="onDayCheckboxClicked"
         android:text=" F"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <CheckedTextView
         android:id="@+id/ctSaturday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAvailability"
-        android:layout_margin="9dp"
+        android:layout_alignTop="@+id/tvAvailability"
+        android:layout_marginLeft="15dp"
         android:layout_toEndOf="@+id/ctFriday"
         android:checked="false"
         android:drawableTop="@drawable/checkboxbutton_unchecked"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:layoutDirection="ltr"
         android:onClick="onDayCheckboxClicked"
         android:text=" S"
         android:textColor="@color/darkGrey"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <ImageButton
         android:id="@+id/ibCamera"
@@ -196,7 +238,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
         android:background="@drawable/createbuttongradient"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         android:text="Lend"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
