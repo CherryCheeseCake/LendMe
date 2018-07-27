@@ -12,9 +12,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.model.Post;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
 
 public class DetailPostActivity extends AppCompatActivity {
 
@@ -31,6 +40,9 @@ public class DetailPostActivity extends AppCompatActivity {
 
     boolean isImageFitToScreen;
 
+    private SupportMapFragment mapFragment;
+    private GoogleMap map;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +58,9 @@ public class DetailPostActivity extends AppCompatActivity {
         tvPrice = (TextView) findViewById(R.id.tvPrice);
         btRequest = (Button) findViewById(R.id.btRequest);
         ibLikes = (ImageButton) findViewById(R.id.ibLikes);
-        isImageFitToScreen=false;
+        isImageFitToScreen = false;
+
+
         final String objectId = getIntent().getStringExtra("objectId");
 
 
@@ -54,7 +68,7 @@ public class DetailPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(DetailPostActivity.this, ItemCalendarActivity.class);
-                i.putExtra("objectId",objectId);
+                i.putExtra("objectId", objectId);
                 startActivity(i);
 
             }
@@ -63,7 +77,7 @@ public class DetailPostActivity extends AppCompatActivity {
 
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         try {
-            Post post =query.get(objectId);
+            Post post = query.get(objectId);
             try {
                 String username = post.getUser().fetchIfNeeded().getUsername();
                 tvUsername.setText(username);
@@ -92,12 +106,12 @@ public class DetailPostActivity extends AppCompatActivity {
             }
             tvDescription.setText(post.getDescription());
             tvTitleItem.setText(post.getItem());
-            tvPrice.setText("$"+Double.toString(post.getPrice()));
+            tvPrice.setText("$" + Double.toString(post.getPrice()));
             //tvPrice.setText("$"+Integer.toString(post.getPrice()));
             final Post mPost = post;
             if (mPost.hasLiked()) {
                 ibLikes.setImageResource(R.drawable.ufi_heart_active);
-            }else {
+            } else {
                 ibLikes.setImageResource(R.drawable.ufi_heart);
             }
 
@@ -118,10 +132,53 @@ public class DetailPostActivity extends AppCompatActivity {
                 }
             });
 
+            final ParseGeoPoint parseGeoPoint = post.getParseGeoPoint("location");
+            setUpMapIfNeeded(parseGeoPoint);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
+
     }
+
+    protected void setUpMapIfNeeded(final ParseGeoPoint parseGeoPoint) {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mapFragment == null) {
+            mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+            // Check if we were successful in obtaining the map.
+            if (mapFragment != null) {
+                mapFragment.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        map=googleMap;
+                        loadMap(map);
+                        // Set the color of the marker to green
+                        Double v =parseGeoPoint.getLatitude();
+                        Double v1 =parseGeoPoint.getLongitude();
+                        LatLng place = new LatLng(v,v1);
+                        map.addMarker(new MarkerOptions().position(place)
+                                .title("Marker in ItemLocation"));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(place));
+
+                    }
+                });
+            }
+        }
+    }
+
+    // The Map is verified. It is now safe to manipulate the map.
+    protected void loadMap(GoogleMap googleMap) {
+        if (googleMap != null) {
+            // Attach marker click listener to the map here
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                public boolean onMarkerClick(Marker marker) {
+                    // Handle marker click here
+                    return true;
+                }
+            });
+        }
+    }
+
 }
