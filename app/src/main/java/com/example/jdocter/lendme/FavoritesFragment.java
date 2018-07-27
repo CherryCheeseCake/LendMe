@@ -151,6 +151,7 @@ public class FavoritesFragment extends Fragment{
                 if (e == null) {
 
                     postAdapter.mPosts.clear();
+                    posts.clear();
                     posts.addAll(objects);
                     postAdapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);

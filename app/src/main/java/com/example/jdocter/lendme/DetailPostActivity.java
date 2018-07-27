@@ -121,7 +121,7 @@ public class DetailPostActivity extends AppCompatActivity {
                     ParseUser user = ParseUser.getCurrentUser();
                     if (mPost.hasLiked()) {
                         ibLikes.setImageResource(R.drawable.ufi_heart);
-                        mPost.unlikePost();
+                        mPost.unlikePost(user);
                         mPost.saveInBackground();
                     } else {
                         ibLikes.setImageResource(R.drawable.ufi_heart_active);
