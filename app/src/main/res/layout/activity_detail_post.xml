@@ -199,6 +199,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Description"
+                    android:textColor="#373737"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/btConfirm"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
