@@ -29,7 +29,7 @@ import java.util.List;
 
 public class FavoritesFragment extends Fragment{
 
-    ArrayList<Post> posts;
+    private ArrayList<Post> posts;
     private SwipeRefreshLayout swipeRefreshLayout;
     FavoritesAdapter postAdapter;
     RecyclerView rvPost;
