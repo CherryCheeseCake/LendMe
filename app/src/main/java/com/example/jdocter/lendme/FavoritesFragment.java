@@ -85,7 +85,7 @@ public class FavoritesFragment extends Fragment{
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                Intent i = new Intent(getActivity(),CreateActivity.class);
+                Intent i = new Intent(getContext(),CreateActivity.class);
                 i.putExtra(launchCamera,false);
                 startActivity(i);
                 return false;
