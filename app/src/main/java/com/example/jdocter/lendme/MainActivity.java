@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme;
 
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -16,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.jdocter.lendme.MainFragments.HomeFragment;
@@ -23,7 +26,6 @@ import com.example.jdocter.lendme.MainFragments.LogoutFragment;
 import com.example.jdocter.lendme.MainFragments.PaymentFragment;
 import com.example.jdocter.lendme.MainFragments.ProfileFragment;
 import com.example.jdocter.lendme.MainFragments.TransactionFragment;
-import com.example.jdocter.lendme.model.User;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -41,7 +43,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseUser;
 
 
-public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback {
+public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback{
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
@@ -299,6 +301,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         ParseGeoPoint userGeoPoint = new ParseGeoPoint(userLatLng.latitude,userLatLng.longitude);
         return userGeoPoint;
     }
+
 
 }
 
