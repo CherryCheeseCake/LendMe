@@ -151,15 +151,14 @@ public class CreateActivity extends AppCompatActivity {
                     final String itemName = etItemName.getText().toString();
                     final Float price = Float.valueOf(etPrice.getText().toString());
                     List<Integer> availableDays = new ArrayList<>();
-                    CheckedTextView[] ctArray = new CheckedTextView[]{ctSunday,ctMonday,ctTuesday,ctWednesday,ctThursday,ctFriday,ctSaturday};
+                    CheckedTextView[] ctArray = new CheckedTextView[]{ctSunday, ctMonday, ctTuesday, ctWednesday, ctThursday, ctFriday, ctSaturday};
 
-                    for (int i = 0; i<7;i++) {
+                    for (int i = 0; i < 7; i++) {
                         CheckedTextView x = ctArray[i];
-                        if (x.isChecked()== true) {
-                            availableDays.add(i+1);
+                        if (x.isChecked() == true) {
+                            availableDays.add(i + 1);
                         }
                     }
-
 
                     // try converting bitmap to parsefile
                     file = getImageFile(bitmapPostImage);
@@ -167,8 +166,8 @@ public class CreateActivity extends AppCompatActivity {
                     // create post
                     createPost(parseFile,user,description,itemName,price,availableDays);
                 } catch (IOException e) {
-                    Log.e("MainActivity","Invalid User Data");
-                    Toast.makeText(CreateActivity.this,"Please input valid information",Toast.LENGTH_LONG);
+                        Log.e("MainActivity", "Invalid User Data");
+                        Toast.makeText(CreateActivity.this, "Please input valid information", Toast.LENGTH_LONG);
                 }
             }
         });

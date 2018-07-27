@@ -29,7 +29,6 @@ public class LogoutFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ParseUser user= ParseUser.getCurrentUser();
                 ParseUser.logOut();
 
                 Intent intent= new Intent(getContext(), LoginActivity.class);

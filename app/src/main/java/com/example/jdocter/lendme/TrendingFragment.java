@@ -1,6 +1,7 @@
 package com.example.jdocter.lendme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,6 +35,7 @@ public class TrendingFragment extends Fragment {
     TrendingAdapter postAdapter;
     RecyclerView rvPost;
     private Callback callback;
+    private String launchCamera = "launchcamera";
 
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
 
@@ -83,6 +85,17 @@ public class TrendingFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+        MenuItem createItem = menu.findItem(R.id.add_button);
+        createItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                Intent i = new Intent(getActivity(),CreateActivity.class);
+                i.putExtra(launchCamera,false);
+                startActivity(i);
+                return false;
+            }
+        });
 
         MenuItem searchItem = menu.findItem(R.id.search_bar);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
