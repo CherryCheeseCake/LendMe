@@ -18,6 +18,8 @@ android {
     }
 }
 ext {
+    permissionDispatcherVersion = "3.2.0"
+    googlePlayVersion = "15.0.0"//map
     supportLibVersion = '27.1.1'  // variable that can be referenced to keep support libs consistent
 }
 
@@ -51,5 +53,11 @@ dependencies {
 
     //Search bar
     implementation 'com.github.arimorty:floatingsearchview:2.1.1'
+
+    //google map
+    implementation "com.google.android.gms:play-services-maps:$googlePlayVersion"
+    implementation "com.google.android.gms:play-services-location:$googlePlayVersion"
+//    implementation "com.github.hotchemi:permissionsdispatcher:$permissionDispatcherVersion"
+//    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionDispatcherVersion"
 
 }
