@@ -67,13 +67,22 @@ public class TrendingFragment extends Fragment {
         rvPost.setHasFixedSize(true);
         posts = new ArrayList<>();
         postAdapter = new TrendingAdapter(posts);
+        swipeRefreshLayout = view.findViewById(R.id.swipeContainer);
+        final ParseUser user= ParseUser.getCurrentUser();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadTopPosts(user);
+            }
+        });
 
         staggeredGridLayoutManager=new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         rvPost.setLayoutManager(staggeredGridLayoutManager);
         rvPost.setAdapter(postAdapter);
 
 
-        ParseUser user= ParseUser.getCurrentUser();
+
         loadTopPosts(user);
 
         setHasOptionsMenu(true);
@@ -152,11 +161,19 @@ public class TrendingFragment extends Fragment {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
+
+                    postAdapter.mPosts.clear();
+                    posts.clear();
+                    posts.addAll(objects);
+                    postAdapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+                    /*
                     for (int i = 0; i < objects.size(); i++) {
                         posts.add(objects.get(i));
 //                        postAdapter.notifyItemInserted(posts.size() - 1);
                     }
                     postAdapter.notifyDataSetChanged();
+                    */
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }

@@ -200,7 +200,9 @@ public class DetailPostActivity extends AppCompatActivity {
                         //Then construct a cameraUpdate
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 100);
                         //Then move the camera
-                        map.animateCamera(cameraUpdate);
+
+                        //TODO FIX THIS
+                        // map.animateCamera(cameraUpdate);
 
                     }
                 });

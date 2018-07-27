@@ -39,8 +39,9 @@ public class BorrowFragment extends Fragment {
 
 
         final int[] ICONS = new int[]{
-                R.drawable.borrow_favorite,
-                R.drawable.borrow_tending
+                R.drawable.borrow_tending,
+                R.drawable.borrow_favorite
+
         };
         tabs.getTabAt(0).setIcon(ICONS[0]);
         tabs.getTabAt(1).setIcon(ICONS[1]);
@@ -52,8 +53,9 @@ public class BorrowFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager){
         Adapter adapter= new Adapter(getChildFragmentManager());
-        adapter.addFragment(new FavoritesFragment());
         adapter.addFragment(new TrendingFragment());
+        adapter.addFragment(new FavoritesFragment());
+
 
         /*adapter.addFragment(new FavoritesFragment(), "Favorites");
         adapter.addFragment(new TrendingFragment(), "Trending");
