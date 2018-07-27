@@ -55,9 +55,10 @@ public class ProfileFragment extends Fragment {
                 if (!b){
                     Toast.makeText(getContext(), "My Profile View", Toast.LENGTH_SHORT).show();
 
-
                 }else{
                     Toast.makeText(getContext(), "External Profile View", Toast.LENGTH_SHORT).show();
+                    String s=getActivity().toString();
+                    //System.out.print("THIS IS THE CURRENT ACTIVITY "+s);
                     Intent intent=new Intent(getContext(), LenderProfileActivity.class);
                     startActivity(intent);
                 }

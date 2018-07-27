@@ -1,7 +1,11 @@
 package com.example.jdocter.lendme;
 
+import android.content.IntentSender;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,23 +14,45 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.jdocter.lendme.MainFragments.HomeFragment;
 import com.example.jdocter.lendme.MainFragments.LogoutFragment;
 import com.example.jdocter.lendme.MainFragments.PaymentFragment;
 import com.example.jdocter.lendme.MainFragments.ProfileFragment;
 import com.example.jdocter.lendme.MainFragments.TransactionFragment;
+import com.example.jdocter.lendme.model.User;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseUser;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback {
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-
-    // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
-    // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
+    private LocationRequest mLocationRequest;
+    private long UPDATE_INTERVAL = 10000 * 1000;  /* 10000 secs - assumes don't need constant updates */
+    private long FASTEST_INTERVAL = 2000; /* 2 sec */
     private ActionBarDrawerToggle drawerToggle;
+    private static final int REQUEST_CHECK_SETTINGS = 0x1;
+    private boolean initialHomeIntent = false;
+    LatLng userLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +71,9 @@ public class MainActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
+        // user location
+        startLocationUpdates();
 
-        // initiate home fragment
-        // toolbar.setBackgroundColor(Color.TRANSPARENT);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
 
 
         drawerToggle = setupDrawerToggle();
@@ -85,11 +109,10 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
     private ActionBarDrawerToggle setupDrawerToggle() {
         // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
         // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     // `onPostCreate` called when activity start-up is complete after `onStart()`
@@ -138,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.nav_home:
                 fragmentClass = HomeFragment.class;
                 break;
@@ -176,6 +199,106 @@ public class MainActivity extends AppCompatActivity {
         mDrawer.closeDrawers();
     }
 
+    // Trigger new location updates at interval
+    protected void startLocationUpdates() {
+
+        // Create the location request to start receiving updates
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+
+        // Create LocationSettingsRequest object using location request
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        // Check whether location settings are satisfied
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(locationSettingsRequest);
+
+
+        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                // ignore red squiggles
+                LocationServices.getFusedLocationProviderClient(MainActivity.this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                            @Override
+                            public void onLocationResult(LocationResult locationResult) {
+                                // do work here
+                                onLocationChanged(locationResult.getLastLocation());
+                                initiatHomeFragment();
+                            }
+                        },
+                        Looper.myLooper());
+            }
+
+        });
+
+        task.addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof ResolvableApiException) {
+                    Log.e("MainActivity", "Locaiton Permissions failed");
+                    // Location settings are not satisfied, but this can be fixed
+                    // by showing the user a dialog.
+                    try {
+                        // Show the dialog by calling startResolutionForResult(),
+                        // and check the result in onActivityResult().
+                        ResolvableApiException resolvable = (ResolvableApiException) e;
+                        resolvable.startResolutionForResult(MainActivity.this, REQUEST_CHECK_SETTINGS);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                        // Ignore the error.
+                    }
+                }
+
+                // default location = user's home location
+                ParseGeoPoint userHomeLoc = null;
+                try {
+                    userHomeLoc = ParseUser.getCurrentUser().fetch().getParseGeoPoint("location");
+                    userLatLng = new LatLng(userHomeLoc.getLatitude(),userHomeLoc.getLongitude());
+
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
+                initiatHomeFragment();
+            }
+
+        });
+
+
+    }
+
+    public void initiatHomeFragment() {
+        // initiate home fragment
+        if (ParseUser.getCurrentUser() != null && initialHomeIntent == false) {
+            // toolbar.setBackgroundColor(Color.TRANSPARENT);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
+            initialHomeIntent = true;
+        }
+    }
+
+    public void onLocationChanged(Location location) {
+        // New location has now been determined
+        String msg = "Updated Location: " +
+                Double.toString(location.getLatitude()) + "," +
+                Double.toString(location.getLongitude());
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Log.e("MainActivity",msg);
+
+        // You can now create a LatLng Object for use with maps
+        userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+        Log.e("MainActivity","Testing");
+    }
+
+
+    @Override
+    public ParseGeoPoint getLiveLoc() {
+        ParseGeoPoint userGeoPoint = new ParseGeoPoint(userLatLng.latitude,userLatLng.longitude);
+        return userGeoPoint;
+    }
 
 }
 

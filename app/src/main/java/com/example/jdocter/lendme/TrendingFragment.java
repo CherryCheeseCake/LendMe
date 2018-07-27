@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import com.example.jdocter.lendme.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -31,9 +33,25 @@ public class TrendingFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     TrendingAdapter postAdapter;
     RecyclerView rvPost;
+    private Callback callback;
 
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
 
+    /**
+     * interface to get the user's live location which is accessed in MainActivity
+     */
+    public interface Callback {
+        ParseGeoPoint getLiveLoc();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Callback) {
+            this.callback = (Callback) context;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +62,7 @@ public class TrendingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        getActivity();
         rvPost = view.findViewById(R.id.rvTrending);
         rvPost.setHasFixedSize(true);
         posts = new ArrayList<>();
@@ -123,10 +142,11 @@ public class TrendingFragment extends Fragment {
         });
     }
 
-
     private void loadTopPosts(ParseUser user){
+        ParseGeoPoint userGeoPoint = callback.getLiveLoc();
+
         final Post.Query postQuery = new Post.Query();
-        postQuery.dec().withUser().byUser(user);
+        postQuery.notByUser(user).withUser().byProximity(userGeoPoint).dec();
 
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
@@ -143,4 +163,5 @@ public class TrendingFragment extends Fragment {
             }
         });
     }
+
 }

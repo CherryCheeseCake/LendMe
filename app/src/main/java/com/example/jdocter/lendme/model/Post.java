@@ -26,7 +26,7 @@ public class Post extends ParseObject {
     public static final String transactionEndDateKey = "endDate";
     public static final String availableDaysKey = "availableDays";
     public static final String locationKey = "location";
-    public static final String userLocationKey = "Location";
+    public static final String userLocationKey = "location";
     public static final String KEY_LIKEPOST="likePost";
     public static final String favorKey="favoritePosts";
 
@@ -34,7 +34,10 @@ public class Post extends ParseObject {
 
     public ParseGeoPoint getLocation() { return getParseGeoPoint(locationKey); }
 
-    public void setLocation() { put(locationKey,getUser().getParseGeoPoint(userLocationKey)); }
+    // set post location to use's home location
+    public void setDefaultLocation() { put(locationKey,getUser().getParseGeoPoint(userLocationKey)); }
+
+    public void setLocation(ParseGeoPoint g) { put(locationKey,g); }
 
     public String getDescription() {
         return getString(descriptionKey);
@@ -153,15 +156,18 @@ public class Post extends ParseObject {
             return this;
         }
 
+        // excludes user's own posts in query
+        public Query notByUser(ParseUser user) {
+            whereNotEqualTo(ownerKey,user);
+            return this;
+        }
 
-
-
-
-
-        // TODO wuery by geoloc
-//        public Query byProximity() {
-//            whereNear(locationKey, )
-//        }
+        // queris by geoloc
+        // input: ParseGeoPoint that posts should be near
+        public Query byProximity(ParseGeoPoint g) {
+            whereNear(locationKey,g);
+            return this;
+        }
 
         // TODO user specified query
     }
