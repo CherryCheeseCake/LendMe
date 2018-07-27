@@ -11,12 +11,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.jdocter.lendme.DetailView.ImageEnlargeActivity;
+import com.example.jdocter.lendme.DetailView.ItemCalendarActivity;
 import com.example.jdocter.lendme.model.Post;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
@@ -42,6 +46,9 @@ public class DetailPostActivity extends AppCompatActivity {
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
+    private final int REQUEST_CODE = 20;
+    private Double userLatitude=0.0;
+    private Double userLongitude=0.0;
 
 
     @Override
@@ -156,6 +163,8 @@ public class DetailPostActivity extends AppCompatActivity {
 
     }
 
+
+
     protected void setUpMapIfNeeded(final ParseGeoPoint parseGeoPoint) {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mapFragment == null) {
@@ -171,15 +180,34 @@ public class DetailPostActivity extends AppCompatActivity {
                         Double v =parseGeoPoint.getLatitude();
                         Double v1 =parseGeoPoint.getLongitude();
                         LatLng place = new LatLng(v,v1);
+
+
+                        ParseGeoPoint userGeo;
+                        userLatitude=39.9;
+                        userLongitude=-116.0;
+                        LatLng userLiveLocation = new LatLng(userLatitude,userLongitude);
+
+
                         map.addMarker(new MarkerOptions().position(place)
                                 .title("Marker in ItemLocation"));
                         map.moveCamera(CameraUpdateFactory.newLatLng(place));
+
+                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                        // Add your locations to bounds using builder.include, maybe in a loop
+                        builder.include(place);
+                        builder.include(userLiveLocation);
+                        LatLngBounds bounds = builder.build();
+                        //Then construct a cameraUpdate
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+                        //Then move the camera
+                        map.animateCamera(cameraUpdate);
 
                     }
                 });
             }
         }
     }
+
 
     // The Map is verified. It is now safe to manipulate the map.
     protected void loadMap(GoogleMap googleMap) {
@@ -193,5 +221,7 @@ public class DetailPostActivity extends AppCompatActivity {
             });
         }
     }
+
+
 
 }

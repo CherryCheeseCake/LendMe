@@ -50,7 +50,7 @@
         </provider>
 
         <activity android:name=".DetailPostActivity" />
-        <activity android:name=".ItemCalendarActivity" />
+        <activity android:name=".DetailView.ItemCalendarActivity" />
         <activity android:name=".LenderProfileActivity" />
 
         <uses-library
@@ -64,7 +64,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ImageEnlargeActivity"></activity>
+        <activity android:name=".DetailView.ImageEnlargeActivity"></activity>
     </application>
 
 </manifest>

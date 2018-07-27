@@ -1,4 +1,4 @@
-package com.example.jdocter.lendme;
+package com.example.jdocter.lendme.DetailView;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.jdocter.lendme.R;
 
 public class ImageEnlargeActivity extends AppCompatActivity {
 

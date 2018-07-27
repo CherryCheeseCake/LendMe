@@ -1,4 +1,4 @@
-package com.example.jdocter.lendme;
+package com.example.jdocter.lendme.DetailView;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.model.Post;
 import com.example.jdocter.lendme.model.Transaction;
 import com.parse.ParseException;
