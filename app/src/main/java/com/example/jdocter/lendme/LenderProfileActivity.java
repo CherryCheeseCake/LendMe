@@ -3,10 +3,13 @@ package com.example.jdocter.lendme;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.jdocter.lendme.model.Post;
 import com.parse.FindCallback;
@@ -16,22 +19,23 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LenderProfileActivity extends AppCompatActivity {
+public class LenderProfileActivity extends FragmentActivity {
 
     RecyclerView rvLend;
     LenderProfileAdapter profileAdapter;
     List<Post> posts;
+    Switch bSwitch;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_lender);
 
-        posts=new ArrayList<>();
-
         //initialize variables
+        posts=new ArrayList<>();
         rvLend=(RecyclerView) findViewById(R.id.rvLend);
         rvLend.setHasFixedSize(true);
         profileAdapter=new LenderProfileAdapter(posts);
+        bSwitch=findViewById(R.id.switch2);
 
         //get user
         ParseUser user=ParseUser.getCurrentUser();
@@ -42,6 +46,22 @@ public class LenderProfileActivity extends AppCompatActivity {
 
         //load posts
         loadUserPosts(user);
+
+        bSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+
+                    //TODO FIX THIS
+                    //Intent intent=new Intent(getApplicationContext(), ProfileFragment.class);
+                    //startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Next Activity", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Current Activity", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
     }
 
     private void loadUserPosts(ParseUser user){

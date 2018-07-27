@@ -55,6 +55,14 @@ public class FavoritesFragment extends Fragment{
         rvPost.setHasFixedSize(true);
         posts = new ArrayList<>();
         postAdapter = new FavoritesAdapter(posts);
+        swipeRefreshLayout= view.findViewById(R.id.swipeContainer);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadTopPosts();
+            }
+        });
 
         staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         rvPost.setLayoutManager(staggeredGridLayoutManager);
@@ -141,11 +149,18 @@ public class FavoritesFragment extends Fragment{
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
+
+                    postAdapter.mPosts.clear();
+                    posts.addAll(objects);
+                    postAdapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+                    /*
                     for (int i = 0; i < objects.size(); i++) {
                         posts.add(objects.get(i));
 //                        postAdapter.notifyItemInserted();
                     }
                     postAdapter.notifyDataSetChanged();
+*/
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }
