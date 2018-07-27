@@ -85,7 +85,7 @@ public class DetailPostActivity extends AppCompatActivity {
                 e1.printStackTrace();
             }
 
-            String ItemUrl = post.getImage().getUrl();
+            final String ItemUrl = post.getImage().getUrl();
             Glide.with(DetailPostActivity.this)
                     .load(ItemUrl)
                     .apply(new RequestOptions().override(470, 340).centerCrop())
@@ -134,6 +134,19 @@ public class DetailPostActivity extends AppCompatActivity {
 
             final ParseGeoPoint parseGeoPoint = post.getParseGeoPoint("location");
             setUpMapIfNeeded(parseGeoPoint);
+
+            ivItemImage.setClickable(true);
+            ivItemImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent i = new Intent(DetailPostActivity.this, ImageEnlargeActivity.class);
+                    i.putExtra("ImageUrl", ItemUrl);
+                    startActivity(i);
+
+
+                }
+            });
 
         } catch (ParseException e) {
             e.printStackTrace();
