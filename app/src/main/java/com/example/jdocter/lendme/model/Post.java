@@ -93,7 +93,9 @@ public class Post extends ParseObject {
         getRelation(transactionsKey).remove(transaction);
     }
 
-    public void unlikePost() {
+    public void unlikePost(ParseUser user) {
+        user.getRelation(favorKey).remove(this);
+        user.saveInBackground();
         getRelation(KEY_LIKEPOST).remove(ParseUser.getCurrentUser());
     }
 

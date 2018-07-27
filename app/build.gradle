@@ -18,6 +18,8 @@ android {
     }
 }
 ext {
+    permissionDispatcherVersion = "3.2.0"
+    googlePlayVersion = "15.0.0"//map
     supportLibVersion = '27.1.1'  // variable that can be referenced to keep support libs consistent
 }
 
@@ -30,7 +32,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     implementation 'com.parse:parse-android:1.17.3'
     implementation 'com.android.support:design:28.0.0-alpha3'
-    implementation 'com.android.support:support-v4:28.0.0-alpha3'
+    //implementation 'com.android.support:support-v4:28.0.0-alpha3'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
@@ -53,5 +55,11 @@ dependencies {
     implementation 'com.github.arimorty:floatingsearchview:2.1.1'
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation "com.google.android.gms:play-services-maps:+"
+
+    //google map
+    implementation "com.google.android.gms:play-services-maps:$googlePlayVersion"
+    implementation "com.google.android.gms:play-services-location:$googlePlayVersion"
+//    implementation "com.github.hotchemi:permissionsdispatcher:$permissionDispatcherVersion"
+//    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionDispatcherVersion"
 
 }
