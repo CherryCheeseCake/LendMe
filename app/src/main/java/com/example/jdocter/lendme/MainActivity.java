@@ -1,6 +1,5 @@
 package com.example.jdocter.lendme;
 
-import android.content.Intent;
 import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -17,8 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.jdocter.lendme.MainFragments.HomeFragment;
@@ -304,4 +301,3 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
 
 }
-

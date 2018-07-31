@@ -3,6 +3,7 @@ package com.example.jdocter.lendme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -49,6 +50,8 @@ public class DetailPostActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 20;
     private Double userLatitude=0.0;
     private Double userLongitude=0.0;
+    private static String ownerIdKey = "ownerId";
+    private static String objectIdKey = "objectId";
 
 
     @Override
@@ -66,9 +69,8 @@ public class DetailPostActivity extends AppCompatActivity {
         btRequest = (Button) findViewById(R.id.btRequest);
         ibLikes = (ImageButton) findViewById(R.id.ibLikes);
         isImageFitToScreen = false;
-
-
         final String objectId = getIntent().getStringExtra("objectId");
+
 
 
         btRequest.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +78,20 @@ public class DetailPostActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(DetailPostActivity.this, ItemCalendarActivity.class);
                 i.putExtra("objectId", objectId);
-                startActivity(i);
+                ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+                Post post = null;
+                try {
+                    post = query.get(objectId);
+                    if (ParseUser.getCurrentUser() == post.getUser()) {
+                        i.putExtra("transaction", true);
+                    } else {
+                        i.putExtra("transaction", false);
+                    }
+                } catch (ParseException e) {
+                    Log.e("DetailPostActivity","Failed to retrieve user post");
+                }
 
+                startActivity(i);
             }
 
         });
@@ -85,6 +99,10 @@ public class DetailPostActivity extends AppCompatActivity {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         try {
             Post post = query.get(objectId);
+            if (post.getString(ownerIdKey) == ParseUser.getCurrentUser().getString(objectIdKey)) {
+                btRequest.setText("Reserve my item");
+            }
+
             try {
                 String username = post.getUser().fetchIfNeeded().getUsername();
                 tvUsername.setText(username);

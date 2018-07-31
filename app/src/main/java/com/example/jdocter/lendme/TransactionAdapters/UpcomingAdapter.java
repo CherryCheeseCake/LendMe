@@ -29,19 +29,25 @@ public class UpcomingAdapter extends TransactionAdapter {
 
 
         // different input depending on borrow vs lent
-        if (post.getUser() == ParseUser.getCurrentUser()) {
-            try {
-                final String borrower = transaction.getBorrower().fetch().getString(fullNameKey);
-                final String blurb = "Lending " + item + " to " + borrower;
-                viewHolder.tvBlurb.setText(blurb);
-            } catch (ParseException e) { e.printStackTrace(); }
+        if (transaction.getLender() != transaction.getBorrower()) {
+            if (post.getUser() == ParseUser.getCurrentUser()) {
+                try {
+                    final String borrower = transaction.getBorrower().fetch().getString(fullNameKey);
+                    final String blurb = "Lending " + item + " to " + borrower;
+                    viewHolder.tvBlurb.setText(blurb);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
-        } else {
-            try {
-                final String lender = transaction.getLender().fetch().getString(fullNameKey);
-                final String blurb = "Borrowing " + item + " from " + lender;
-                viewHolder.tvBlurb.setText(blurb);
-            } catch (ParseException e) { e.printStackTrace(); }
+            } else {
+                try {
+                    final String lender = transaction.getLender().fetch().getString(fullNameKey);
+                    final String blurb = "Borrowing " + item + " from " + lender;
+                    viewHolder.tvBlurb.setText(blurb);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

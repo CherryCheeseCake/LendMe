@@ -55,10 +55,12 @@ public class SelectLocationActivity extends AppCompatActivity {
                 ParseGeoPoint userHomeLoc = ((User) ParseUser.getCurrentUser().fetch()).getLocation();
                 LatLng listingPosition = new LatLng(userHomeLoc.getLatitude(), userHomeLoc.getLongitude());
                 newMarker(listingPosition,googleMap);
-                
+
             } catch (ParseException e) {
                 Log.e("SelectLocationActivity", "Failed to load user home location");
             }
+
+            googleMap.getUiSettings().setAllGesturesEnabled(true);
 
             // Attach marker click listener to the map here
             googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

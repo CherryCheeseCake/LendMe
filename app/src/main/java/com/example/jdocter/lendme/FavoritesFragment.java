@@ -75,7 +75,7 @@ public class FavoritesFragment extends Fragment{
 
     }
 
-
+    // TODO this is redundant code with respect to the TrendingFragment... Consider moving method to MainActivity? or HomeFragment?
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
@@ -85,12 +85,13 @@ public class FavoritesFragment extends Fragment{
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                Intent i = new Intent(getContext(),CreateActivity.class);
-                i.putExtra(launchCamera,false);
+                Intent i = new Intent(getContext(), CreateActivity.class);
+                i.putExtra(launchCamera, false);
                 startActivity(i);
                 return false;
             }
         });
+
 
         MenuItem searchItem = menu.findItem(R.id.search_bar);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class HistoryUpcomingFragment extends Fragment {
     RecyclerView rvTransactions;
     List<Post> userPosts;
     List<Transaction> userTransactions;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -51,6 +53,16 @@ public class HistoryUpcomingFragment extends Fragment {
         // get correct adapter depending on situation
         adapter = getAdapter();
         rvTransactions.setAdapter(adapter);
+
+        swipeRefreshLayout= view.findViewById(R.id.swipeContainer);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               loadAllTransactions();
+            }
+        });
+
 
         loadAllTransactions();
 
@@ -73,14 +85,6 @@ public class HistoryUpcomingFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-//        // get posts related to users
-//        try {
-//            userPosts = postQuery.find();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        loadPostTransactions();
     }
 
     public void loadPostTransactions() {
@@ -111,13 +115,7 @@ public class HistoryUpcomingFragment extends Fragment {
                 }
             });
 
-//            try {
-//                List<Transaction> postTransactions = query.find();
-//                userTransactions.addAll(postTransactions);
-//                adapter.notifyDataSetChanged();
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 

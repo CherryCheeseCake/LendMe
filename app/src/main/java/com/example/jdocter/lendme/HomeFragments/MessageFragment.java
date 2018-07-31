@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,4 +19,14 @@ public class MessageFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_message, container, false);
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        setHasOptionsMenu(false);
+//        MenuItem searchItem = menu.findItem(R.id.search_bar);
+//        searchItem.setIcon(getResources().getDrawable(R.drawable.checkboxbutton_checked));
+
+    }
+
 }

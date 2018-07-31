@@ -36,6 +36,7 @@ public class TrendingFragment extends Fragment {
     RecyclerView rvPost;
     private Callback callback;
     private String launchCamera = "launchcamera";
+    private Context context;
 
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
 
@@ -70,6 +71,7 @@ public class TrendingFragment extends Fragment {
         posts = new ArrayList<>();
         postAdapter = new TrendingAdapter(posts);
         swipeRefreshLayout = view.findViewById(R.id.swipeContainer);
+        context = getContext();
         final ParseUser user= ParseUser.getCurrentUser();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,13 +96,14 @@ public class TrendingFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+
         MenuItem createItem = menu.findItem(R.id.add_button);
         createItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                Intent i = new Intent(getContext(),CreateActivity.class);
-                i.putExtra(launchCamera,false);
+                Intent i = new Intent(getContext(), CreateActivity.class);
+                i.putExtra(launchCamera, false);
                 startActivity(i);
                 return false;
             }

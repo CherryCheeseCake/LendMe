@@ -32,14 +32,14 @@ import java.util.List;
 
 public class LendFragment extends Fragment {
 
-    List<Post> posts;
-    LendAdapter lendAdapter;
-    RecyclerView rvLends;
-    TextView tvfullName;
-    TextView tvUsername;
-    ImageView ivProfileImage;
-    Button btnCreate;
-    String launchCamera = "launchcamera";
+    private List<Post> posts;
+    private LendAdapter lendAdapter;
+    private RecyclerView rvLends;
+    private TextView tvfullName;
+    private TextView tvUsername;
+    private ImageView ivProfileImage;
+    private Button btnCreate;
+    private String launchCamera = "launchcamera";
 
 
 
