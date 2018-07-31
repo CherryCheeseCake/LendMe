@@ -22,5 +22,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum lorem 
 
     <string name="google_maps_key">AIzaSyCZ3E-xEQqcWccJqAQaAR2zo_4DZshOCT0</string>
 
+    <string-array name="card_type">
+        <item>Visa</item>
+        <item>MasterCard</item>
+        <item>American Express</item>
+        <item>Discover</item>
+
+    </string-array>
 
 </resources>
