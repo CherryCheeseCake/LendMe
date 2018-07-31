@@ -11,11 +11,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.jdocter.lendme.MainFragments.HomeFragment;
@@ -52,15 +55,24 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
     private boolean initialHomeIntent = false;
     LatLng userLatLng;
+    private ActionBar actionBar;
+    private FrameLayout frameBig;
+    private FrameLayout frameSmall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        frameBig = findViewById(R.id.flContent);
+        frameSmall = findViewById(R.id.flContentShort);
+
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -188,7 +200,20 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        if (fragmentClass == HomeFragment.class) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+            frameSmall.removeAllViews();
+
+        } else {
+            actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.black));
+            actionBar.setDisplayShowTitleEnabled(true);
+            fragmentManager.beginTransaction().replace(R.id.flContentShort, fragment).commit();
+            frameBig.removeAllViews();
+        }
+
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);

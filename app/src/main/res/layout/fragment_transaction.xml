@@ -18,6 +18,7 @@ tools:context=".MainFragments.TransactionFragment">
             android:layout_height="wrap_content"
             app:tabTextAppearance="@style/MyCustomTextAppearance"
             app:tabGravity="fill"
+            android:background="@color/colorPrimaryDark"
             app:tabIndicatorColor="@color/white"
             app:tabMode="fixed"
             app:tabTextColor="@color/white">

@@ -3,15 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search_bar"
-        android:icon="@drawable/search"
+        android:icon="@drawable/searchtint"
         android:title="Search"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView">
-    </item>
-    <item
-        android:id="@+id/add_button"
-        android:icon="@drawable/ic_action_name"
-        app:showAsAction="ifRoom|withText"
-        android:title="Create Post">
     </item>
 </menu>

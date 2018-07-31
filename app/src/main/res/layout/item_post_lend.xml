@@ -15,9 +15,9 @@
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
         app:srcCompat="@drawable/profile"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="2dp"/>
+        android:paddingTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:paddingBottom="3dp"/>
 
 </android.support.constraint.ConstraintLayout>

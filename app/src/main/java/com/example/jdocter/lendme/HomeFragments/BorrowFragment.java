@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme.HomeFragments;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,6 +39,7 @@ public class BorrowFragment extends Fragment {
         tabs.setupWithViewPager(viewPager);
 
 
+
         final int[] ICONS = new int[]{
                 R.drawable.borrow_tending,
                 R.drawable.borrow_favorite
@@ -45,6 +47,9 @@ public class BorrowFragment extends Fragment {
         };
         tabs.getTabAt(0).setIcon(ICONS[0]);
         tabs.getTabAt(1).setIcon(ICONS[1]);
+
+        tabs.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         return view;
         //return inflater.inflate(R.layout.fragment_borrow, container, false);
@@ -62,7 +67,7 @@ public class BorrowFragment extends Fragment {
         */
         viewPager.setAdapter(adapter);
     }
-static class Adapter extends FragmentPagerAdapter{
+    static class Adapter extends FragmentPagerAdapter{
         private final List<Fragment> mFragmentList = new ArrayList<>();
         //private final List<String> mFragmentTitleList = new ArrayList<>();
 
@@ -70,34 +75,34 @@ static class Adapter extends FragmentPagerAdapter{
             super(manager);
         }
 
-    @Override
-    public Fragment getItem(int i) {
-        return mFragmentList.get(i);
-    }
+        @Override
+        public Fragment getItem(int i) {
+            return mFragmentList.get(i);
+        }
 
-    @Override
-    public int getCount() {
-        return mFragmentList.size();
-    }
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
 
-    public void addFragment(Fragment fragment){
-        mFragmentList.add(fragment);
-    }
-
-    //THIS IS THE CODE TO SHOW A TITLE ON TABS
-
-    /*public void addFragment(Fragment fragment, String title){
-        //public void addFragment(Fragment fragment, String title, ImageView imageView){
+        public void addFragment(Fragment fragment){
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-    }*/
+        }
 
-   // @Nullable
-    //@Override
-    //public CharSequence getPageTitle(int position) {
-     //   return mFragmentTitleList.get(position);
-    //}
-}
+        //THIS IS THE CODE TO SHOW A TITLE ON TABS
+
+        /*public void addFragment(Fragment fragment, String title){
+            //public void addFragment(Fragment fragment, String title, ImageView imageView){
+                mFragmentList.add(fragment);
+                mFragmentTitleList.add(title);
+        }*/
+
+       // @Nullable
+        //@Override
+        //public CharSequence getPageTitle(int position) {
+         //   return mFragmentTitleList.get(position);
+        //}
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

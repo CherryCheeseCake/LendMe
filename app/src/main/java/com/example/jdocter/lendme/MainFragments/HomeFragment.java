@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     final Fragment messageFragment = new MessageFragment();
 
     private BottomNavigationView bottomNavigationView;
+    private android.support.v7.app.ActionBar actionBar;
 
 
 
@@ -47,6 +49,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+
         final FragmentManager homeFragmentManager = getActivity().getSupportFragmentManager();
 
         bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
@@ -57,9 +61,11 @@ public class HomeFragment extends Fragment {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         FragmentTransaction fragmentTransaction = homeFragmentManager.beginTransaction();
+                        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
                         switch (item.getItemId()) {
                             case R.id.borrow:
                                 fragmentTransaction.replace(R.id.homeContainer, borrowFragment).commit();
+                                actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
                                 return true;
                             case R.id.lend:
                                 fragmentTransaction.replace(R.id.homeContainer, lendFragment).commit();
