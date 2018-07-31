@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme;
 
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.location.Location;

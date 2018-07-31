@@ -15,13 +15,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.DetailView.ImageEnlargeActivity;
 import com.example.jdocter.lendme.DetailView.ItemCalendarActivity;
 import com.example.jdocter.lendme.model.Post;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
@@ -179,11 +178,13 @@ public class DetailPostActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
 
     protected void setUpMapIfNeeded(final ParseGeoPoint parseGeoPoint) {
+
         // Do a null check to confirm that we have not already instantiated the map.
         if (mapFragment == null) {
             mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
@@ -205,22 +206,32 @@ public class DetailPostActivity extends AppCompatActivity {
                         userLongitude=-116.0;
                         LatLng userLiveLocation = new LatLng(userLatitude,userLongitude);
 
+                        map.getUiSettings().setZoomControlsEnabled(true);
 
                         map.addMarker(new MarkerOptions().position(place)
                                 .title("Marker in ItemLocation"));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(place));
+                        map.setMinZoomPreference(10.0f);
+                        map.setMaxZoomPreference(25.0f);
+                        CameraPosition cameraPosition = new CameraPosition.Builder()
+                                .target(place)      // Sets the center of the map to Mountain View
+                                .zoom(17)                   // Sets the zoom
+                                //.bearing(90)                // Sets the orientation of the camera to east
+                                //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                                .build();                   // Creates a CameraPosition from the builder
+                        //map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        //map.moveCamera(CameraUpdateFactory.newLatLng(place));
+                        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                        // Add your locations to bounds using builder.include, maybe in a loop
-                        builder.include(place);
-                        builder.include(userLiveLocation);
-                        LatLngBounds bounds = builder.build();
-                        //Then construct a cameraUpdate
-                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 100);
-                        //Then move the camera
-
-                        //TODO FIX THIS
-                        // map.animateCamera(cameraUpdate);
+//                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//                        // Add your locations to bounds using builder.include, maybe in a loop
+//                        builder.include(place);
+//                        builder.include(userLiveLocation);
+//                        LatLngBounds bounds = builder.build();
+//                        //Then construct a cameraUpdate
+//                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 20);
+//                        //Then move the camera
+//                        //TODO FIX THIS
+//                        map.animateCamera(cameraUpdate);
 
                     }
                 });

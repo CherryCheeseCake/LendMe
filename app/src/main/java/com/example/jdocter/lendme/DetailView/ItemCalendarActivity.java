@@ -132,6 +132,8 @@ public class ItemCalendarActivity extends AppCompatActivity {
         list.add(1);
         calendar.deactivateDates(list);
 
+
+
         calendar.init(lastYear.getTime(), nextYear.getTime(), new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
                 .withSelectedDate(new Date())
@@ -139,6 +141,8 @@ public class ItemCalendarActivity extends AppCompatActivity {
                 .withDeactivateDates(new ArrayList<>(Collections.singletonList(7)))
                 // highlight dates in red color, mean they are aleady used.
                 .withHighlightedDates(finalArrayList);
+
+
 
     }
 

@@ -21,6 +21,7 @@ ext {
     permissionDispatcherVersion = "3.2.0"
     googlePlayVersion = "15.0.0"//map
     supportLibVersion = '27.1.1'  // variable that can be referenced to keep support libs consistent
+    parseVersion = "1.17.3"
 }
 
 dependencies {
@@ -61,5 +62,8 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:$googlePlayVersion"
 //    implementation "com.github.hotchemi:permissionsdispatcher:$permissionDispatcherVersion"
 //    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionDispatcherVersion"
+
+    //push notification
+    implementation "com.parse:parse-fcm-android:1.17.3"
 
 }
