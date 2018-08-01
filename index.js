@@ -14,40 +14,20 @@ if (!databaseUri) {
 var pushConfig = {};
 
 if (process.env.FCM_API_KEY) {
-    pushConfig['android'] = { apiKey: process.env.FCM_API_KEY || ''};
-}
-
-if (process.env.APNS_ENABLE) {
-    pushConfig['ios'] = [
-        {
-            pfx: 'ParsePushDevelopmentCertificate.p12', // P12 file only
-            bundleId: 'beta.codepath.parsetesting',  // change to match bundleId
-            production: false // dev certificate
-        }
-    ]
+    pushConfig['android'] = { apiKey: process.env.FCM_API_KEY || 'AIzaSyC4v_joMxPq-EsD1EC1MzxgdPVbRYyuvvY',
+    senderId:process.env.SENDER_ID || '950375924425'};
 }
 
 
-var filesAdapter = null;  // enable Gridstore to be the default
-if (process.env.S3_ENABLE) {
-    var S3Adapter = require('parse-server').S3Adapter;
-
-    filesAdapter = new S3Adapter(
-        process.env.AWS_ACCESS_KEY,
-        process.env.AWS_SECRET_ACCESS_KEY,
-        {bucket: process.env.AWS_BUCKET_NAME, bucketPrefix: "", directAccess: true}
-    );
-}
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: databaseUri || 'mongodb://heroku_4jtjqz31:1k0147u2rstundfh6h4634m49f@ds239931.mlab.com:39931/heroku_4jtjqz31',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
+  appId: process.env.APP_ID || 'CanIBorrow',
+  masterKey: process.env.MASTER_KEY || 'qwe123!@#', //Add your master key here. Keep it secret!
   push: pushConfig,
-  filesAdapter: filesAdapter,
   liveQuery: { classNames: ["Message"]},
-  serverURL: process.env.SERVER_URL || 'http://localhost/parse'  // needed for Parse Cloud and push notifications
+  serverURL: process.env.SERVER_URL || 'http://caniborrow.herokuapp.com/parse'  // needed for Parse Cloud and push notifications
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
