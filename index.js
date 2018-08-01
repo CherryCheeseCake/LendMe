@@ -14,8 +14,8 @@ if (!databaseUri) {
 var pushConfig = {};
 
 if (process.env.FCM_API_KEY) {
-    pushConfig['android'] = { apiKey: process.env.FCM_API_KEY || 'AIzaSyC4v_joMxPq-EsD1EC1MzxgdPVbRYyuvvY',
-    senderId:process.env.SENDER_ID || '950375924425'};
+    pushConfig['android'] = { apiKey: process.env.FCM_API_KEY || 'AIzaSyBv8HfBrpXHpnGDPpDTpj9UWbZGiWLgKMg',
+    senderId:process.env.SENDER_ID || '72446384673'};
 }
 
 
