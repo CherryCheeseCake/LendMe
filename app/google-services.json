@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "72446384673",
-    "firebase_url": "https://lendme-3e3ac.firebaseio.com",
-    "project_id": "lendme-3e3ac",
-    "storage_bucket": "lendme-3e3ac.appspot.com"
+    "project_number": "950375924425",
+    "firebase_url": "https://lendme-3c003.firebaseio.com",
+    "project_id": "lendme-3c003",
+    "storage_bucket": "lendme-3c003.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:72446384673:android:5e8a429e0f65f15b",
+        "mobilesdk_app_id": "1:950375924425:android:5e8a429e0f65f15b",
         "android_client_info": {
           "package_name": "com.example.jdocter.lendme"
         }
       },
       "oauth_client": [
         {
-          "client_id": "72446384673-qhuk9e67nlqi4j9eeqkff8d8p6up0a6m.apps.googleusercontent.com",
+          "client_id": "950375924425-aia9lrq9ne640q6hrhhckmsnqjgkscog.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA6zLyug9kn9QW0A0BJ-WhiG16FhR8BLho"
+          "current_key": "AIzaSyBPJn55UJdvUJh4_3bzBCVxub1DV8xoNAo"
         }
       ],
       "services": {
