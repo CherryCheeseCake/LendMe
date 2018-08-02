@@ -117,7 +117,11 @@ public class DetailPostActivity extends AppCompatActivity {
                 JSONObject payload = new JSONObject();
 
                 try {
-                    payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
+                    final ParseInstallation parseInstallation = ParseInstallation.getCurrentInstallation();
+                    parseInstallation.put("GCMSenderId","72446384673");
+                    parseInstallation.saveInBackground();
+                    payload.put("sender", parseInstallation.getInstallationId());
+                    //payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
