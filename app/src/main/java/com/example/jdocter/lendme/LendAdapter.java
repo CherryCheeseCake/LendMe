@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.model.Post;
@@ -30,9 +31,15 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
         final Post post = (Post) mLends.get(i);
         String imageUrl = post.getImage().getUrl();
         // load image using glide
+
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
+
         Glide.with(context)
                 .load(imageUrl)
-                .apply(new RequestOptions().transform(new RoundedCorners(15)))
+                .apply(requestOptions)
+                /*.apply(new RequestOptions().transform(new CenterCrop()))
+                .apply(new RequestOptions().transform(new RoundedCorners(30)))*/
                 .into(viewHolder.ivLendImage);
     }
 

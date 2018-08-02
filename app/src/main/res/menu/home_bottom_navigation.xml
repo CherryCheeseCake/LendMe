@@ -33,7 +33,4 @@
         android:icon="@drawable/person"
         android:title="Lend"
         app:showAsAction="always" />
-
-
-
 </menu>
