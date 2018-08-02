@@ -16,7 +16,7 @@
     <item
         android:id="@+id/lend"
         android:enabled="true"
-        android:icon="@drawable/lend"
+        android:icon="@drawable/person"
         android:title="Lend"
         app:showAsAction="always" />
     <item
@@ -28,7 +28,7 @@
     <item
         android:id="@+id/notifications"
         android:enabled="true"
-        android:icon="@drawable/search"
+        android:icon="@drawable/notifications"
         android:title="Notifications"
         app:showAsAction="always"
         />
