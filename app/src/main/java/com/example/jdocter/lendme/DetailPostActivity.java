@@ -125,7 +125,7 @@ public class DetailPostActivity extends AppCompatActivity {
                 HashMap<String, String> data = new HashMap<>();
                 data.put("customData", payload.toString());
 
-                ParseCloud.callFunctionInBackground("pingReply", data);
+                ParseCloud.callFunctionInBackground("pushChannelTest", data);
 
                 //startActivity(i);
             }
