@@ -1,6 +1,5 @@
 package com.example.jdocter.lendme;
 
-import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -18,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -41,6 +39,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 
@@ -64,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         frameBig = findViewById(R.id.flContent);
         frameSmall = findViewById(R.id.flContentShort);

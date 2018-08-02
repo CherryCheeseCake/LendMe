@@ -1,7 +1,11 @@
 package com.example.jdocter.lendme;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -23,10 +28,17 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseInstallation;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 
 public class DetailPostActivity extends AppCompatActivity {
@@ -51,6 +63,16 @@ public class DetailPostActivity extends AppCompatActivity {
     private Double userLongitude=0.0;
     private static String ownerIdKey = "ownerId";
     private static String objectIdKey = "objectId";
+
+    //push notification
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(getApplicationContext(), "onReceive invoked!", Toast.LENGTH_LONG).show();
+        }
+    };
 
 
     @Override
@@ -90,7 +112,22 @@ public class DetailPostActivity extends AppCompatActivity {
                     Log.e("DetailPostActivity","Failed to retrieve user post");
                 }
 
-                startActivity(i);
+                //push
+
+                JSONObject payload = new JSONObject();
+
+                try {
+                    payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                HashMap<String, String> data = new HashMap<>();
+                data.put("customData", payload.toString());
+
+                ParseCloud.callFunctionInBackground("pushChannelTest", data);
+
+                //startActivity(i);
             }
 
         });
@@ -179,6 +216,20 @@ public class DetailPostActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter(MyCustomReceiver.intentAction));
     }
 
 

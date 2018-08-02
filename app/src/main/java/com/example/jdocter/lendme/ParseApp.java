@@ -19,6 +19,9 @@ public class ParseApp extends Application {
         ParseObject.registerSubclass(Transaction.class);
         ParseUser.registerSubclass(User.class);
 
+        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
+
+
 
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
                 .applicationId("CanIBorrow")
