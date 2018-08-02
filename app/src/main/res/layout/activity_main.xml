@@ -34,7 +34,7 @@
             <include
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
         </FrameLayout>
 
@@ -47,7 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
+
         app:menu="@menu/drawer_view" />
 
 </android.support.v4.widget.DrawerLayout>
+
+    <!--android:background="@color/colorToolbarLight"-->

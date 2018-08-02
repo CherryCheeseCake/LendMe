@@ -17,4 +17,7 @@
     <color name="opaque">#a4000000</color>
     <color name="whiteOpaque">#f3ffffff</color>
 
+    <color name="colorToolbar">#5BC8AC</color>
+    <color name ="colorToolbarLight">#98DBC6</color>
+
 </resources>
