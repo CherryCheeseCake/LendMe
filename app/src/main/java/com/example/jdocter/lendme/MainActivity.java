@@ -2,6 +2,8 @@ package com.example.jdocter.lendme;
 
 import android.content.IntentSender;
 import android.content.res.Configuration;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -41,6 +43,10 @@ import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback{
@@ -311,7 +317,21 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+        Geocoder geocoder=new Geocoder(getApplicationContext(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses.size()>0){
+            String addy=addresses.get(0).getLocality()+", "+addresses.get(0).getAdminArea()+", "+addresses.get(0).getCountryName();
+
+            Toast.makeText(this,addy, Toast.LENGTH_SHORT).show();
+        }
+/*
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();*/
         Log.e("MainActivity",msg);
 
         // You can now create a LatLng Object for use with maps
