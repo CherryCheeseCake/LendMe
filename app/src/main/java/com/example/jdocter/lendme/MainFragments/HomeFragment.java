@@ -16,6 +16,7 @@ import com.example.jdocter.lendme.HomeFragments.BorrowFragment;
 import com.example.jdocter.lendme.HomeFragments.CalenderFragment.CalenderFragment;
 import com.example.jdocter.lendme.HomeFragments.LendFragment;
 import com.example.jdocter.lendme.HomeFragments.MessageFragment;
+import com.example.jdocter.lendme.HomeFragments.NotificationsFragment;
 import com.example.jdocter.lendme.R;
 
 
@@ -29,6 +30,8 @@ public class HomeFragment extends Fragment {
     final Fragment calenderFragment = new CalenderFragment();
     final Fragment lendFragment = new LendFragment();
     final Fragment messageFragment = new MessageFragment();
+    final Fragment notificationsFragment=new NotificationsFragment();
+
 
     private BottomNavigationView bottomNavigationView;
     private android.support.v7.app.ActionBar actionBar;
@@ -75,6 +78,9 @@ public class HomeFragment extends Fragment {
                                 return true;
                             case R.id.message:
                                 fragmentTransaction.replace(R.id.homeContainer, messageFragment).commit();
+                                return true;
+                            case R.id.notifications:
+                                fragmentTransaction.replace(R.id.homeContainer, notificationsFragment).commit();
                                 return true;
 
                         }

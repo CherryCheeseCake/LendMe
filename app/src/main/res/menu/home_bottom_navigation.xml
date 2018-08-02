@@ -25,5 +25,12 @@
         android:icon="@drawable/messaging"
         android:title="Messaging"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/notifications"
+        android:enabled="true"
+        android:icon="@drawable/search"
+        android:title="Notifications"
+        app:showAsAction="always"
+        />
 
 </menu>
