@@ -66,22 +66,27 @@ public class HomeFragment extends Fragment {
                         FragmentTransaction fragmentTransaction = homeFragmentManager.beginTransaction();
                         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
                         switch (item.getItemId()) {
-                            case R.id.borrow:
-                                fragmentTransaction.replace(R.id.homeContainer, borrowFragment).commit();
-                                actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
-                                return true;
-                            case R.id.lend:
-                                fragmentTransaction.replace(R.id.homeContainer, lendFragment).commit();
-                                return true;
-                            case R.id.calender:
-                                fragmentTransaction.replace(R.id.homeContainer, calenderFragment).commit();
+                            case R.id.notifications:
+                                fragmentTransaction.replace(R.id.homeContainer, notificationsFragment).commit();
                                 return true;
                             case R.id.message:
                                 fragmentTransaction.replace(R.id.homeContainer, messageFragment).commit();
                                 return true;
-                            case R.id.notifications:
-                                fragmentTransaction.replace(R.id.homeContainer, notificationsFragment).commit();
+
+                            case R.id.borrow:
+                                fragmentTransaction.replace(R.id.homeContainer, borrowFragment).commit();
+                                actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
                                 return true;
+                            case R.id.calender:
+                                fragmentTransaction.replace(R.id.homeContainer, calenderFragment).commit();
+                                return true;
+
+                            case R.id.lend:
+                                fragmentTransaction.replace(R.id.homeContainer, lendFragment).commit();
+                                return true;
+
+
+
 
                         }
                         return true; // TODO this supposed to be here?
