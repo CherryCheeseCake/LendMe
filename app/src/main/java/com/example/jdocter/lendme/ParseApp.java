@@ -5,11 +5,14 @@ import android.app.Application;
 import com.example.jdocter.lendme.model.Post;
 import com.example.jdocter.lendme.model.Transaction;
 import com.example.jdocter.lendme.model.User;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import okhttp3.OkHttpClient;
 
 public class ParseApp extends Application {
 
@@ -17,6 +20,14 @@ public class ParseApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        OkHttpClient builder = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
+
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+//        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        builder.networkInterceptors().add(httpLoggingInterceptor);
 
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Transaction.class);
@@ -38,6 +49,7 @@ public class ParseApp extends Application {
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("GCMSenderId", "72446384673");
+        installation.put("channels","default");//TODO set a channel
         installation.saveInBackground();
         ParseACL defaultACL = new ParseACL();
         defaultACL.setPublicReadAccess(true);

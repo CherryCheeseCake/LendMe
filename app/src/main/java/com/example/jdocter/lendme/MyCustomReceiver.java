@@ -1,9 +1,12 @@
 package com.example.jdocter.lendme;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -16,6 +19,8 @@ import java.util.Iterator;
 public class MyCustomReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
     public static final String intentAction = "com.parse.push.intent.RECEIVE";
+    private NotificationManager notificationManager;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -62,12 +67,44 @@ public class MyCustomReceiver extends BroadcastReceiver {
     public static final int NOTIFICATION_ID = 45;
     // Create a local dashboard notification to tell user about the event
     // See: http://guides.codepath.com/android/Notifications
+
+
     private void createNotification(Context context, String datavalue) {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(
-                R.drawable.ic_launcher_foreground).setContentTitle("Notification: " + datavalue).setContentText("Pushed!");
-        NotificationManager mNotificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        initChannels(context);
+
+        // First let's define the intent to trigger when notification is selected
+        // Start out by creating a normal intent (in this case to open an activity)
+        Intent intent = new Intent(context, MainActivity.class);
+        // Next, let's turn this into a PendingIntent using
+        //   public static PendingIntent getActivity(Context context, int requestCode,
+        //       Intent intent, int flags)
+        int requestID = (int) System.currentTimeMillis(); //unique requestID to differentiate between various notification with same NotifId
+        int flags = PendingIntent.FLAG_CANCEL_CURRENT; // cancel old intent and create new one
+        PendingIntent pIntent = PendingIntent.getActivity(context, requestID, intent, flags);
+        // Now we can attach the pendingIntent to a new notification using setContentIntent
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "default")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Notification Monster: " + datavalue)
+                .setContentText("You Monster!")
+                .setContentIntent(pIntent)
+//                .setStyle(new NotificationCompat.BigTextStyle()
+//                      .bigText("Much longer text that cannot fit one line..."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    }
+
+    public void initChannels(Context context) {
+        if (Build.VERSION.SDK_INT < 26) {
+            return;
+        }
+        notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel("default",
+                "Channel name",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("Channel description");
+        notificationManager.createNotificationChannel(channel);
     }
 
     // Handle push notification by invoking activity directly

@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.DetailView.ImageEnlargeActivity;
 import com.example.jdocter.lendme.DetailView.ItemCalendarActivity;
 import com.example.jdocter.lendme.model.Post;
+import com.facebook.stetho.Stetho;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -91,6 +92,8 @@ public class DetailPostActivity extends AppCompatActivity {
         ibLikes = (ImageButton) findViewById(R.id.ibLikes);
         isImageFitToScreen = false;
         final String objectId = getIntent().getStringExtra("objectId");
+
+        Stetho.initializeWithDefaults(this);
 
 
 
@@ -212,10 +215,6 @@ public class DetailPostActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 
     @Override
@@ -228,7 +227,6 @@ public class DetailPostActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
         LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter(MyCustomReceiver.intentAction));
     }
 
