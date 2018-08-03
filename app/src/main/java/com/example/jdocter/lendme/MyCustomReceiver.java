@@ -81,13 +81,19 @@ public class MyCustomReceiver extends BroadcastReceiver {
         int requestID = (int) System.currentTimeMillis(); //unique requestID to differentiate between various notification with same NotifId
         int flags = PendingIntent.FLAG_CANCEL_CURRENT; // cancel old intent and create new one
         PendingIntent pIntent = PendingIntent.getActivity(context, requestID, intent, flags);
-        // Now we can attach the pendingIntent to a new notification using setContentIntent
+
+        PendingIntent sIntent = PendingIntent.getActivity(context, 3, intent, flags);
+        PendingIntent iIntent = PendingIntent.getActivity(context, 4, intent, flags);
+
+
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "default")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Notification Monster: " + datavalue)
                 .setContentText("You Monster!")
                 .setContentIntent(pIntent)
+                .addAction(R.drawable.notification_accept, "Accept", sIntent)
+                .addAction(R.drawable.notification_decline, "Decline", iIntent)
 //                .setStyle(new NotificationCompat.BigTextStyle()
 //                      .bigText("Much longer text that cannot fit one line..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
