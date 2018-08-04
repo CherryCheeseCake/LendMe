@@ -4,5 +4,6 @@
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="search_view_inset">5dp</dimen>
     <dimen name="sliding_search_view_header_height">250dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#2b2b2b</color>
-    <color name="colorPrimaryDark">#2b2b2b</color>-->
-    <color name="colorAccent">#5171d1</color>
+    <color name="colorPrimary">#2b2b2b</color>
+    <color name="colorPrimaryDark">#2b2b2b</color>
+    <color name="colorAccent">#00c0c0</color>
     <color name="appbackground">#ffffff</color>
     <color name="appColorDark">#558639</color>
     <color name="white">#FFFFFF</color>
     <color name="colorWhite">#ffffff</color>
     <color name="darkGrey">#595959</color>
     <color name="black">#000000</color>
-    <color name="background_color">#A8DF94</color>
+    <color name="background_color">#a8df94</color>
     <color name="border_color">#38831C</color>
     <color name="login_button">#5297EA</color>
     <color name="transparent">#00c4c4c4</color>
@@ -20,10 +20,10 @@
     <color name="colorToolbar">#5BC8AC</color>
     <color name ="colorToolbarLight">#98DBC6</color>
 <!--Colors that can be changed to style the app-->
-    <color name="colorPrimaryDark">#5BC8AC</color>
+<!--    <color name="colorPrimaryDark">#5BC8AC</color>
     <color name="colorPrimary">#98DBC6</color>
     <color name="colorPrimaryTransparent">#4098DBC6</color>
-<!--
+
     <color name="colorToolbar">#5BC8AC</color>
     <color name ="colorToolbarLight">#98DBC6</color>
     &lt;!&ndash;Colors that can be changed to style the app&ndash;&gt;

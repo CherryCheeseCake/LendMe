@@ -1,8 +1,10 @@
 package com.example.jdocter.lendme.MainFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,11 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jdocter.lendme.CreateActivity;
 import com.example.jdocter.lendme.HomeFragments.BorrowFragment;
 import com.example.jdocter.lendme.HomeFragments.CalenderFragment.CalenderFragment;
 import com.example.jdocter.lendme.HomeFragments.LendFragment;
 import com.example.jdocter.lendme.HomeFragments.MessageFragment;
-import com.example.jdocter.lendme.HomeFragments.NotificationsFragment;
+import com.example.jdocter.lendme.HomeFragments.NotificationFragment;
+
 import com.example.jdocter.lendme.R;
 
 
@@ -26,15 +30,18 @@ public class HomeFragment extends Fragment {
 
 
     // define your fragments here
-    final Fragment borrowFragment = new BorrowFragment();
-    final Fragment calenderFragment = new CalenderFragment();
-    final Fragment lendFragment = new LendFragment();
-    final Fragment messageFragment = new MessageFragment();
-    final Fragment notificationsFragment=new NotificationsFragment();
+    private final Fragment borrowFragment = new BorrowFragment();
+    private final Fragment calenderFragment = new CalenderFragment();
+    private final Fragment lendFragment = new LendFragment();
+    private final Fragment messageFragment = new MessageFragment();
+    private final Fragment notificationFragment = new NotificationFragment();
+    private String launchCamera = "launchcamera";
+
 
 
     private BottomNavigationView bottomNavigationView;
     private android.support.v7.app.ActionBar actionBar;
+    private FloatingActionButton create;
 
 
 
@@ -53,6 +60,7 @@ public class HomeFragment extends Fragment {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        create = view.findViewById(R.id.create);
 
         final FragmentManager homeFragmentManager = getActivity().getSupportFragmentManager();
 
@@ -66,9 +74,6 @@ public class HomeFragment extends Fragment {
                         FragmentTransaction fragmentTransaction = homeFragmentManager.beginTransaction();
                         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
                         switch (item.getItemId()) {
-                            case R.id.notifications:
-                                fragmentTransaction.replace(R.id.homeContainer, notificationsFragment).commit();
-                                return true;
                             case R.id.message:
                                 fragmentTransaction.replace(R.id.homeContainer, messageFragment).commit();
                                 return true;
@@ -84,6 +89,9 @@ public class HomeFragment extends Fragment {
                             case R.id.lend:
                                 fragmentTransaction.replace(R.id.homeContainer, lendFragment).commit();
                                 return true;
+                            case R.id.notification:
+                                fragmentTransaction.replace(R.id.homeContainer, notificationFragment).commit();
+                                return true;
 
 
 
@@ -95,6 +103,16 @@ public class HomeFragment extends Fragment {
         );
 
         bottomNavigationView.setSelectedItemId(R.id.borrow);
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), CreateActivity.class);
+                i.putExtra(launchCamera, false);
+                startActivity(i);
+            }
+        });
+
     }
 
 }

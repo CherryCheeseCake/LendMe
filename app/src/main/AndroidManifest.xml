@@ -44,6 +44,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <receiver
+            android:name="com.example.jdocter.lendme.MyCustomReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name="com.parse.fcm.ParseFirebaseInstanceIdService"
             android:exported="true">
@@ -57,15 +67,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <receiver
-            android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
+
 
 
 
@@ -87,13 +89,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".DetailPostActivity" />
         <activity android:name=".DetailView.ItemCalendarActivity" />
         <activity android:name=".LenderProfileActivity" />
-        <activity android:name=".SelectLocationActivity"></activity>
+        <activity android:name=".SelectLocationActivity" />
 
         <uses-library
             android:name="com.google.android.maps"
@@ -109,7 +111,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".DetailView.ImageEnlargeActivity"></activity>
+        <activity android:name=".DetailView.ImageEnlargeActivity" />
     </application>
 
 </manifest>

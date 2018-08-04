@@ -1,7 +1,12 @@
 package com.example.jdocter.lendme;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -11,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -65,6 +71,16 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     private FrameLayout frameBig;
     private FrameLayout frameSmall;
 
+    //push notification
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(getApplicationContext(), "onReceive invoked!", Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,12 +97,14 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
+        actionBar.setIcon(R.drawable.logo);
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Find our drawer view
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
+
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -100,6 +118,21 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         mDrawer.addDrawerListener(drawerToggle);
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter(MyCustomReceiver.intentAction));
+    }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -212,12 +245,16 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         if (fragmentClass == HomeFragment.class) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
+            actionBar.setIcon(R.drawable.logo);
+            drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
             frameSmall.removeAllViews();
 
         } else {
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.black));
             actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+            drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
             fragmentManager.beginTransaction().replace(R.id.flContentShort, fragment).commit();
             frameBig.removeAllViews();
         }

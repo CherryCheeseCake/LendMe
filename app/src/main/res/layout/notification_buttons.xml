@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/btnBlue"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:text="Accept"
+        android:textAllCaps="false"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/accept"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/btnRed"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnBlue"
+        android:layout_alignTop="@+id/btnBlue"
+        android:layout_toLeftOf="@+id/btnBlue"
+        android:background="@drawable/delete"
+        android:text="Deny"
+        android:textAllCaps="false" />
+
+</RelativeLayout>

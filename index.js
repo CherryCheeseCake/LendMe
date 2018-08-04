@@ -26,7 +26,7 @@ var api = new ParseServer({
   appId: process.env.APP_ID || 'CanIBorrow',
   masterKey: process.env.MASTER_KEY || 'qwe123!@#', //Add your master key here. Keep it secret!
   push: pushConfig,
-  liveQuery: { classNames: ["Message"]},
+  liveQuery: { classNames: ["Post"]},
   serverURL: process.env.SERVER_URL || 'http://caniborrow.herokuapp.com/parse'  // needed for Parse Cloud and push notifications
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
