@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.jdocter.lendme.model.Post;
 import com.example.jdocter.lendme.model.Transaction;
+import com.example.jdocter.lendme.model.User;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -31,7 +32,7 @@ public class HistoryAdapter extends TransactionAdapter {
         if (transaction.getLender() != transaction.getBorrower()) {
             if (post.getUser() == ParseUser.getCurrentUser()) {
                 try {
-                    final String borrower = transaction.getBorrower().fetch().getString(fullNameKey);
+                    final String borrower = ((User) transaction.getBorrower().fetch()).getFullName();
                     final String blurb = "Lent " + item + " to " + borrower;
                     final String costWithSign = "+ $" + cost;
 
@@ -43,7 +44,8 @@ public class HistoryAdapter extends TransactionAdapter {
 
             } else {
                 try {
-                    final String lender = transaction.getLender().fetch().getString(fullNameKey);
+                    final User user = (User) transaction.getLender().fetch();
+                    final String lender = user.getFullName();
                     final String blurb = "Borrowed " + item + " from " + lender;
                     final String costWithSign = "- $" + cost;
 

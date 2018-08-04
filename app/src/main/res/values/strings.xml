@@ -29,5 +29,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum lorem 
         <item>Discover</item>
 
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

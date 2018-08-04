@@ -2,6 +2,7 @@ package com.example.jdocter.lendme;
 
 import android.content.IntentSender;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -17,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -73,12 +73,14 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
+        actionBar.setIcon(R.drawable.logo);
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Find our drawer view
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
+
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -204,12 +206,16 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         if (fragmentClass == HomeFragment.class) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
+            actionBar.setIcon(R.drawable.logo);
+            drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
             frameSmall.removeAllViews();
 
         } else {
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.black));
             actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+            drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
             fragmentManager.beginTransaction().replace(R.id.flContentShort, fragment).commit();
             frameBig.removeAllViews();
         }

@@ -45,7 +45,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="sans-serif"
             android:text="Full Name"
-            android:textSize="12dp" />
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/tvUsername"
@@ -53,10 +53,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvname"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:fontFamily="sans-serif"
             android:text="\@username"
-            android:textSize="10dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/tvInterests"
@@ -64,24 +64,25 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvUsername"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif"
-            android:text="Interests"
-            android:textSize="12dp" />
-
-        <Button
-            android:id="@+id/btnCreate"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_below="@+id/tvInterests"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/createbuttongradient"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="\+\nCreate"
-            android:textAllCaps="false" />
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="🏒 ⚽ ⚾ 🎿 ⛵   I enjoy a lot of sports and outdoor activities. Thus this page is namely dedicated to sports equipment."
+            android:textSize="18dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/horizontal_line"
+            android:layout_below="@+id/tvInterests"
+
+            />
+
+
 
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 </RelativeLayout>

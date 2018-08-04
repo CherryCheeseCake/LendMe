@@ -48,13 +48,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".DetailPostActivity" />
         <activity android:name=".DetailView.ItemCalendarActivity" />
         <activity android:name=".LenderProfileActivity" />
-        <activity android:name=".SelectLocationActivity"></activity>
+        <activity android:name=".SelectLocationActivity" />
 
         <uses-library
             android:name="com.google.android.maps"
@@ -70,7 +70,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".DetailView.ImageEnlargeActivity"></activity>
+        <activity android:name=".DetailView.ImageEnlargeActivity" />
     </application>
 
 </manifest>

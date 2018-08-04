@@ -11,10 +11,12 @@ public class User extends ParseUser {
     public static final String favoritePostsKey = "favoritePosts";
     public static final String itemKey = "itemName";
     public static final String locationKey = "location";
+    public static final String fullNameKey = "gullName";
 
 
     public User(){}
 
+    public String getFullName() { return getString(fullNameKey); }
 
     public ParseGeoPoint getLocation() { return getParseGeoPoint(locationKey); }
 

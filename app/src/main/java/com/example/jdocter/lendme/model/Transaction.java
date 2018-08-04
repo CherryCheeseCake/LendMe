@@ -5,6 +5,7 @@ import android.text.format.DateUtils;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.Date;
@@ -17,8 +18,10 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
     public static final String borrowerKey = "borrower";
     public static final String itemKey = "item";
     public static final String costKey = "cost";
+    public static final String statusCodeKey = "statusCode";
 
 
+    public int getStatusCode() { return getInt(statusCodeKey); }
 
     public Date getStartDate(){
         return getDate(startKey);
@@ -66,7 +69,6 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
     public String getTimestamp() { return getRelativeTimeAgo(getCreatedAt()); }
 
 
-
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public static String getRelativeTimeAgo(Date date) {
 
@@ -84,4 +86,42 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
     public int compareTo(@NonNull Transaction transaction) {
         return transaction.getStartDate().compareTo(this.getStartDate());
     }
+    public static class Query extends ParseQuery<Transaction> {
+        public Query() {
+            super(Transaction.class);
+        }
+
+        public Transaction.Query getTop() {
+            setLimit(20);
+            return this;
+        }
+
+        public Transaction.Query dec() {
+            orderByDescending("createdAt");
+            return this;
+        }
+
+        public Transaction.Query withUser() {
+            include("user");
+            return this;
+        }
+
+        public Transaction.Query excludeStatusCode(int i) {
+            whereNotEqualTo(statusCodeKey,i);
+            return this;
+        }
+
+        public Transaction.Query byLender(ParseUser user) {
+            whereEqualTo(lenderKey, user);
+            return this;
+        }
+
+        public Transaction.Query byBorrower(ParseUser user) {
+            whereEqualTo(borrowerKey, user);
+            return this;
+        }
+
+
+    }
+
 }

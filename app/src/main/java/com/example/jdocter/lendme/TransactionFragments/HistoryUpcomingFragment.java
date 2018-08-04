@@ -71,6 +71,19 @@ public class HistoryUpcomingFragment extends Fragment {
     public void loadAllTransactions() {
         // TODO get rid of transactions of same person
 
+        final Transaction.Query transactionQuery = new Transaction.Query();
+        transactionQuery.dec().withUser().byBorrower(ParseUser.getCurrentUser());
+
+        transactionQuery.findInBackground(new FindCallback<Transaction>() {
+            @Override
+            public void done(List<Transaction> objects, ParseException e) {
+                for (Transaction t: objects) {
+                    userTransactions.add(t);
+                    adapter.notifyItemInserted(userTransactions.size());
+                }
+            }
+        });
+
         // posts query
         final Post.Query postQuery = new Post.Query();
         postQuery.dec().withUser().byUser(ParseUser.getCurrentUser());
