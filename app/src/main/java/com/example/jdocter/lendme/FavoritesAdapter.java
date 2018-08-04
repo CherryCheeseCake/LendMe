@@ -27,42 +27,42 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public FavoritesAdapter(List<Post> posts){
         mPosts=posts;
     }
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            context = parent.getContext();
-            LayoutInflater inflater = LayoutInflater.from(context);
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
 
-            View postView = inflater.inflate(R.layout.item_post_borrow, parent, false);
+        View postView = inflater.inflate(R.layout.item_post_borrow, parent, false);
 
-            ViewHolder viewHolder = new ViewHolder(postView);
-            return viewHolder;
-        }
+        ViewHolder viewHolder = new ViewHolder(postView);
+        return viewHolder;
+    }
 
-        // Involves populating data into the item through holder
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int position) {
-            // Get the data model based on position
-            final Post post = (Post) mPosts.get(position);
-            //TODO set price
-            //System.out.println("POST PRICE ******************************  "+post.getPrice());
+    // Involves populating data into the item through holder
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        // Get the data model based on position
+        final Post post = (Post) mPosts.get(position);
+        //TODO set price
+        //System.out.println("POST PRICE ******************************  "+post.getPrice());
 
-            String x="$"+post.getPrice();
-            viewHolder.tvBorrowPrice.setText(x);
+        String x="$"+post.getPrice();
+        viewHolder.tvBorrowPrice.setText(x);
+        viewHolder.ivBorrowImage.layout(0,0,0,0);
+        String imageUrl = post.getImage().getUrl();
+        // load image using glide
+        Glide.with(context)
+                .load(imageUrl)
+                .into(viewHolder.ivBorrowImage);
 
-            String imageUrl = post.getImage().getUrl();
-            // load image using glide
-            Glide.with(context)
-                    .load(imageUrl)
-                    .into(viewHolder.ivBorrowImage);
 
+    }
 
-        }
-
-        // Returns the total count of items in the list
-        @Override
-        public int getItemCount() {
-            return mPosts.size();
-        }
+    // Returns the total count of items in the list
+    @Override
+    public int getItemCount() {
+        return mPosts.size();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -71,10 +71,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
 
         public ViewHolder(View itemView) {
-          super(itemView);
-          ivBorrowImage= (ImageView) itemView.findViewById(R.id.ivBorrowImage);
-          tvBorrowPrice= (TextView) itemView.findViewById(R.id.tvBorrowPrice);
-          itemView.setOnClickListener(this);
+            super(itemView);
+            ivBorrowImage= (ImageView) itemView.findViewById(R.id.ivBorrowImage);
+            tvBorrowPrice= (TextView) itemView.findViewById(R.id.tvBorrowPrice);
+            itemView.setOnClickListener(this);
         }
 
         @Override

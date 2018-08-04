@@ -20,6 +20,7 @@ import com.example.jdocter.lendme.HomeFragments.CalenderFragment.CalenderFragmen
 import com.example.jdocter.lendme.HomeFragments.LendFragment;
 import com.example.jdocter.lendme.HomeFragments.MessageFragment;
 import com.example.jdocter.lendme.HomeFragments.NotificationFragment;
+
 import com.example.jdocter.lendme.R;
 
 
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     private final Fragment messageFragment = new MessageFragment();
     private final Fragment notificationFragment = new NotificationFragment();
     private String launchCamera = "launchcamera";
+
 
 
     private BottomNavigationView bottomNavigationView;
@@ -72,22 +74,27 @@ public class HomeFragment extends Fragment {
                         FragmentTransaction fragmentTransaction = homeFragmentManager.beginTransaction();
                         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
                         switch (item.getItemId()) {
+                            case R.id.message:
+                                fragmentTransaction.replace(R.id.homeContainer, messageFragment).commit();
+                                return true;
+
                             case R.id.borrow:
                                 fragmentTransaction.replace(R.id.homeContainer, borrowFragment).commit();
                                 actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
                                 return true;
-                            case R.id.lend:
-                                fragmentTransaction.replace(R.id.homeContainer, lendFragment).commit();
-                                return true;
                             case R.id.calender:
                                 fragmentTransaction.replace(R.id.homeContainer, calenderFragment).commit();
                                 return true;
-                            case R.id.message:
-                                fragmentTransaction.replace(R.id.homeContainer, messageFragment).commit();
+
+                            case R.id.lend:
+                                fragmentTransaction.replace(R.id.homeContainer, lendFragment).commit();
                                 return true;
                             case R.id.notification:
                                 fragmentTransaction.replace(R.id.homeContainer, notificationFragment).commit();
                                 return true;
+
+
+
 
                         }
                         return true; // TODO this supposed to be here?

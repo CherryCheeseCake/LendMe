@@ -5,14 +5,14 @@
     <item
         android:id="@+id/notification"
         android:enabled="true"
-        android:icon="@drawable/chat"
-        app:showAsAction="always"
-        android:title="" />
+        android:icon="@drawable/notifications"
+        android:title="Notifications"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/calender"
+        android:id="@+id/message"
         android:enabled="true"
-        android:icon="@drawable/calendar"
-        android:title="Calendar"
+        android:icon="@drawable/messaging"
+        android:title="Messaging"
         app:showAsAction="always" />
     <item
         android:id="@+id/borrow"
@@ -21,16 +21,16 @@
         android:title="Borrow"
         app:showAsAction="always" />
     <item
-        android:id="@+id/lend"
+        android:id="@+id/calender"
         android:enabled="true"
-        android:icon="@drawable/lend"
-        android:title="Lend"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/message"
-        android:enabled="true"
-        android:icon="@drawable/messaging"
-        android:title="Messaging"
+        android:icon="@drawable/calendar"
+        android:title="Calendar"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/lend"
+        android:enabled="true"
+        android:icon="@drawable/person"
+        android:title="Lend"
+        app:showAsAction="always" />
 </menu>

@@ -1,8 +1,14 @@
 package com.example.jdocter.lendme;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -10,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -40,7 +47,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback{
@@ -59,10 +71,22 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     private FrameLayout frameBig;
     private FrameLayout frameSmall;
 
+    //push notification
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(getApplicationContext(), "onReceive invoked!", Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         frameBig = findViewById(R.id.flContent);
         frameSmall = findViewById(R.id.flContentShort);
@@ -94,6 +118,21 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         mDrawer.addDrawerListener(drawerToggle);
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter(MyCustomReceiver.intentAction));
+    }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -315,7 +354,21 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+        Geocoder geocoder=new Geocoder(getApplicationContext(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses.size()>0){
+            String addy=addresses.get(0).getLocality()+", "+addresses.get(0).getAdminArea()+", "+addresses.get(0).getCountryName();
+
+            Toast.makeText(this,addy, Toast.LENGTH_SHORT).show();
+        }
+/*
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();*/
         Log.e("MainActivity",msg);
 
         // You can now create a LatLng Object for use with maps
