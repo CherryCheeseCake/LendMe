@@ -44,13 +44,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         //TODO set price
         //System.out.println("POST PRICE ******************************  "+post.getPrice());
 
-        String x="$"+post.getPrice();
+        String x=" $"+post.getPrice();
         viewHolder.tvBorrowPrice.setText(x);
         viewHolder.ivBorrowImage.layout(0,0,0,0);
         String imageUrl = post.getImage().getUrl();
         // load image using glide
         Glide.with(context)
                 .load(imageUrl)
+                //.apply(new RequestOptions().transform(new RoundedCorners(30)))
                 .into(viewHolder.ivBorrowImage);
 
 

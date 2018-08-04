@@ -342,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
     @Override
     public ParseGeoPoint getLiveLoc() {
+        //TODO - caused error when location is null.
         ParseGeoPoint userGeoPoint = new ParseGeoPoint(userLatLng.latitude,userLatLng.longitude);
         return userGeoPoint;
     }

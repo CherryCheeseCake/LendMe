@@ -41,7 +41,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
         final Post post = (Post) mPosts.get(position);
         //TODO set price
         //System.out.println("POST PRICE ******************************  "+post.getPrice());
-        String x="$"+post.getPrice();
+        String x=" $"+post.getPrice();
         viewHolder.tvBorrowPrice.setText(x);
         viewHolder.ivBorrowImage.layout(0,0,0,0);
         String imageUrl = post.getImage().getUrl();

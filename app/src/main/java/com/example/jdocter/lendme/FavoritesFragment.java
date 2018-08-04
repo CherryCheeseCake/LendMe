@@ -123,7 +123,7 @@ public class FavoritesFragment extends Fragment{
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                posts.clear();
+                //posts.clear();
                 loadTopPosts();
                 return true;
             }
