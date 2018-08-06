@@ -28,6 +28,9 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 
 public class DetailPostActivity extends AppCompatActivity {
 
@@ -131,9 +134,11 @@ public class DetailPostActivity extends AppCompatActivity {
             tvTitleItem.setText(post.getItem());
 
 
+            double amount =post.getPrice();
+            Locale locale=new Locale("en", "US");
+            NumberFormat currencyFormatter= NumberFormat.getCurrencyInstance(locale);
 
-
-            tvPrice.setText("$" + Double.toString(post.getPrice()));
+            tvPrice.setText(currencyFormatter.format(amount));
             //tvPrice.setText("$"+Integer.toString(post.getPrice()));
             final Post mPost = post;
             if (mPost.hasLiked()) {
