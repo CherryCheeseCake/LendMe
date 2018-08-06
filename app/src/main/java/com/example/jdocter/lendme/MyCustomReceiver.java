@@ -49,6 +49,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
                     // Extract custom push data
                     if (key.equals("customdata")) {
                         // create a local notification
+                        parseInfo(value);
                         createNotification(context, value);
                     } else if (key.equals("launch")) {
                         // Handle push notification by invoking activity directly
@@ -63,6 +64,8 @@ public class MyCustomReceiver extends BroadcastReceiver {
             }
         }
     }
+
+    private void parseInfo(String value){}
 
     public static final int NOTIFICATION_ID = 45;
     // Create a local dashboard notification to tell user about the event

@@ -22,6 +22,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
 
 
     public int getStatusCode() { return getInt(statusCodeKey); }
+    public void setStatusCode(int code){put(statusCodeKey,code);}
 
     public Date getStartDate(){
         return getDate(startKey);

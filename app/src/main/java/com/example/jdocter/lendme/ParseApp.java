@@ -49,7 +49,7 @@ public class ParseApp extends Application {
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("GCMSenderId", "72446384673");
-        installation.put("channels","default");//TODO set a channel
+        installation.put("channel","default");//TODO set a channel
         installation.saveInBackground();
         ParseACL defaultACL = new ParseACL();
         defaultACL.setPublicReadAccess(true);
