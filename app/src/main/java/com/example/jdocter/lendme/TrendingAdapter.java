@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jdocter.lendme.model.Post;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHolder> {
 
@@ -39,10 +41,14 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
         final Post post = (Post) mPosts.get(position);
-        //TODO set price
-        //System.out.println("POST PRICE ******************************  "+post.getPrice());
-        String x=" $"+post.getPrice();
-        viewHolder.tvBorrowPrice.setText(x);
+
+        //get and set post prices
+        double amount =post.getPrice();
+        Locale locale=new Locale("en", "US");
+        NumberFormat currencyFormatter= NumberFormat.getCurrencyInstance(locale);
+
+
+        viewHolder.tvBorrowPrice.setText(currencyFormatter.format(amount));
         viewHolder.ivBorrowImage.layout(0,0,0,0);
         String imageUrl = post.getImage().getUrl();
         // load image using glide
