@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2b2b2b</color>
-    <color name="colorPrimaryDark">#2b2b2b</color>
+   <!-- <color name="colorPrimary">#2b2b2b</color>
+    <color name="colorPrimaryDark">#2b2b2b</color>-->
     <color name="colorAccent">#00c0c0</color>
     <color name="appbackground">#ffffff</color>
     <color name="appColorDark">#558639</color>
@@ -19,19 +19,23 @@
 
     <color name="colorToolbar">#5BC8AC</color>
     <color name ="colorToolbarLight">#98DBC6</color>
+
+    <color name="colorPrimaryTransparent">#4098DBC6</color>
+
 <!--Colors that can be changed to style the app-->
-<!--    <color name="colorPrimaryDark">#5BC8AC</color>
+    <color name="colorPrimaryDark">#5BC8AC</color>
     <color name="colorPrimary">#98DBC6</color>
+
+    <!--
     <color name="colorPrimaryTransparent">#4098DBC6</color>
 
     <color name="colorToolbar">#5BC8AC</color>
     <color name ="colorToolbarLight">#98DBC6</color>
-    &lt;!&ndash;Colors that can be changed to style the app&ndash;&gt;
     <color name="colorPrimaryDark">#5BC8AC</color>
     <color name="colorPrimary">#98DBC6</color>
-    <color name="colorPrimaryTransparent">#4098DBC6</color>-->
 
 
 
+-->
 
 </resources>
