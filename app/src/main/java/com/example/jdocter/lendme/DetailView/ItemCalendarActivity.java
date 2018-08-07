@@ -117,38 +117,16 @@ public class ItemCalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startEndDates= (ArrayList<Date>) calendar.getSelectedDates();
-                //String toast = "Selected: " + calendar.getSelectedDates();
-                //Toast.makeText(ItemCalendarActivity.this, toast, LENGTH_SHORT).show();
 
-                //push
-
-                try {
-                    username = user.fetchIfNeeded().getUsername();
-                } catch (ParseException e) {
-                    Log.e("ItemCalendarActivity","no Username");
-                }
-
-                JSONObject payload = new JSONObject();
-
-                try {
-                    payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
-                    payload.put("itemImageUrl", itemImageUrl);
-                    payload.put("startEnd",startEndDates);
-                    payload.put("borrowerName",username);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                HashMap<String, String> data = new HashMap<>();
-                data.put("customData", payload.toString());
-
-
-                ParseCloud.callFunctionInBackground("pushChannelTest", data);
                 try {
                     createTransaction(startEndDates,mPost);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                //push
+
+
+
 
             }
         });
@@ -174,6 +152,32 @@ public class ItemCalendarActivity extends AppCompatActivity {
 //        arrayList.add(newdate2);
 
 
+    }
+
+    public void pushNotification(Transaction transaction){
+        try {
+            username = user.fetchIfNeeded().getUsername();
+        } catch (ParseException e) {
+            Log.e("ItemCalendarActivity","no Username");
+        }
+
+        JSONObject payload = new JSONObject();
+
+        try {
+            payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
+            payload.put("itemImageUrl", itemImageUrl);
+            payload.put("startEnd",startEndDates);
+            payload.put("borrowerName",username);
+            payload.put("postId", transaction.getObjectId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("customData", payload.toString());
+
+
+        ParseCloud.callFunctionInBackground("pushChannelTest", data);
     }
 
     @Override
@@ -217,13 +221,18 @@ public class ItemCalendarActivity extends AppCompatActivity {
 
     private void createTransaction(List<Date> startEndDates, final Post post) throws ParseException {
 
+        Date startDate = startEndDates.get(0);
+        Date endDate = startEndDates.get(startEndDates.size()-1);
+
+
         final Transaction newTransaction = new Transaction();
-        newTransaction.setStartDate(startEndDates.get(0));
-        newTransaction.setEndDate(startEndDates.get(startEndDates.size()-1));
+        newTransaction.setStartDate(startDate);
+        newTransaction.setEndDate(endDate);
         newTransaction.setLender(post.getUser().fetchIfNeeded());
         newTransaction.setBorrower(user);
         newTransaction.setItemPost(post);
         newTransaction.setStatusCode(1);
+        newTransaction.setCost(post.getPrice()*(startEndDates.size()));
 
         newTransaction.saveInBackground(new SaveCallback() {
             @Override
@@ -232,6 +241,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
                     post.addTransaction(newTransaction);
                     post.saveInBackground();
                     Log.d("ItemCalendarActivity", "Create transaction success");
+                    pushNotification(newTransaction);
                     finish();
                 }else{
                     e.printStackTrace();

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="64dp"
+    android:padding="10dp" >
+    <ImageView
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/ivBorrower"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp" />
+    <TextView
+        android:textSize="13dp"
+        android:textColor="#000"
+        android:text="Borrower Name"
+        android:id="@+id/tvBorrower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ivBorrower"
+        style="@style/TextAppearance.Compat.Notification.Title"
+        />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        style="@style/TextAppearance.Compat.Notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBorrower"
+        android:layout_toRightOf="@id/ivBorrower"
+        android:text="wants to borrow your item XXX"
+        android:textColor="#000"
+        android:textSize="13dp" />
+
+    <ImageView
+        android:id="@+id/ivItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+</RelativeLayout>

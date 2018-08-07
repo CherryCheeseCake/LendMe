@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="@color/colorPrimary"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp">
 
@@ -55,7 +55,7 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="50dp"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:layout_collapseMode="pin" />
 
@@ -69,12 +69,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".DetailPostActivity"
-            tools:layout_editor_absoluteY="25dp">
+            tools:layout_editor_absoluteY="25dp"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="50dp"
                 android:background="@color/transparent"
                 android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
@@ -201,7 +202,7 @@
                     android:text="Description"
                     android:textColor="#373737"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/btConfirm"
+                    app:layout_constraintBottom_toTopOf="@+id/map"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -234,9 +235,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/chat" />
 
-                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                <fragment
                     xmlns:map="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/map"
+                    android:id="@+id/mapfragment"
                     class="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
@@ -247,7 +248,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDescription"
                     map:cameraBearing="112.5"
                     map:cameraTargetLat="-33.796923"
                     map:cameraTargetLng="150.922433"
@@ -259,7 +259,8 @@
                     map:uiScrollGestures="false"
                     map:uiTiltGestures="true"
                     map:uiZoomControls="false"
-                    map:uiZoomGestures="true"/>
+                    map:uiZoomGestures="true"
+                    map:layout_constraintTop_toBottomOf="@+id/tvDescription" />
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v4.widget.NestedScrollView>

@@ -83,7 +83,7 @@ Parse.Cloud.define('pushChannelTest', function(request, response) {
 
   var payload = {};
   if (customData) {
-    payload.alert = customData;
+    payload.customdata = customData;
   }
 
 

@@ -1,5 +1,7 @@
 package com.example.jdocter.lendme.MainFragments;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +23,12 @@ import com.example.jdocter.lendme.HomeFragments.CalenderFragment.CalenderFragmen
 import com.example.jdocter.lendme.HomeFragments.LendFragment;
 import com.example.jdocter.lendme.HomeFragments.MessageFragment;
 import com.example.jdocter.lendme.HomeFragments.NotificationFragment;
-
+import com.example.jdocter.lendme.MyCustomReceiver;
 import com.example.jdocter.lendme.R;
+import com.example.jdocter.lendme.model.Transaction;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 
 public class HomeFragment extends Fragment {
@@ -36,6 +43,7 @@ public class HomeFragment extends Fragment {
     private final Fragment messageFragment = new MessageFragment();
     private final Fragment notificationFragment = new NotificationFragment();
     private String launchCamera = "launchcamera";
+
 
 
 
@@ -93,16 +101,58 @@ public class HomeFragment extends Fragment {
                                 fragmentTransaction.replace(R.id.homeContainer, notificationFragment).commit();
                                 return true;
 
-
-
-
                         }
                         return true; // TODO this supposed to be here?
                     }
                 }
         );
 
-        bottomNavigationView.setSelectedItemId(R.id.borrow);
+
+        Bundle notificationInfo= getActivity().getIntent().getExtras();
+        if (notificationInfo!=null) {
+            String intentFragment = notificationInfo.getString("frgToLoad");
+            switch (intentFragment) {
+                case "notification":
+                    final String response = notificationInfo.getString("response");
+                    if (response != null) {
+                        ParseQuery<Transaction> query = ParseQuery.getQuery(Transaction.class);
+                        notificationInfo.getString("PostId");
+                        query.getInBackground(notificationInfo.getString("PostId"), new GetCallback<Transaction>() {
+                            public void done(Transaction transaction, ParseException e) {
+                                if (e == null) {
+                                    if (response.equals("accept")) {
+                                        transaction.setStatusCode(2);
+                                        transaction.saveInBackground();
+                                    } else {
+                                        transaction.setStatusCode(6);
+                                        transaction.saveInBackground();
+                                    }
+                                } else {
+                                    Log.e("Notification", "can't retrieve transaction from parse query");
+                                }
+                            }
+                        });
+                    }
+                    bottomNavigationView.setSelectedItemId(R.id.notification);
+                    break;
+                case "message":
+                    bottomNavigationView.setSelectedItemId(R.id.message);
+                    break;
+                case "calender":
+                    bottomNavigationView.setSelectedItemId(R.id.calender);
+                    break;
+                case "lend":
+                    bottomNavigationView.setSelectedItemId(R.id.lend);
+                    break;
+                default:
+                    bottomNavigationView.setSelectedItemId(R.id.borrow);
+            }
+            NotificationManager manager=
+                    (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.cancel(MyCustomReceiver.NOTIFICATION_ID);
+        }else{
+            bottomNavigationView.setSelectedItemId(R.id.borrow);
+        }
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override

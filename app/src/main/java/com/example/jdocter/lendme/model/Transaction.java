@@ -68,7 +68,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
 
     public double getCost() { return getDouble(costKey); }
 
-    public void setCost(Float price) { put(costKey, price); }
+    public void setCost(Double price) { put(costKey, price); }
 
     public ParseObject getItemPost(){
         return getParseObject(itemKey);
