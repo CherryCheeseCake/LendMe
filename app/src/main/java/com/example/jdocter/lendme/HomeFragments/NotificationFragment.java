@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.example.jdocter.lendme.NotificationAdapter;
 import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.model.Transaction;
@@ -44,6 +45,8 @@ public class NotificationFragment extends Fragment {
         adapter = new NotificationAdapter(transactions);
         rvNotification.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         rvNotification.setAdapter(adapter);
+        RecyclerViewHeader recyclerHeader = (RecyclerViewHeader) view.findViewById(R.id.notificationHeader);
+        recyclerHeader.attachTo(rvNotification);
 
         loadAllTransactions();
 
@@ -54,7 +57,7 @@ public class NotificationFragment extends Fragment {
         // TODO get rid of transactions of same person
 
         final Transaction.Query transactionBorrowerQuery = new Transaction.Query();
-        transactionBorrowerQuery.dec().withUser().byBorrower(ParseUser.getCurrentUser());
+        transactionBorrowerQuery.dec().excludeStatusCode(0).withUser().byBorrower(ParseUser.getCurrentUser());
 
         transactionBorrowerQuery.findInBackground(new FindCallback<Transaction>() {
             @Override
@@ -67,7 +70,7 @@ public class NotificationFragment extends Fragment {
         });
 
         final Transaction.Query transactionLenderQuery = new Transaction.Query();
-        transactionLenderQuery.dec().withUser().byLender(ParseUser.getCurrentUser());
+        transactionLenderQuery.dec().excludeStatusCode(0).withUser().byLender(ParseUser.getCurrentUser());
 
         transactionLenderQuery.findInBackground(new FindCallback<Transaction>() {
             @Override

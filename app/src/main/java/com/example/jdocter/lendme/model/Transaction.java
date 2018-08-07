@@ -19,9 +19,14 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
     public static final String itemKey = "item";
     public static final String costKey = "cost";
     public static final String statusCodeKey = "statusCode";
+    public static final String updatedAtKey = "updatedAt";
 
 
     public int getStatusCode() { return getInt(statusCodeKey); }
+
+    public Date getUpdatedAt(){
+        return getDate(updatedAtKey);
+    }
 
     public Date getStartDate(){
         return getDate(startKey);
@@ -35,6 +40,13 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
     }
     public void setEndDate(Date date){
         put(endKey,date);
+    }
+
+    public String getLenderId() {
+        return getParseUser(lenderKey).getObjectId();
+    }
+    public String getBorrowerId() {
+        return getParseUser(borrowerKey).getObjectId();
     }
 
     public ParseUser getLender() {

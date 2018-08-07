@@ -9,6 +9,7 @@
         android:title="Notifications"
         app:showAsAction="always" />
     <item
+
         android:id="@+id/message"
         android:enabled="true"
         android:icon="@drawable/messaging"

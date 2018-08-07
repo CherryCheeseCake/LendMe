@@ -97,10 +97,9 @@ public class DetailPostActivity extends AppCompatActivity {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         try {
             Post post = query.get(objectId);
-            if (post.getString(ownerIdKey) == ParseUser.getCurrentUser().getString(objectIdKey)) {
+            if (post.getString(ownerIdKey).equals(ParseUser.getCurrentUser().getString(objectIdKey))) {
                 btRequest.setText("Reserve my item");
             }
-
             try {
                 String username = post.getUser().fetchIfNeeded().getUsername();
                 tvUsername.setText(username);
