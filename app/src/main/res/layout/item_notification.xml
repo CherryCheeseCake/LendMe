@@ -24,16 +24,19 @@
             android:layout_toLeftOf="@+id/ivSwipe"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_margin = "7dp"
+            android:layout_marginTop = "7dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="5dp"
             tools:text="Robert Lewandowski" />
 
         <ImageView
             android:id="@+id/ivSwipe"
-            android:layout_width="44dp"
+            android:layout_width="22dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvBody"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_marginRight="7dp"
             android:scaleType="centerInside"
             android:src="@drawable/left" />
         <TextView
@@ -43,7 +46,7 @@
             android:layout_below="@+id/tvTitle"
             android:layout_alignEnd="@id/tvTitle"
             android:layout_alignStart="@+id/tvTitle"
-            android:layout_marginBottom="7dp"/>
+            android:layout_marginBottom="10dp"/>
     </RelativeLayout>
 
 

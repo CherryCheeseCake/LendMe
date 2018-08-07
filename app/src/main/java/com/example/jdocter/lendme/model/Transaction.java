@@ -110,7 +110,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
         }
 
         public Transaction.Query dec() {
-            orderByDescending("createdAt");
+            orderByDescending("updatedAt");
             return this;
         }
 
@@ -131,6 +131,11 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
 
         public Transaction.Query byBorrower(ParseUser user) {
             whereEqualTo(borrowerKey, user);
+            return this;
+        }
+
+        public Transaction.Query excludePast() {
+            whereGreaterThan(endKey,new Date());
             return this;
         }
 
