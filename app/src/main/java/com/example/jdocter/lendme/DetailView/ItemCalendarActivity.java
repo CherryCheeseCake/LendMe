@@ -221,13 +221,18 @@ public class ItemCalendarActivity extends AppCompatActivity {
 
     private void createTransaction(List<Date> startEndDates, final Post post) throws ParseException {
 
+        Date startDate = startEndDates.get(0);
+        Date endDate = startEndDates.get(startEndDates.size()-1);
+
+
         final Transaction newTransaction = new Transaction();
-        newTransaction.setStartDate(startEndDates.get(0));
-        newTransaction.setEndDate(startEndDates.get(startEndDates.size()-1));
+        newTransaction.setStartDate(startDate);
+        newTransaction.setEndDate(endDate);
         newTransaction.setLender(post.getUser().fetchIfNeeded());
         newTransaction.setBorrower(user);
         newTransaction.setItemPost(post);
         newTransaction.setStatusCode(1);
+        newTransaction.setCost(post.getPrice()*(startEndDates.size()));
 
         newTransaction.saveInBackground(new SaveCallback() {
             @Override

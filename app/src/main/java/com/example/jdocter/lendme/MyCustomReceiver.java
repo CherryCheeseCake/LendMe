@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
     public static final String intentAction = "com.parse.push.intent.RECEIVE";
     private NotificationManager notificationManager;
     private String postId;
+    private String itemImageUrl;
 
 
     @Override
@@ -69,8 +71,8 @@ public class MyCustomReceiver extends BroadcastReceiver {
 
     public static final int NOTIFICATION_ID = 45;
 
-    // Create a local dashboard notification to tell user about the event
-    // See: http://guides.codepath.com/android/Notifications
+
+
 
 
     public void createNotification(Context context, JSONObject jsonObject) throws JSONException {
@@ -82,6 +84,13 @@ public class MyCustomReceiver extends BroadcastReceiver {
         //do what you want with JSONObject
         Log.d("createNotification", object.toString());
         postId = object.getString("postId");
+        itemImageUrl=object.getString("itemImageUrl");
+        //Bitmap itemImage=loadItemImage(itemImageUrl,context);
+
+        RemoteViews notificationLayout = new RemoteViews(context.getPackageName(), R.layout.notification_small);
+        RemoteViews notificationLayoutExpanded = new RemoteViews(context.getPackageName(), R.layout.notification_large);
+
+
 
 
 
@@ -112,13 +121,15 @@ public class MyCustomReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "default")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(notificationLayout)
+                .setCustomBigContentView(notificationLayoutExpanded)
                 .setContentTitle("Notification Monster: " + postId)
                 .setContentText("You Monster!")
                 .setContentIntent(pIntent)
+                //.setLargeIcon(itemImage)
                 .addAction(R.drawable.notification_accept, "Accept", aIntent)
                 .addAction(R.drawable.notification_decline, "Decline", dIntent)
-//                .setStyle(new NotificationCompat.BigTextStyle()
-//                      .bigText("Much longer text that cannot fit one line..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true); //dismiss the notification after user taps on it, but clicking on the accept or decline option do not work
         notificationManager.notify(NOTIFICATION_ID, mBuilder.build());

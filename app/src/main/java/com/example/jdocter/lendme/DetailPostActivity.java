@@ -189,7 +189,7 @@ public class DetailPostActivity extends AppCompatActivity {
 
         // Do a null check to confirm that we have not already instantiated the map.
         if (mapFragment == null) {
-            mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+            mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapfragment));
             // Check if we were successful in obtaining the map.
             if (mapFragment != null) {
                 mapFragment.getMapAsync(new OnMapReadyCallback() {
