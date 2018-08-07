@@ -20,6 +20,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
     public static final String intentAction = "com.parse.push.intent.RECEIVE";
     private NotificationManager notificationManager;
+    private String postId;
 
 
     @Override
@@ -49,57 +50,77 @@ public class MyCustomReceiver extends BroadcastReceiver {
                     // Extract custom push data
                     if (key.equals("customdata")) {
                         // create a local notification
-                        parseInfo(value);
-                        createNotification(context, value);
-                    } else if (key.equals("launch")) {
-                        // Handle push notification by invoking activity directly
-                        launchSomeActivity(context, value);
-                    } else if (key.equals("broadcast")) {
-                        // OR trigger a broadcast to activity
-                        triggerBroadcastToActivity(context, value);
+                        createNotification(context, json);
                     }
+//                    else if (key.equals("launch")) {
+//                        // Handle push notification by invoking activity directly
+//                        launchSomeActivity(context, value);
+//                    } else if (key.equals("broadcast")) {
+//                        // OR trigger a broadcast to activity
+//                        triggerBroadcastToActivity(context, value);
+//                    }
                 }
             } catch (JSONException ex) {
+                ex.printStackTrace();
                 Log.d(TAG, "JSON failed!");
             }
         }
     }
 
-    private void parseInfo(String value){}
-
     public static final int NOTIFICATION_ID = 45;
+
     // Create a local dashboard notification to tell user about the event
     // See: http://guides.codepath.com/android/Notifications
 
 
-    private void createNotification(Context context, String datavalue) {
+    public void createNotification(Context context, JSONObject jsonObject) throws JSONException {
         initChannels(context);
+
+        //Parse Json nested object
+        String values = jsonObject.getString("customdata");
+        JSONObject object = new JSONObject(values);
+        //do what you want with JSONObject
+        Log.d("createNotification", object.toString());
+        postId = object.getString("postId");
+
+
 
         // First let's define the intent to trigger when notification is selected
         // Start out by creating a normal intent (in this case to open an activity)
+
         Intent intentP = new Intent(context, MainActivity.class);
+        intentP.putExtra("frgToLoad","notification");
+        Intent intentA = new Intent(context, MainActivity.class);
+        intentA.putExtra("frgToLoad","notification");
+        intentA.putExtra("response","accept");
+        intentA.putExtra("PostId",postId);
+        Intent intentD = new Intent(context, MainActivity.class);
+        intentD.putExtra("frgToLoad","notification");
+        intentD.putExtra("response","decline");
+        intentD.putExtra("PostId",postId);
         // Next, let's turn this into a PendingIntent using
         //   public static PendingIntent getActivity(Context context, int requestCode,
         //       Intent intent, int flags)
         int requestID = (int) System.currentTimeMillis(); //unique requestID to differentiate between various notification with same NotifId
         int flags = PendingIntent.FLAG_CANCEL_CURRENT; // cancel old intent and create new one
-        PendingIntent pIntent = PendingIntent.getActivity(context, requestID, intentP, flags);
 
-        PendingIntent sIntent = PendingIntent.getActivity(context, 3, intentP, flags);
-        PendingIntent iIntent = PendingIntent.getActivity(context, 4, intentP, flags);
+        PendingIntent pIntent = PendingIntent.getActivity(context, requestID, intentP, flags);
+        PendingIntent aIntent = PendingIntent.getActivity(context, 3, intentA, flags);
+        PendingIntent dIntent = PendingIntent.getActivity(context, 4, intentD, flags);
 
 
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "default")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Notification Monster: " + datavalue)
+                .setContentTitle("Notification Monster: " + postId)
                 .setContentText("You Monster!")
                 .setContentIntent(pIntent)
-                .addAction(R.drawable.notification_accept, "Accept", sIntent)
-                .addAction(R.drawable.notification_decline, "Decline", iIntent)
+                .addAction(R.drawable.notification_accept, "Accept", aIntent)
+                .addAction(R.drawable.notification_decline, "Decline", dIntent)
 //                .setStyle(new NotificationCompat.BigTextStyle()
 //                      .bigText("Much longer text that cannot fit one line..."))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true); //dismiss the notification after user taps on it, but clicking on the accept or decline option do not work
         notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
