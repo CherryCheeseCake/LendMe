@@ -11,11 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.model.Post;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
@@ -43,16 +43,20 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
         final Post post = (Post) mPosts.get(position);
-        //TODO set price
-        //System.out.println("POST PRICE ******************************  "+post.getPrice());
 
-        String x="$"+post.getPrice();
-        viewHolder.tvBorrowPrice.setText(x);
+
+        double amount =post.getPrice();
+        Locale locale=new Locale("en", "US");
+        NumberFormat currencyFormatter= NumberFormat.getCurrencyInstance(locale);
+
+        viewHolder.tvBorrowPrice.setText(currencyFormatter.format(amount));
+
         viewHolder.ivBorrowImage.layout(0,0,0,0);
         String imageUrl = post.getImage().getUrl();
         // load image using glide
         Glide.with(context)
                 .load(imageUrl)
+                //.apply(new RequestOptions().transform(new RoundedCorners(30)))
                 .into(viewHolder.ivBorrowImage);
 
 

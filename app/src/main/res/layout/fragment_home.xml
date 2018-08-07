@@ -25,6 +25,7 @@
         app:menu="@menu/home_bottom_navigation" />
 
 
+
     <android.support.design.widget.FloatingActionButton
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/create"
@@ -42,7 +43,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/plus"/>
-
 
 
 </RelativeLayout>

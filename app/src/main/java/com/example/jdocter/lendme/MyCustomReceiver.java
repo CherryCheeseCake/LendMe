@@ -49,6 +49,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
                     // Extract custom push data
                     if (key.equals("customdata")) {
                         // create a local notification
+                        parseInfo(value);
                         createNotification(context, value);
                     } else if (key.equals("launch")) {
                         // Handle push notification by invoking activity directly
@@ -64,6 +65,8 @@ public class MyCustomReceiver extends BroadcastReceiver {
         }
     }
 
+    private void parseInfo(String value){}
+
     public static final int NOTIFICATION_ID = 45;
     // Create a local dashboard notification to tell user about the event
     // See: http://guides.codepath.com/android/Notifications
@@ -74,16 +77,16 @@ public class MyCustomReceiver extends BroadcastReceiver {
 
         // First let's define the intent to trigger when notification is selected
         // Start out by creating a normal intent (in this case to open an activity)
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intentP = new Intent(context, MainActivity.class);
         // Next, let's turn this into a PendingIntent using
         //   public static PendingIntent getActivity(Context context, int requestCode,
         //       Intent intent, int flags)
         int requestID = (int) System.currentTimeMillis(); //unique requestID to differentiate between various notification with same NotifId
         int flags = PendingIntent.FLAG_CANCEL_CURRENT; // cancel old intent and create new one
-        PendingIntent pIntent = PendingIntent.getActivity(context, requestID, intent, flags);
+        PendingIntent pIntent = PendingIntent.getActivity(context, requestID, intentP, flags);
 
-        PendingIntent sIntent = PendingIntent.getActivity(context, 3, intent, flags);
-        PendingIntent iIntent = PendingIntent.getActivity(context, 4, intent, flags);
+        PendingIntent sIntent = PendingIntent.getActivity(context, 3, intentP, flags);
+        PendingIntent iIntent = PendingIntent.getActivity(context, 4, intentP, flags);
 
 
 

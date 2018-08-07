@@ -44,7 +44,11 @@ public class ItemCalendarActivity extends AppCompatActivity {
     List<Date> startEndDates= new ArrayList<Date>();
     ParseUser user = ParseUser.getCurrentUser();
     Post mPost;
-    ArrayList<ParseObject> transactions;
+    private ArrayList<ParseObject> transactions;
+    private String itemImageUrl;
+    private String username;
+
+
 
     //push notification
 
@@ -55,6 +59,8 @@ public class ItemCalendarActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "onReceive invoked!", Toast.LENGTH_LONG).show();
         }
     };
+
+
 
 
 
@@ -77,6 +83,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        itemImageUrl = mPost.getImage().getUrl();
 
         List<ParseObject> transactions = new ArrayList<>();
 
@@ -115,10 +122,19 @@ public class ItemCalendarActivity extends AppCompatActivity {
 
                 //push
 
+                try {
+                    username = user.fetchIfNeeded().getUsername();
+                } catch (ParseException e) {
+                    Log.e("ItemCalendarActivity","no Username");
+                }
+
                 JSONObject payload = new JSONObject();
 
                 try {
                     payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
+                    payload.put("itemImageUrl", itemImageUrl);
+                    payload.put("startEnd",startEndDates);
+                    payload.put("borrowerName",username);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -126,12 +142,13 @@ public class ItemCalendarActivity extends AppCompatActivity {
                 HashMap<String, String> data = new HashMap<>();
                 data.put("customData", payload.toString());
 
+
                 ParseCloud.callFunctionInBackground("pushChannelTest", data);
-//                try { //TODO
-//                    createTransaction(startEndDates,mPost);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    createTransaction(startEndDates,mPost);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -206,6 +223,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
         newTransaction.setLender(post.getUser().fetchIfNeeded());
         newTransaction.setBorrower(user);
         newTransaction.setItemPost(post);
+        newTransaction.setStatusCode(1);
 
         newTransaction.saveInBackground(new SaveCallback() {
             @Override
