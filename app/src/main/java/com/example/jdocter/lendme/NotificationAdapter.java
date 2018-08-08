@@ -366,7 +366,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mTransactions.size();
     }
 
-
+    /**
+     * Viewholder for notifications that only require text
+     */
     public class TextViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvBody;
@@ -385,6 +387,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    /**
+     * Viewholder for notifications that require a rating bar
+     */
     public class RatingViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvBody;
@@ -402,7 +407,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-
+    /**
+     * Viewholder for notifications that require actions --> swipe to reveal buttons
+     */
     public class SwipeViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
 
         public TextView tvBody;
@@ -433,6 +440,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             card.setOnTouchListener(this);
         }
+
 
 
         @Override

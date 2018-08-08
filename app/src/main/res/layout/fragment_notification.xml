@@ -10,11 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingTop="?attr/actionBarSize"
+        android:clipToPadding="false"
+        android:background="@color/white"
         android:overScrollMode="never">
 
     </android.support.v7.widget.RecyclerView>
 
-    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+<!--    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
         android:id="@+id/notificationHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +28,7 @@
         <TextView
             android:id="@+id/space"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="65dp" />
         <TextView
             android:layout_below="@+id/space"
             android:layout_width="wrap_content"
@@ -34,6 +37,6 @@
             android:textSize="22dp"
             android:textStyle="bold"
             android:layout_margin="7dp" />
-    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>-->
 
 </FrameLayout>

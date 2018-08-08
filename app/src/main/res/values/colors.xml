@@ -20,7 +20,8 @@
     <color name="colorToolbar">#5BC8AC</color>
     <color name ="colorToolbarLight">#98DBC6</color>
 
-    <color name="colorPrimaryTransparent">#4098DBC6</color>
+    <color name="colorPrimaryTransparent">#945ac6aa</color>
+    <color name="notificationCard">#efefef</color>
 
 <!--Colors that can be changed to style the app-->
     <!--<color name="colorPrimaryDark">#5BC8AC</color>

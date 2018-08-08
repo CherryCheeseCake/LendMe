@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.example.jdocter.lendme.NotificationAdapter;
 import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.model.Transaction;
@@ -45,8 +44,8 @@ public class NotificationFragment extends Fragment {
         adapter = new NotificationAdapter(transactions);
         rvNotification.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         rvNotification.setAdapter(adapter);
-        RecyclerViewHeader recyclerHeader = (RecyclerViewHeader) view.findViewById(R.id.notificationHeader);
-        recyclerHeader.attachTo(rvNotification);
+//        RecyclerViewHeader recyclerHeader = (RecyclerViewHeader) view.findViewById(R.id.notificationHeader);
+//        recyclerHeader.attachTo(rvNotification);
 
         loadAllTransactions();
 
@@ -54,7 +53,7 @@ public class NotificationFragment extends Fragment {
 
 
     public void loadAllTransactions() {
-        // TODO get rid of transactions of same person
+        // TODO query by updated at date and put constraint: today's date <= end date
 
         final Transaction.Query transactionBorrowerQuery = new Transaction.Query();
         // query: all transactions where current user is the borrower, ordered by newest updates, excluding items on hold (status code 0), and items current user cancelled
