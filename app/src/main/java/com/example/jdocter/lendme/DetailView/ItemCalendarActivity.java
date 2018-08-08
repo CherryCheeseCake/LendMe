@@ -47,6 +47,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
     private ArrayList<ParseObject> transactions;
     private String itemImageUrl;
     private String username;
+    private String borrowerUrl;
 
 
 
@@ -157,6 +158,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
     public void pushNotification(Transaction transaction){
         try {
             username = user.fetchIfNeeded().getUsername();
+            borrowerUrl=user.fetchIfNeeded().getParseFile("profileImage").getUrl();
         } catch (ParseException e) {
             Log.e("ItemCalendarActivity","no Username");
         }
@@ -166,9 +168,11 @@ public class ItemCalendarActivity extends AppCompatActivity {
         try {
             payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
             payload.put("itemImageUrl", itemImageUrl);
-            payload.put("startEnd",startEndDates);
+            payload.put("startEnd",startEndDates.toArray());
             payload.put("borrowerName",username);
-            payload.put("postId", transaction.getObjectId());
+            payload.put("borrowerProfile",borrowerUrl);
+            payload.put("transactionId", transaction.getObjectId());
+            payload.put("item",mPost.getItem());
         } catch (JSONException e) {
             e.printStackTrace();
         }

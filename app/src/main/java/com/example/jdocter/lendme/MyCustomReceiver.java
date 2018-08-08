@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +13,10 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.NotificationTarget;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,8 +26,13 @@ public class MyCustomReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
     public static final String intentAction = "com.parse.push.intent.RECEIVE";
     private NotificationManager notificationManager;
-    private String postId;
+    private String transactionId;
     private String itemImageUrl;
+    private String borrowerImageUrl;
+    private String borrowerName;
+    private String itemName;
+    private NotificationTarget notificationTarget;
+    private NotificationTarget notificationTarget2;
 
 
     @Override
@@ -83,15 +93,19 @@ public class MyCustomReceiver extends BroadcastReceiver {
         JSONObject object = new JSONObject(values);
         //do what you want with JSONObject
         Log.d("createNotification", object.toString());
-        postId = object.getString("postId");
+        transactionId = object.getString("transactionId");
         itemImageUrl=object.getString("itemImageUrl");
-        //Bitmap itemImage=loadItemImage(itemImageUrl,context);
+        borrowerImageUrl=object.getString("borrowerProfile");
+        borrowerName=object.getString("borrowerName");
+        itemName=object.getString("item");
+        final String message = "wants to borrow you item: "+itemName;
 
         RemoteViews notificationLayout = new RemoteViews(context.getPackageName(), R.layout.notification_small);
         RemoteViews notificationLayoutExpanded = new RemoteViews(context.getPackageName(), R.layout.notification_large);
-
-
-
+        notificationLayout.setImageViewResource(R.id.ivItem,R.mipmap.ic_launcher);
+        notificationLayout.setImageViewResource(R.id.ivBorrower,R.mipmap.ic_launcher);
+        notificationLayout.setTextViewText(R.id.tvBorrower,borrowerName);
+        notificationLayout.setTextViewText(R.id.tvMessage,message);
 
 
         // First let's define the intent to trigger when notification is selected
@@ -102,11 +116,11 @@ public class MyCustomReceiver extends BroadcastReceiver {
         Intent intentA = new Intent(context, MainActivity.class);
         intentA.putExtra("frgToLoad","notification");
         intentA.putExtra("response","accept");
-        intentA.putExtra("PostId",postId);
+        intentA.putExtra("transactionId",transactionId);
         Intent intentD = new Intent(context, MainActivity.class);
         intentD.putExtra("frgToLoad","notification");
         intentD.putExtra("response","decline");
-        intentD.putExtra("PostId",postId);
+        intentD.putExtra("transactionId",transactionId);
         // Next, let's turn this into a PendingIntent using
         //   public static PendingIntent getActivity(Context context, int requestCode,
         //       Intent intent, int flags)
@@ -124,15 +138,43 @@ public class MyCustomReceiver extends BroadcastReceiver {
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomContentView(notificationLayout)
                 .setCustomBigContentView(notificationLayoutExpanded)
-                .setContentTitle("Notification Monster: " + postId)
-                .setContentText("You Monster!")
                 .setContentIntent(pIntent)
-                //.setLargeIcon(itemImage)
                 .addAction(R.drawable.notification_accept, "Accept", aIntent)
                 .addAction(R.drawable.notification_decline, "Decline", dIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true); //dismiss the notification after user taps on it, but clicking on the accept or decline option do not work
-        notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        final Notification notification = mBuilder.build();
+        notificationManager.notify(NOTIFICATION_ID, notification);
+
+        notificationTarget = new NotificationTarget(
+                context,
+                R.id.ivItem,
+                notificationLayout,
+                notification,
+                NOTIFICATION_ID);
+        Glide
+                .with(context)
+                .asBitmap()
+                .load(itemImageUrl)
+                .apply(new RequestOptions().override(110, 110))
+                .apply(new RequestOptions().centerCrop())
+                .into(notificationTarget);
+
+        notificationTarget2 = new NotificationTarget(
+                context,
+                R.id.ivBorrower,
+                notificationLayout,
+                notification,
+                NOTIFICATION_ID);
+        Glide
+                .with(context)
+                .asBitmap()
+                .load(borrowerImageUrl)
+                .apply(new RequestOptions().override(110, 110))
+                .apply(new RequestOptions().centerCrop())
+                .into(notificationTarget2);
+
+
     }
 
     public void initChannels(Context context) {

@@ -116,8 +116,7 @@ public class HomeFragment extends Fragment {
                     final String response = notificationInfo.getString("response");
                     if (response != null) {
                         ParseQuery<Transaction> query = ParseQuery.getQuery(Transaction.class);
-                        notificationInfo.getString("PostId");
-                        query.getInBackground(notificationInfo.getString("PostId"), new GetCallback<Transaction>() {
+                        query.getInBackground(notificationInfo.getString("transactionId"), new GetCallback<Transaction>() {
                             public void done(Transaction transaction, ParseException e) {
                                 if (e == null) {
                                     if (response.equals("accept")) {
