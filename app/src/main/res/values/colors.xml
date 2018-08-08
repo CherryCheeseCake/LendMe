@@ -25,7 +25,9 @@
 <!--Colors that can be changed to style the app-->
     <!--<color name="colorPrimaryDark">#5BC8AC</color>
     <color name="colorPrimary">#98DBC6</color>-->
-    <color name="colorPrimaryDark">#1e957b</color>
+    <!--<color name="colorPrimaryDark">#1e957b</color>-->
+ <color name="colorDark">#1e957b</color>
+ <color name="colorPrimaryDark">#5ac6aa</color>
     <color name="colorPrimary">#5ac6aa</color>
     <color name="colorPrimaryLight">#8ef9dc</color>
     <!--

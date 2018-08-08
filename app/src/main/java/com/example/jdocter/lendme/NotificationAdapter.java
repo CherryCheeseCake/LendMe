@@ -165,6 +165,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     holder.tvBody.setText("Waiting for "+lender+" to accept your request for "+item+" on "+startDateString);
                 } else if (lenderId.equals(currentUserId)) {
                     // request made, need lender approval
+
                     SwipeViewHolder holder = (SwipeViewHolder) viewHolder;
                     holder.tvtitle.setText(item);
                     holder.tvBody.setText(borrower+" requests to borrow "+item+" from "+startDateString+" to "+endDateString);
