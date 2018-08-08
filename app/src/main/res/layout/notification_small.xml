@@ -16,24 +16,25 @@
     <TextView
         android:id="@+id/tvBorrower"
         style="@style/TextAppearance.Compat.Notification.Title"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@id/ivBorrower"
         android:text="Borrower Name"
+        android:textStyle="bold"
         android:textColor="#000"
         android:textSize="13dp" />
 
     <TextView
         android:id="@+id/tvMessage"
         style="@style/TextAppearance.Compat.Notification"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvBorrower"
         android:layout_marginStart="10dp"
         android:layout_toRightOf="@id/ivBorrower"
         android:text="wants to borrow your item XXX"
-        android:textColor="#000"
+        android:textColor="#093145"
         android:textSize="13dp" />
 
     <ImageView
@@ -42,5 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        android:layout_toEndOf="@id/tvMessage"
+        android:layout_marginStart="5dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:layout_alignTop="@id/ivBorrower"/>
 </RelativeLayout>

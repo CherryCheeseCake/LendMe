@@ -20,6 +20,7 @@ import com.bumptech.glide.request.target.NotificationTarget;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.Iterator;
 
 public class MyCustomReceiver extends BroadcastReceiver {
@@ -33,6 +34,11 @@ public class MyCustomReceiver extends BroadcastReceiver {
     private String itemName;
     private NotificationTarget notificationTarget;
     private NotificationTarget notificationTarget2;
+    private NotificationTarget notificationTarget3;
+    private NotificationTarget notificationTarget4;
+    private Date startDate;
+    private Date endDate;
+
 
 
     @Override
@@ -83,8 +89,6 @@ public class MyCustomReceiver extends BroadcastReceiver {
 
 
 
-
-
     public void createNotification(Context context, JSONObject jsonObject) throws JSONException {
         initChannels(context);
 
@@ -98,14 +102,21 @@ public class MyCustomReceiver extends BroadcastReceiver {
         borrowerImageUrl=object.getString("borrowerProfile");
         borrowerName=object.getString("borrowerName");
         itemName=object.getString("item");
-        final String message = "wants to borrow you item: "+itemName;
+        //final List<Date> startEndDates = object.get
+        final String message = "wants to borrow your item: "+itemName;
 
         RemoteViews notificationLayout = new RemoteViews(context.getPackageName(), R.layout.notification_small);
         RemoteViews notificationLayoutExpanded = new RemoteViews(context.getPackageName(), R.layout.notification_large);
+
         notificationLayout.setImageViewResource(R.id.ivItem,R.mipmap.ic_launcher);
         notificationLayout.setImageViewResource(R.id.ivBorrower,R.mipmap.ic_launcher);
         notificationLayout.setTextViewText(R.id.tvBorrower,borrowerName);
         notificationLayout.setTextViewText(R.id.tvMessage,message);
+
+        notificationLayoutExpanded.setImageViewResource(R.id.ivItem2,R.mipmap.ic_launcher);
+        notificationLayoutExpanded.setImageViewResource(R.id.ivBorrower2,R.mipmap.ic_launcher);
+        notificationLayoutExpanded.setTextViewText(R.id.tvBorrower2,borrowerName);
+        notificationLayoutExpanded.setTextViewText(R.id.tvMessage2,message);
 
 
         // First let's define the intent to trigger when notification is selected
@@ -146,34 +157,21 @@ public class MyCustomReceiver extends BroadcastReceiver {
         final Notification notification = mBuilder.build();
         notificationManager.notify(NOTIFICATION_ID, notification);
 
-        notificationTarget = new NotificationTarget(
-                context,
-                R.id.ivItem,
-                notificationLayout,
-                notification,
-                NOTIFICATION_ID);
-        Glide
-                .with(context)
-                .asBitmap()
-                .load(itemImageUrl)
-                .apply(new RequestOptions().override(110, 110))
-                .apply(new RequestOptions().centerCrop())
-                .into(notificationTarget);
+        notificationTarget = new NotificationTarget(context, R.id.ivItem, notificationLayout, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(itemImageUrl).apply(new RequestOptions().override(110, 110))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget);
 
-        notificationTarget2 = new NotificationTarget(
-                context,
-                R.id.ivBorrower,
-                notificationLayout,
-                notification,
-                NOTIFICATION_ID);
-        Glide
-                .with(context)
-                .asBitmap()
-                .load(borrowerImageUrl)
-                .apply(new RequestOptions().override(110, 110))
-                .apply(new RequestOptions().centerCrop())
-                .into(notificationTarget2);
+        notificationTarget2 = new NotificationTarget(context, R.id.ivBorrower, notificationLayout, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(borrowerImageUrl).apply(new RequestOptions().override(110, 110))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget2);
 
+        notificationTarget3 = new NotificationTarget(context, R.id.ivItem2, notificationLayoutExpanded, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(itemImageUrl).apply(new RequestOptions().override(150, 150))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget3);
+
+        notificationTarget4 = new NotificationTarget(context, R.id.ivBorrower2, notificationLayoutExpanded, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(borrowerImageUrl).apply(new RequestOptions().override(150, 150))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget4);
 
     }
 

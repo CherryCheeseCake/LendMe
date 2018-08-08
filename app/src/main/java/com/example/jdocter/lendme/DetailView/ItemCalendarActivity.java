@@ -168,7 +168,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
         try {
             payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
             payload.put("itemImageUrl", itemImageUrl);
-            payload.put("startEnd",startEndDates.toArray());
+            payload.put("startEnd",startEndDates);
             payload.put("borrowerName",username);
             payload.put("borrowerProfile",borrowerUrl);
             payload.put("transactionId", transaction.getObjectId());
