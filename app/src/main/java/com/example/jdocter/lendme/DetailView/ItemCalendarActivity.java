@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +49,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
     private ArrayList<ParseObject> transactions;
     private String itemImageUrl;
     private String username;
+    private String borrowerUrl;
 
 
 
@@ -132,43 +135,38 @@ public class ItemCalendarActivity extends AppCompatActivity {
         });
 
 
-//        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-//        String strdate = "7-2-2018";
-//        String strdate2 = "23-2-2018";
-//
-//        Date newdate = null;
-//        try {
-//            newdate = dateformat.parse(strdate);
-//        } catch (java.text.ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Date newdate2 = null;
-//        try {
-//            newdate2 = dateformat.parse(strdate2);
-//        } catch (java.text.ParseException e) {
-//            e.printStackTrace();
-//        }
-//        arrayList.add(newdate);
-//        arrayList.add(newdate2);
-
 
     }
 
     public void pushNotification(Transaction transaction){
         try {
             username = user.fetchIfNeeded().getUsername();
+            borrowerUrl=user.fetchIfNeeded().getParseFile("profileImage").getUrl();
         } catch (ParseException e) {
             Log.e("ItemCalendarActivity","no Username");
         }
 
         JSONObject payload = new JSONObject();
+//        final DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+//        startEndDates.get(0) (dateformat);
+
+        Calendar cal1 = new GregorianCalendar();
+        cal1.setTime(startEndDates.get(0));
+        Calendar cal2 = new GregorianCalendar();
+        cal2.setTime(startEndDates.get(startEndDates.size()-1));
+        String date = DateUtils.formatDateRange(this, cal1.getTimeInMillis(), cal2.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE |
+                DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_ALL);
+
+
 
         try {
             payload.put("sender", ParseInstallation.getCurrentInstallation().getInstallationId());
             payload.put("itemImageUrl", itemImageUrl);
-            payload.put("startEnd",startEndDates);
+            payload.put("startEndDates",date);
             payload.put("borrowerName",username);
-            payload.put("postId", transaction.getObjectId());
+            payload.put("borrowerProfile",borrowerUrl);
+            payload.put("transactionId", transaction.getObjectId());
+            payload.put("item",mPost.getItem());
         } catch (JSONException e) {
             e.printStackTrace();
         }

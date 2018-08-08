@@ -202,7 +202,7 @@
                     android:text="Description"
                     android:textColor="#373737"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/map"
+                    app:layout_constraintBottom_toTopOf="@+id/mapfragment"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -220,7 +220,7 @@
                     android:text="1.4 mi"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     app:layout_constraintEnd_toStartOf="@+id/ibMessage"
-                    app:layout_constraintStart_toEndOf="@+id/tvTitleItem"
+                    app:layout_constraintStart_toEndOf="@+id/tvPrice"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton

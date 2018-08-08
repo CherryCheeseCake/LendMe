@@ -1,6 +1,7 @@
 package com.example.jdocter.lendme.model;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -12,6 +13,7 @@ public class User extends ParseUser {
     public static final String itemKey = "itemName";
     public static final String locationKey = "location";
     public static final String fullNameKey = "gullName";
+    public static final String profileImageKey="profileImage";
 
 
     public User(){}
@@ -20,6 +22,9 @@ public class User extends ParseUser {
 
     public ParseGeoPoint getLocation() { return getParseGeoPoint(locationKey); }
 
+    public ParseFile getProfileImage() {
+        return getParseFile(profileImageKey);
+    }
 
     public ParseQuery getFavoritePostsQuery() {
         return getRelation(favoritePostsKey).getQuery();

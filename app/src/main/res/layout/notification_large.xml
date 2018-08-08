@@ -21,30 +21,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/ivBorrower2"
+        android:textStyle="bold"
         style="@style/TextAppearance.Compat.Notification.Title"
         />
 
     <TextView
         android:id="@+id/tvMessage2"
         style="@style/TextAppearance.Compat.Notification"
-        android:layout_width="wrap_content"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvBorrower2"
         android:layout_toEndOf="@id/ivBorrower2"
         android:text="wants to borrow your item XXX"
-        android:textColor="#000"
+        android:textColor="#093145"
         android:textSize="13sp" />
 
     <TextView
         android:id="@+id/tvDatesBorrowed2"
         style="@style/TextAppearance.Compat.Notification"
-        android:layout_width="wrap_content"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvMessage2"
         android:layout_toEndOf="@id/ivBorrower2"
         android:text="From XXX to XXX"
         android:textColor="#000"
-        android:textSize="13sp" />
+        android:textSize="11sp" />
 
     <ImageView
         android:id="@+id/ivItem2"
@@ -52,5 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        android:layout_toEndOf="@id/tvMessage2"
+        android:layout_marginStart="5dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:layout_alignTop="@id/ivBorrower2"/>
 </RelativeLayout>
