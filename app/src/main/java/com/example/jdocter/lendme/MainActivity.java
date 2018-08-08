@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
 
         drawerToggle = setupDrawerToggle();
+        drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.hamburgerBlack));
         // Tie DrawerLayout events to the ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
 
@@ -246,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
             actionBar.setIcon(R.drawable.logo);
-            drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
+            drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.hamburgerBlack));
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
             frameSmall.removeAllViews();
 

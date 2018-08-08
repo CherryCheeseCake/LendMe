@@ -1,5 +1,6 @@
 package com.example.jdocter.lendme;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,6 +11,11 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.RemoteViews;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.NotificationTarget;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +26,16 @@ public class MyCustomReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
     public static final String intentAction = "com.parse.push.intent.RECEIVE";
     private NotificationManager notificationManager;
-    private String postId;
+    private String transactionId;
+    private String itemImageUrl;
+    private String borrowerImageUrl;
+    private String borrowerName;
+    private String itemName;
+    private String startEndDates;
+    private NotificationTarget notificationTarget;
+    private NotificationTarget notificationTarget2;
+    private NotificationTarget notificationTarget3;
+    private NotificationTarget notificationTarget4;
 
 
     @Override
@@ -69,8 +84,6 @@ public class MyCustomReceiver extends BroadcastReceiver {
 
     public static final int NOTIFICATION_ID = 45;
 
-    // Create a local dashboard notification to tell user about the event
-    // See: http://guides.codepath.com/android/Notifications
 
 
     public void createNotification(Context context, JSONObject jsonObject) throws JSONException {
@@ -81,8 +94,27 @@ public class MyCustomReceiver extends BroadcastReceiver {
         JSONObject object = new JSONObject(values);
         //do what you want with JSONObject
         Log.d("createNotification", object.toString());
-        postId = object.getString("postId");
+        transactionId = object.getString("transactionId");
+        itemImageUrl=object.getString("itemImageUrl");
+        borrowerImageUrl=object.getString("borrowerProfile");
+        borrowerName=object.getString("borrowerName");
+        itemName=object.getString("item");
+        startEndDates="Dates: "+object.getString("startEndDates");
+        final String message = "wants to borrow your item: "+"\n"+itemName;
 
+        RemoteViews notificationLayout = new RemoteViews(context.getPackageName(), R.layout.notification_small);
+        RemoteViews notificationLayoutExpanded = new RemoteViews(context.getPackageName(), R.layout.notification_large);
+
+        notificationLayout.setImageViewResource(R.id.ivItem,R.mipmap.ic_launcher);
+        notificationLayout.setImageViewResource(R.id.ivBorrower,R.mipmap.ic_launcher);
+        notificationLayout.setTextViewText(R.id.tvBorrower,borrowerName);
+        notificationLayout.setTextViewText(R.id.tvMessage,message);
+
+        notificationLayoutExpanded.setImageViewResource(R.id.ivItem2,R.mipmap.ic_launcher);
+        notificationLayoutExpanded.setImageViewResource(R.id.ivBorrower2,R.mipmap.ic_launcher);
+        notificationLayoutExpanded.setTextViewText(R.id.tvBorrower2,borrowerName);
+        notificationLayoutExpanded.setTextViewText(R.id.tvMessage2,message);
+        notificationLayoutExpanded.setTextViewText(R.id.tvDatesBorrowed2,startEndDates);
 
 
         // First let's define the intent to trigger when notification is selected
@@ -93,11 +125,11 @@ public class MyCustomReceiver extends BroadcastReceiver {
         Intent intentA = new Intent(context, MainActivity.class);
         intentA.putExtra("frgToLoad","notification");
         intentA.putExtra("response","accept");
-        intentA.putExtra("PostId",postId);
+        intentA.putExtra("transactionId",transactionId);
         Intent intentD = new Intent(context, MainActivity.class);
         intentD.putExtra("frgToLoad","notification");
         intentD.putExtra("response","decline");
-        intentD.putExtra("PostId",postId);
+        intentD.putExtra("transactionId",transactionId);
         // Next, let's turn this into a PendingIntent using
         //   public static PendingIntent getActivity(Context context, int requestCode,
         //       Intent intent, int flags)
@@ -112,16 +144,33 @@ public class MyCustomReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "default")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Notification Monster: " + postId)
-                .setContentText("You Monster!")
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(notificationLayout)
+                .setCustomBigContentView(notificationLayoutExpanded)
                 .setContentIntent(pIntent)
                 .addAction(R.drawable.notification_accept, "Accept", aIntent)
                 .addAction(R.drawable.notification_decline, "Decline", dIntent)
-//                .setStyle(new NotificationCompat.BigTextStyle()
-//                      .bigText("Much longer text that cannot fit one line..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true); //dismiss the notification after user taps on it, but clicking on the accept or decline option do not work
-        notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        final Notification notification = mBuilder.build();
+        notificationManager.notify(NOTIFICATION_ID, notification);
+
+        notificationTarget = new NotificationTarget(context, R.id.ivItem, notificationLayout, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(itemImageUrl).apply(new RequestOptions().override(110, 110))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget);
+
+        notificationTarget2 = new NotificationTarget(context, R.id.ivBorrower, notificationLayout, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(borrowerImageUrl).apply(new RequestOptions().override(110, 110))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget2);
+
+        notificationTarget3 = new NotificationTarget(context, R.id.ivItem2, notificationLayoutExpanded, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(itemImageUrl).apply(new RequestOptions().override(150, 150))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget3);
+
+        notificationTarget4 = new NotificationTarget(context, R.id.ivBorrower2, notificationLayoutExpanded, notification, NOTIFICATION_ID);
+        Glide.with(context).asBitmap().load(borrowerImageUrl).apply(new RequestOptions().override(150, 150))
+                .apply(new RequestOptions().centerCrop()).into(notificationTarget4);
+
     }
 
     public void initChannels(Context context) {

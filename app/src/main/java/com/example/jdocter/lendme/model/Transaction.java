@@ -68,7 +68,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
 
     public double getCost() { return getDouble(costKey); }
 
-    public void setCost(Float price) { put(costKey, price); }
+    public void setCost(Double price) { put(costKey, price); }
 
     public ParseObject getItemPost(){
         return getParseObject(itemKey);
@@ -110,7 +110,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
         }
 
         public Transaction.Query dec() {
-            orderByDescending("createdAt");
+            orderByDescending("updatedAt");
             return this;
         }
 
@@ -131,6 +131,11 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
 
         public Transaction.Query byBorrower(ParseUser user) {
             whereEqualTo(borrowerKey, user);
+            return this;
+        }
+
+        public Transaction.Query excludePast() {
+            whereGreaterThan(endKey,new Date());
             return this;
         }
 

@@ -100,8 +100,9 @@ public class DetailPostActivity extends AppCompatActivity {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         try {
             Post post = query.get(objectId);
-            if (false) {
-                // TODO
+            String userId = post.getUser().getObjectId();
+            String currentId = ParseUser.getCurrentUser().getObjectId();
+            if (userId.equals(currentId)) {
                 btRequest.setText("Reserve my item");
             }
             try {
@@ -189,7 +190,7 @@ public class DetailPostActivity extends AppCompatActivity {
 
         // Do a null check to confirm that we have not already instantiated the map.
         if (mapFragment == null) {
-            mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+            mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapfragment));
             // Check if we were successful in obtaining the map.
             if (mapFragment != null) {
                 mapFragment.getMapAsync(new OnMapReadyCallback() {
