@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragments.LendFragment">
-
+    tools:context=".UserProfileActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvLends"
@@ -76,9 +75,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:src="@drawable/horizontal_line"
-            android:layout_below="@+id/tvInterests" />
+            android:layout_below="@+id/tvInterests"
+
+            />
+
+
+
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 
 </RelativeLayout>
