@@ -20,7 +20,6 @@ import com.bumptech.glide.request.target.NotificationTarget;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.Iterator;
 
 public class MyCustomReceiver extends BroadcastReceiver {
@@ -32,13 +31,11 @@ public class MyCustomReceiver extends BroadcastReceiver {
     private String borrowerImageUrl;
     private String borrowerName;
     private String itemName;
+    private String startEndDates;
     private NotificationTarget notificationTarget;
     private NotificationTarget notificationTarget2;
     private NotificationTarget notificationTarget3;
     private NotificationTarget notificationTarget4;
-    private Date startDate;
-    private Date endDate;
-
 
 
     @Override
@@ -102,8 +99,8 @@ public class MyCustomReceiver extends BroadcastReceiver {
         borrowerImageUrl=object.getString("borrowerProfile");
         borrowerName=object.getString("borrowerName");
         itemName=object.getString("item");
-        //final List<Date> startEndDates = object.get
-        final String message = "wants to borrow your item: "+itemName;
+        startEndDates="Dates: "+object.getString("startEndDates");
+        final String message = "wants to borrow your item: "+"\n"+itemName;
 
         RemoteViews notificationLayout = new RemoteViews(context.getPackageName(), R.layout.notification_small);
         RemoteViews notificationLayoutExpanded = new RemoteViews(context.getPackageName(), R.layout.notification_large);
@@ -117,6 +114,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
         notificationLayoutExpanded.setImageViewResource(R.id.ivBorrower2,R.mipmap.ic_launcher);
         notificationLayoutExpanded.setTextViewText(R.id.tvBorrower2,borrowerName);
         notificationLayoutExpanded.setTextViewText(R.id.tvMessage2,message);
+        notificationLayoutExpanded.setTextViewText(R.id.tvDatesBorrowed2,startEndDates);
 
 
         // First let's define the intent to trigger when notification is selected

@@ -45,7 +45,7 @@
         android:layout_toEndOf="@id/ivBorrower2"
         android:text="From XXX to XXX"
         android:textColor="#000"
-        android:textSize="13sp" />
+        android:textSize="11sp" />
 
     <ImageView
         android:id="@+id/ivItem2"
