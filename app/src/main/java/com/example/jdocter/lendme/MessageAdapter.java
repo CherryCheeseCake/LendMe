@@ -42,7 +42,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Message message = mMessage.get(i);
 
         //populate the views according to this data
-        viewHolder.tvSenderUsername.setText(message.getSenderId());
+        try {
+            viewHolder.tvSenderUsername.setText(message.getSender().fetchIfNeeded().getUsername());
+        } catch (ParseException e) {
+
+        }
         viewHolder.tvMessageContent.setText(message.getMessageKey());
         //viewHolder.tvDate.setText(message.getUpdatedAt());
 
