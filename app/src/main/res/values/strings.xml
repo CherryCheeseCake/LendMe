@@ -6,6 +6,9 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <string name="profile_me">My Profile Pic</string>
+    <string name="profile_other">Other profile pic</string>
+
 
     <string name="action_voice_rec">action voice rec</string>
     <string name="action_location">action location</string>

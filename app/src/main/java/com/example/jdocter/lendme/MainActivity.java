@@ -97,7 +97,9 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
-        actionBar.setIcon(R.drawable.logo);
+        //actionBar.setIcon(R.drawable.logo);
+        actionBar.setIcon(R.drawable.lend_me_logo);
+
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
