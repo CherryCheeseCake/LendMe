@@ -21,6 +21,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
     Context context;
     List<Post> mLends;
 
+
     public LendAdapter(List<Post> lends) {
         mLends = lends;
     }

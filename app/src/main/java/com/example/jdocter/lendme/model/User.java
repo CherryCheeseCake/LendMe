@@ -12,7 +12,7 @@ public class User extends ParseUser {
     public static final String favoritePostsKey = "favoritePosts";
     public static final String itemKey = "itemName";
     public static final String locationKey = "location";
-    public static final String fullNameKey = "gullName";
+    public static final String fullNameKey = "fullName";
     public static final String profileImageKey="profileImage";
 
 

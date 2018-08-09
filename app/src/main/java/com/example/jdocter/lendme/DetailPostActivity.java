@@ -44,6 +44,7 @@ public class DetailPostActivity extends AppCompatActivity {
     TextView tvPrice;
     Button btRequest;
     ImageButton ibLikes;
+    TextView txvUser;
 
     boolean isImageFitToScreen;
 
@@ -54,6 +55,7 @@ public class DetailPostActivity extends AppCompatActivity {
     private Double userLongitude=0.0;
     private static String ownerIdKey = "ownerId";
     private static String objectIdKey = "objectId";
+    private final static String userIdTag = "userId";
 
 
     @Override
@@ -70,6 +72,8 @@ public class DetailPostActivity extends AppCompatActivity {
         tvPrice = (TextView) findViewById(R.id.tvPrice);
         btRequest = (Button) findViewById(R.id.btRequest);
         ibLikes = (ImageButton) findViewById(R.id.ibLikes);
+        txvUser = (TextView) findViewById(R.id.textView);
+
         isImageFitToScreen = false;
         final String objectId = getIntent().getStringExtra("objectId");
 
@@ -99,9 +103,20 @@ public class DetailPostActivity extends AppCompatActivity {
 
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         try {
-            Post post = query.get(objectId);
-            String userId = post.getUser().getObjectId();
+            final Post post = query.get(objectId);
+//            final User user = (User) post.getUser().fetch();
+            final String userId = post.getUser().getObjectId();
             String currentId = ParseUser.getCurrentUser().getObjectId();
+
+            txvUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(DetailPostActivity.this,UserProfileActivity.class);
+                    i.putExtra(userIdTag, userId);
+                    startActivity(i);
+                }
+            });
+
             if (userId.equals(currentId)) {
                 btRequest.setText("Reserve my item");
             }
