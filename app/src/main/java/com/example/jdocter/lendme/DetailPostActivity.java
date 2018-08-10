@@ -118,7 +118,7 @@ public class DetailPostActivity extends AppCompatActivity {
             });
 
             if (userId.equals(currentId)) {
-                btRequest.setText("Reserve my item");
+                btRequest.setText("My item schedule");
             }
             try {
                 String username = post.getUser().fetchIfNeeded().getUsername();

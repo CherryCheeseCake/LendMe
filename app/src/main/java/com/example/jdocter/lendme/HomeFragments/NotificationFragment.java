@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jdocter.lendme.NotificationAdapter;
 import com.example.jdocter.lendme.R;
+import com.example.jdocter.lendme.SimpleNotificationAdapter;
 import com.example.jdocter.lendme.model.Transaction;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -25,7 +25,7 @@ public class NotificationFragment extends Fragment {
 
     private List<Transaction> transactions;
     private RecyclerView rvNotification;
-    private NotificationAdapter adapter;
+    private SimpleNotificationAdapter adapter;
     private SwipeController swipeController;
 
     @Override
@@ -41,7 +41,7 @@ public class NotificationFragment extends Fragment {
 
         rvNotification = view.findViewById(R.id.rvNotification);
         transactions = new ArrayList<>();
-        adapter = new NotificationAdapter(transactions);
+        adapter = new SimpleNotificationAdapter(transactions);
         rvNotification.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         rvNotification.setAdapter(adapter);
 //        RecyclerViewHeader recyclerHeader = (RecyclerViewHeader) view.findViewById(R.id.notificationHeader);
@@ -56,22 +56,23 @@ public class NotificationFragment extends Fragment {
         // TODO query by updated at date and put constraint: today's date <= end date
 
         final Transaction.Query transactionBorrowerQuery = new Transaction.Query();
-        // query: all transactions where current user is the borrower, ordered by newest updates, excluding items on hold (status code 0), and items current user cancelled
-        transactionBorrowerQuery.dec().excludeStatusCode(0).excludeStatusCode(5).excludeStatusCode(8).withUser().byBorrower(ParseUser.getCurrentUser());
 
-        transactionBorrowerQuery.findInBackground(new FindCallback<Transaction>() {
-            @Override
-            public void done(List<Transaction> objects, ParseException e) {
-                for (Transaction t : objects) {
-                    transactions.add(t);
-                    adapter.notifyItemInserted(transactions.size()-1);
-                }
-            }
-        });
+//        // query: all transactions where current user is the borrower, ordered by newest updates, excluding items on hold (status code 0), and items current user cancelled
+//        transactionBorrowerQuery.dec().includesStatusCode(1).excludeStatusCode(0).withUser().byBorrower(ParseUser.getCurrentUser());
+//
+//        transactionBorrowerQuery.findInBackground(new FindCallback<Transaction>() {
+//            @Override
+//            public void done(List<Transaction> objects, ParseException e) {
+//                for (Transaction t : objects) {
+//                    transactions.add(t);
+//                    adapter.notifyItemInserted(transactions.size()-1);
+//                }
+//            }
+//        });
 
         final Transaction.Query transactionLenderQuery = new Transaction.Query();
         // query: all transactions where current user is the lender, ordered by newest updates, excluding items on hold (status code 0), and items current user cancelled
-        transactionLenderQuery.dec().excludeStatusCode(0).excludeStatusCode(6).excludeStatusCode(8).withUser().byLender(ParseUser.getCurrentUser());
+        transactionLenderQuery.dec().includesStatusCode(1).excludeStatusCode(0).withUser().byLender(ParseUser.getCurrentUser());
 
         transactionLenderQuery.findInBackground(new FindCallback<Transaction>() {
             @Override

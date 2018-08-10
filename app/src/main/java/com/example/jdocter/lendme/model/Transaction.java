@@ -124,6 +124,11 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
             return this;
         }
 
+        public Transaction.Query includesStatusCode(int i) {
+            whereEqualTo(statusCodeKey,i);
+            return this;
+        }
+
         public Transaction.Query byLender(ParseUser user) {
             whereEqualTo(lenderKey, user);
             return this;
