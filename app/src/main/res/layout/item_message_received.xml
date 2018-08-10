@@ -8,17 +8,21 @@
 
     <TextView
         android:id="@+id/tvReceived"
-        android:layout_width="302dp"
-        android:layout_height="89dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="109dp"
+        android:layout_width="345dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:text="Message received"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toEndOf="@+id/ivReceived"
         tools:layout_editor_absoluteY="1dp" />
 
     <ImageView
         android:id="@+id/ivReceived"
-        android:layout_width="109dp"
-        android:layout_height="90dp"
-        app:srcCompat="@android:drawable/btn_star"
+        android:layout_width="87dp"
+        android:layout_height="91dp"
+        app:srcCompat="@android:drawable/sym_def_app_icon"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 </android.support.constraint.ConstraintLayout>

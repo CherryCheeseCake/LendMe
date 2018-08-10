@@ -1,15 +1,17 @@
 package com.example.jdocter.lendme.model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.Date;
+@ParseClassName("Message")
 
 public class Message extends ParseObject {
 
-    public static final String senderKey="sender";
-    public static final String receiverKey="receiver";
+    public static final String senderKey="Sender";
+    public static final String receiverKey="Receiver";
     public static final String updatedAtKey = "updatedAt";
     public static final String messageKey="message";
 
@@ -50,6 +52,11 @@ public class Message extends ParseObject {
 
     public static class Query extends ParseQuery<Message>{
         public Query(){super(Message.class);}
+
+        public Query getTop(){
+            setLimit(10);
+            return this;
+        }
 
         public Message.Query bySender(ParseUser user){
             whereEqualTo(senderKey, user);

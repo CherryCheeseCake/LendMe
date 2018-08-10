@@ -18,5 +18,5 @@
         android:id="@+id/tvSent"
         android:layout_width="341dp"
         android:layout_height="71dp"
-        android:text="MESSAGE FROM SENDER" />
+        android:text="Message Sent" />
 </android.support.constraint.ConstraintLayout>
