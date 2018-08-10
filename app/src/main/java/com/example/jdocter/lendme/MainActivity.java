@@ -54,6 +54,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.jdocter.lendme.R.color.transparent;
+
 
 public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback{
 
@@ -245,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
         if (fragmentClass == HomeFragment.class) {
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
+            actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
             actionBar.setIcon(R.drawable.logo);
             drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.hamburgerBlack));
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
@@ -381,7 +383,16 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     @Override
     public ParseGeoPoint getLiveLoc() {
         //TODO - caused error when location is null.
-        ParseGeoPoint userGeoPoint = new ParseGeoPoint(userLatLng.latitude,userLatLng.longitude);
+        ParseGeoPoint userGeoPoint = null;
+        if (userLatLng == null) {
+            try {
+                userGeoPoint = ParseUser.getCurrentUser().fetch().getParseGeoPoint("location");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            userGeoPoint = new ParseGeoPoint(userLatLng.latitude,userLatLng.longitude);
+        }
         return userGeoPoint;
     }
 

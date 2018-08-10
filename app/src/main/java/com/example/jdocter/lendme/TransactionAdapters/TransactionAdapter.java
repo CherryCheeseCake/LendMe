@@ -22,7 +22,7 @@ import java.util.List;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
         Context context;
         List<Transaction> mTransactions;
-        final public static String fullNameKey = "fullname";
+        final public static String fullNameKey = "fullName";
 
         public TransactionAdapter(List<Transaction> transactions) {
             mTransactions = transactions;
