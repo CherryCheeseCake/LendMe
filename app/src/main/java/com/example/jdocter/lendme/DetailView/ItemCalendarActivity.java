@@ -24,6 +24,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.savvi.rangedatepicker.CalendarPickerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,8 +38,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import me.roseliu.calendarlibrary.CalendarPickerView;
 
 public class ItemCalendarActivity extends AppCompatActivity {
 
