@@ -44,8 +44,7 @@
    <color name="colorDark">#ffffff</color>
    <color name="colorPrimaryDark">@color/beachBlueDark</color>
     <color name="colorPrimary">@color/colorPrimaryDark</color>
-    <color name="colorPrimaryLight">#ffffff</color>
-
+    <color name="colorPrimaryLight">#647be1</color>
 
     <!--
     <color name="colorPrimaryTransparent">#4098DBC6</color>
