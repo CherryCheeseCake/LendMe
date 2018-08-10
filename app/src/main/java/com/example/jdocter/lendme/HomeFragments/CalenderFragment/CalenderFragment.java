@@ -15,8 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-//import com.squareup.timessquare.CalendarCellDecorator;
-//import com.squareup.timessquare.CalendarPickerView;
+
 
 public class CalenderFragment extends Fragment {
 
