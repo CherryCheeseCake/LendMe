@@ -4,18 +4,17 @@
     <item>
         <shape android:shape="oval">
             <gradient android:angle="90"
-                android:startColor="@color/colorAccent"
-                android:centerColor="@color/colorAccent2"
-                android:endColor="@color/colorAccent"
+                android:startColor="@color/fab1"
+                android:centerColor="@color/fab1"
+                android:endColor="@color/fab1"
                 android:type="linear" />
         </shape>
     </item>
     <item>
         <shape android:shape="oval">
             <gradient android:angle="0"
-                android:startColor="@color/colorAccent"
-                android:centerColor="#008f22ac"
-                android:endColor="@color/colorAccent"
+                android:startColor="@color/fab1"
+                android:endColor="@color/fab1"
                 android:type="linear" />
         </shape>
     </item>
