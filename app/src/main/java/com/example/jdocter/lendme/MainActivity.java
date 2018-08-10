@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
-        actionBar.setIcon(R.drawable.logo);
+        actionBar.setIcon(R.drawable.taglogo);
 //        actionBar.setIcon(R.drawable.lend_me_logo);
 
 
@@ -128,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     @Override
     public void onPause() {
         super.onPause();
-
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
     }
 
@@ -251,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         if (fragmentClass == HomeFragment.class) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
-            actionBar.setIcon(R.drawable.logo);
+            actionBar.setIcon(R.drawable.taglogo);
             drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.hamburgerBlack));
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
             frameSmall.removeAllViews();
