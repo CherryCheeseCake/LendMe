@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jdocter.lendme.R;
-import com.savvi.rangedatepicker.CalendarPickerView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import me.roseliu.calendarlibrary.CalendarPickerView;
 
 
 public class CalenderFragment extends Fragment {
@@ -34,38 +34,29 @@ public class CalenderFragment extends Fragment {
         calendar = (CalendarPickerView) view.findViewById(R.id.calendar_view);
 
         final Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 1);
+        nextYear.add(Calendar.YEAR, 2);
 
         final Calendar lastYear = Calendar.getInstance();
-        lastYear.add(Calendar.YEAR, -1);
+        lastYear.add(Calendar.YEAR, -2);
 
-        ArrayList<Date> arrayList = new ArrayList<>();
-        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-        String strdate = "7-2-2018";
-        String strdate2 = "23-2-2018";
+        ArrayList<Date> multirangelist = new ArrayList<Date>();
+        Date date1 = new GregorianCalendar(2018, Calendar.FEBRUARY, 11).getTime();
+        Date date2 = new GregorianCalendar(2018, Calendar.FEBRUARY, 20).getTime();
+        Date date3= new GregorianCalendar(2018, Calendar.MARCH, 1).getTime();
+        Date date4 = new GregorianCalendar(2018, Calendar.MARCH, 10).getTime();
 
-        Date newdate = null;
-        try {
-            newdate = dateformat.parse(strdate);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        Date newdate2 = null;
-        try {
-            newdate2 = dateformat.parse(strdate2);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        arrayList.add(newdate);
-        arrayList.add(newdate2);
+        multirangelist.add(date1);
+        multirangelist.add(date2);
+        multirangelist.add(date3);
+        multirangelist.add(date4);
 
 
 
         //calendar.setCustomDayView(new SampleDayViewAdapter());
         //calendar.setDecorators(Arrays.<CalendarCellDecorator>asList(new SampleDecorator()));
         calendar.init(lastYear.getTime(), nextYear.getTime(),new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
-                .inMode(CalendarPickerView.SelectionMode.RANGE)
-                .withSelectedDates(arrayList)
+                .inMode(CalendarPickerView.SelectionMode.MULTIPLE_RANGE)
+                .withSelectedDates(multirangelist)
                 .displayOnly();
 
 

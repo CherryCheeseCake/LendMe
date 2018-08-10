@@ -30,6 +30,7 @@
     <color name="beachBlueLight">#a7c2e9</color>
     <color name="beachBlueExtraLight">#7b90ae</color>
     <color name="beachBlueDark">#223658</color>
+    <color name="custom_header_text">#030303</color>
 
 <!--Colors that can be changed to style the app-->
     <!--<color name="colorPrimaryDark">#5BC8AC</color>
