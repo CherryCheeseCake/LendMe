@@ -9,10 +9,12 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.jdocter.lendme.MainActivity;
 import com.example.jdocter.lendme.MyCustomReceiver;
 import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.model.Post;
@@ -24,6 +26,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.savvi.rangedatepicker.CalendarPickerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,8 +40,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import me.roseliu.calendarlibrary.CalendarPickerView;
 
 public class ItemCalendarActivity extends AppCompatActivity {
 
@@ -129,7 +130,11 @@ public class ItemCalendarActivity extends AppCompatActivity {
                 }
                 //push
 
-
+                Toast toast = Toast.makeText(ItemCalendarActivity.this,"Post Sucess!",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                Intent i = new Intent(ItemCalendarActivity.this, MainActivity.class);
+                startActivity(i);
 
 
             }
