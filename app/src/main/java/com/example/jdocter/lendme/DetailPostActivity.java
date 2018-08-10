@@ -3,7 +3,6 @@ package com.example.jdocter.lendme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.DetailView.ImageEnlargeActivity;
-import com.example.jdocter.lendme.DetailView.ItemCalendarActivity;
 import com.example.jdocter.lendme.model.Post;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -78,28 +76,28 @@ public class DetailPostActivity extends AppCompatActivity {
         final String objectId = getIntent().getStringExtra("objectId");
 
 
-        btRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(DetailPostActivity.this, ItemCalendarActivity.class);
-                i.putExtra("objectId", objectId);
-                ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-                Post post = null;
-                try {
-                    post = query.get(objectId);
-                    if (ParseUser.getCurrentUser() == post.getUser()) {
-                        i.putExtra("transaction", true);
-                    } else {
-                        i.putExtra("transaction", false);
-                    }
-                } catch (ParseException e) {
-                    Log.e("DetailPostActivity","Failed to retrieve user post");
-                }
-
-                startActivity(i);
-            }
-
-        });
+//        btRequest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(DetailPostActivity.this, ItemCalendarActivity.class);
+//                i.putExtra("objectId", objectId);
+//                ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+//                Post post = null;
+//                try {
+//                    post = query.get(objectId);
+//                    if (ParseUser.getCurrentUser() == post.getUser()) {
+//                        i.putExtra("transaction", true);
+//                    } else {
+//                        i.putExtra("transaction", false);
+//                    }
+//                } catch (ParseException e) {
+//                    Log.e("DetailPostActivity","Failed to retrieve user post");
+//                }
+//
+//                startActivity(i);
+//            }
+//
+//        });
 
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         try {
