@@ -32,6 +32,7 @@
     <color name="beachBlueDark">#223658</color>
     <color name="fab1">#ffc800</color>
     <color name="fab2">#f9a8ef</color>
+    <color name="custom_header_text">#030303</color>
 
 
     <!--Colors that can be changed to style the app-->
