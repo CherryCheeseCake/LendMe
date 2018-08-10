@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             tools:context=".DetailPostActivity"
             tools:layout_editor_absoluteY="25dp"
-            android:padding="5dp">
+            android:padding="0dp">
 
             <TextView
                 android:id="@+id/textView"
