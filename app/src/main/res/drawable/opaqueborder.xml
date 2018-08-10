@@ -3,12 +3,15 @@
 
     <item >
         <shape android:shape="rectangle">
-            <solid android:color="@color/whiteOpaque"></solid>
+            <gradient android:angle="90"
+                android:startColor="#ffffff"
+                android:endColor="#ffffff"
+                android:type="linear" />
         </shape>
     </item>
     <item android:height="0.3dp" android:gravity="bottom">
         <shape android:shape="rectangle">
-            <solid android:color="#c9c9c9"></solid>
+            <solid android:color="#cec0b7"></solid>
         </shape>
 
     </item>

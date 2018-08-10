@@ -1,7 +1,6 @@
 package com.example.jdocter.lendme;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -101,8 +100,8 @@ public class TrendingFragment extends Fragment {
         MenuItem searchItem = menu.findItem(R.id.search_bar);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         TextView textview = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        textview.setHintTextColor(Color.BLACK);
-        textview.setTextColor(Color.BLACK);
+        textview.setHintTextColor(getResources().getColor(R.color.actionBarText));
+        textview.setTextColor(getResources().getColor(R.color.actionBarText));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

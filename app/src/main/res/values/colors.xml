@@ -2,7 +2,8 @@
 <resources>
    <!-- <color name="colorPrimary">#2b2b2b</color>
     <color name="colorPrimaryDark">#2b2b2b</color>-->
-    <color name="colorAccent">#fbc02d</color>
+    <color name="colorAccent">@color/beachBlueDark</color>
+    <color name="colorAccent2">@color/beachBlueLight</color>
     <color name="appbackground">#ffffff</color>
     <color name="appColorDark">#558639</color>
     <color name="white">#FFFFFF</color>
@@ -13,24 +14,42 @@
     <color name="border_color">#38831C</color>
     <color name="login_button">#5297EA</color>
     <color name="transparent">#00c4c4c4</color>
-    <color name="hamburgerBlack">@color/colorPrimary</color>
+    <color name="hamburgerBlack">@color/actionBarText</color>
     <color name="opaque">#a4000000</color>
-    <color name="whiteOpaque">#f3ffffff</color>
+    <color name="whiteOpaque">#f5ffffff</color>
 
-    <color name="colorToolbar">#5BC8AC</color>
-    <color name ="colorToolbarLight">#98DBC6</color>
+    <color name="colorToolbar">#ffffff</color>
+    <color name ="colorToolbarLight">#ffffff</color>
+    <color name="actionBarText">@color/colorPrimary</color>
 
     <color name="colorPrimaryTransparent">#945ac6aa</color>
-    <color name="notificationCard">#efefef</color>
+    <color name="notificationCard">#ffffff</color>
+    <color name="beachBrown">#6D5F56</color>
+    <color name="beachBlue">#294876</color>
+    <color name="beachBrownDark">#3C393B</color>
+    <color name="beachBlueLight">#a7c2e9</color>
+    <color name="beachBlueExtraLight">#7b90ae</color>
+    <color name="beachBlueDark">#223658</color>
 
 <!--Colors that can be changed to style the app-->
     <!--<color name="colorPrimaryDark">#5BC8AC</color>
     <color name="colorPrimary">#98DBC6</color>-->
     <!--<color name="colorPrimaryDark">#1e957b</color>-->
- <color name="colorDark">#1e957b</color>
+
+ <!--<color name="colorDark">#1e957b</color>
  <color name="colorPrimaryDark">#5ac6aa</color>
     <color name="colorPrimary">#5ac6aa</color>
-    <color name="colorPrimaryLight">#8ef9dc</color>
+    <color name="colorPrimaryLight">#8ef9dc</color>-->
+
+   <color name="colorDark">#ffffff</color>
+   <color name="colorPrimaryDark">@color/beachBlueDark</color>
+    <color name="colorPrimary">@color/colorPrimaryDark</color>
+    <color name="colorPrimaryLight">#ffffff</color>
+
+
+    <!--
+    <color name="colorPrimaryTransparent">#4098DBC6</color>
+>>>>>>> b0af55658e086b87b44dee37305ea82ad989040f
 
 
     <color name="textColorA">#ffffff</color>
