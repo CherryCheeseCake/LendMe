@@ -43,6 +43,7 @@ public class Message extends ParseObject {
         put(receiverKey, user);
     }
 
+
     public String getMessageKey(){
         return getString(messageKey);
     }
