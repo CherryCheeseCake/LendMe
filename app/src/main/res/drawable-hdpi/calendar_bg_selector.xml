@@ -8,9 +8,9 @@
   <item android:drawable="@drawable/state_range_middle" app:tsquare_state_range_middle="true" />
   <item android:drawable="@drawable/state_range_last" app:tsquare_state_range_last="true" />
 
-  <item android:drawable="@drawable/state_range_first_lend" app:tsquare_state_range_first_lend="true"/>
-  <item android:drawable="@drawable/state_range_middle_lend" app:tsquare_state_range_middle_lend="true" />
-  <item android:drawable="@drawable/state_range_last_lend" app:tsquare_state_range_last_lend="true" />
+  <!--<item android:drawable="@drawable/state_range_first_lend" app:tsquare_state_range_first_lend="true"/>-->
+  <!--<item android:drawable="@drawable/state_range_middle_lend" app:tsquare_state_range_middle_lend="true" />-->
+  <!--<item android:drawable="@drawable/state_range_last_lend" app:tsquare_state_range_last_lend="true" />-->
 
   <item android:drawable="@drawable/state_selected" android:state_selected="true" app:tsquare_state_range_first="false"
       app:tsquare_state_range_last="false" app:tsquare_state_highlighted = "false"/>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DetailView.ItemCalendarActivity">
 
-    <me.roseliu.calendarlibrary.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.savvi.rangedatepicker.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
@@ -28,6 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:textColor="@color/white"
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="@+id/calendar_view"
         app:layout_constraintEnd_toEndOf="parent"
