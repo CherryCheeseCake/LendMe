@@ -30,8 +30,11 @@
     <color name="beachBlueLight">#a7c2e9</color>
     <color name="beachBlueExtraLight">#7b90ae</color>
     <color name="beachBlueDark">#223658</color>
+    <color name="fab1">#ffc800</color>
+    <color name="fab2">#f9a8ef</color>
 
-<!--Colors that can be changed to style the app-->
+
+    <!--Colors that can be changed to style the app-->
     <!--<color name="colorPrimaryDark">#5BC8AC</color>
     <color name="colorPrimary">#98DBC6</color>-->
     <!--<color name="colorPrimaryDark">#1e957b</color>-->

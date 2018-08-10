@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment {
         final FragmentManager homeFragmentManager = getActivity().getSupportFragmentManager();
 
         bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setBackground(getResources().getDrawable(R.drawable.navigation_bottom_background));
 
         // handle navigation selection
         bottomNavigationView.setOnNavigationItemSelectedListener(
