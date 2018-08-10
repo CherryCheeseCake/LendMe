@@ -31,14 +31,14 @@
             android:layout_height="wrap_content"
             app:elevation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
-            android:background="@drawable/opaqueborder">
+            android:background="@drawable/black">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/result_tabs"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 app:tabIndicatorHeight="3dp"
-                app:tabIndicatorColor="@color/colorPrimary"/>
+                app:tabIndicatorColor="@color/white"/>
 
         </android.support.design.widget.AppBarLayout>
 
