@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_margin="@dimen/pad_5dp">
+
+    <TextView
+        android:id="@+id/tvSenderUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/ivSenderProfileImage"
+        android:text="Username"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_18sp" />
+
+    <ImageView
+        android:id="@+id/ivSenderProfileImage"
+        android:layout_width="106dp"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/person" />
+
+    <TextView
+        android:id="@+id/tvMessageContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSenderUsername"
+        android:layout_centerHorizontal="true"
+        android:text="This is going to be the Message" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="August, 17 2018" />
+
+</RelativeLayout>

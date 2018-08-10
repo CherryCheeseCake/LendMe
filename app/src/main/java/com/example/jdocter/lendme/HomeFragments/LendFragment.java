@@ -35,7 +35,6 @@ public class LendFragment extends Fragment {
     private TextView tvfullName;
     private TextView tvUsername;
     private ImageView ivProfileImage;
-//    private Button btnCreate;
     private String launchCamera = "launchcamera";
 
 
@@ -58,7 +57,6 @@ public class LendFragment extends Fragment {
         tvfullName = view.findViewById(R.id.tvname);
         tvUsername = view.findViewById(R.id.tvUsername);
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
-//        btnCreate = view.findViewById(R.id.btnCreate);
         ParseUser user = ParseUser.getCurrentUser();
 
 

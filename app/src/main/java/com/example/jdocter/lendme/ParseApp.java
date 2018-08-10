@@ -2,6 +2,7 @@ package com.example.jdocter.lendme;
 
 import android.app.Application;
 
+import com.example.jdocter.lendme.model.Message;
 import com.example.jdocter.lendme.model.Post;
 import com.example.jdocter.lendme.model.Transaction;
 import com.example.jdocter.lendme.model.User;
@@ -32,6 +33,7 @@ public class ParseApp extends Application {
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Transaction.class);
         ParseUser.registerSubclass(User.class);
+        ParseObject.registerSubclass(Message.class);
 
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
         Parse.enableLocalDatastore(this);

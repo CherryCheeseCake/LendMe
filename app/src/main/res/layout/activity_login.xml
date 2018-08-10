@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@drawable/menubargradient"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
@@ -51,8 +51,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
         android:tint="@color/white"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:ignore="VectorDrawableCompat" />
+        app:srcCompat="@drawable/logo_icon_small" />
 
     <Button
         android:id="@+id/btnSignup"

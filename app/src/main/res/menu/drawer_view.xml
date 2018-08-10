@@ -5,9 +5,12 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/space"
+            android:title="     " />
+        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:title="Home" />
+            android:title="Home"/>
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/profile"
@@ -15,6 +18,7 @@
         <item
             android:id="@+id/nav_transaction"
             android:icon="@drawable/transaction"
+            android:iconTint="@color/white"
             android:title="My Transactions" />
         <item
             android:id="@+id/nav_payment"

@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="search_view_inset">5dp</dimen>
     <dimen name="sliding_search_view_header_height">250dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">56dp</dimen>
+
+    <dimen name="pad_5dp">5dp</dimen>
+    <dimen name="pad_10dp">10dp</dimen>
+    <dimen name="pad_15dp">15dp</dimen>
+    <dimen name="pad_20dp">20dp</dimen>
+    <dimen name="pad_30dp">30dp</dimen>
+    <dimen name="pad_chat_item">45dp</dimen>
+    <dimen name="pad_chat_item1">10dp</dimen>
+
+    <dimen name="txt_7sp">7sp</dimen>
+    <dimen name="txt_12sp">12sp</dimen>
+    <dimen name="txt_13sp">13sp</dimen>
+    <dimen name="txt_14sp">14sp</dimen>
+    <dimen name="txt_15sp">15sp</dimen>
+    <dimen name="txt_16sp">16sp</dimen>
+    <dimen name="txt_18sp">18sp</dimen>
+    <dimen name="txt_20sp">20sp</dimen>
 
 </resources>

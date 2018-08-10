@@ -48,8 +48,8 @@ public class BorrowFragment extends Fragment {
         tabs.getTabAt(0).setIcon(ICONS[0]);
         tabs.getTabAt(1).setIcon(ICONS[1]);
 
-        tabs.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-        tabs.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
 
         return view;
         //return inflater.inflate(R.layout.fragment_borrow, container, false);
