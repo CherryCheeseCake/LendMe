@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jdocter.lendme.R;
-import com.savvi.rangedatepicker.CalendarPickerView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,6 +14,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import me.roseliu.calendarlibrary.CalendarPickerView;
 
 
 public class CalenderFragment extends Fragment {

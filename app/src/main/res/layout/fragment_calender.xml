@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragments.CalenderFragment.CalenderFragment">
 
-    <com.savvi.rangedatepicker.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <me.roseliu.calendarlibrary.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
