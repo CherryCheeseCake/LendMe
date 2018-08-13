@@ -224,6 +224,8 @@ public class DetailPostActivity extends AppCompatActivity {
                         userLongitude=-116.0;
                         LatLng userLiveLocation = new LatLng(userLatitude,userLongitude);
 
+                        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
                         map.getUiSettings().setZoomControlsEnabled(true);
 
                         map.addMarker(new MarkerOptions().position(place)
