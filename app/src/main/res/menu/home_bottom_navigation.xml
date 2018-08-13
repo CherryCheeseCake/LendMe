@@ -32,6 +32,7 @@
         android:id="@+id/lend"
         android:enabled="true"
         android:icon="@drawable/person"
+        android:iconTint="@color/black"
         android:title="Lend"
         app:showAsAction="always" />
 </menu>
