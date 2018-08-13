@@ -131,6 +131,7 @@ public class Transaction extends ParseObject implements Comparable<Transaction> 
 
         public Transaction.Query byLender(ParseUser user) {
             whereEqualTo(lenderKey, user);
+            whereNotEqualTo(borrowerKey,user);
             return this;
         }
 
