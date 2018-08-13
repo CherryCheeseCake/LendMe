@@ -43,7 +43,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         //populate the views according to this data
         try {
-            viewHolder.tvSenderUsername.setText(message.getSender().fetchIfNeeded().getUsername());
+            viewHolder.tvSenderUsername.setText("@"+message.getSender().fetchIfNeeded().getUsername());
         } catch (ParseException e) {
 
         }
@@ -81,7 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             super(messageView);
             tvSenderUsername= messageView.findViewById(R.id.tvSenderUsername);
             tvMessageContent=messageView.findViewById(R.id.tvMessageContent);
-            tvDate=messageView.findViewById(R.id.tvDate);
+            //tvDate=messageView.findViewById(R.id.tvDate);
             ivSenderProfileImage=messageView.findViewById(R.id.ivSenderProfileImage);
         }
 

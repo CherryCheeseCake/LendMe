@@ -24,6 +24,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum lorem 
     <string name="action_example_scrolling_search_bar">scrolling behavior</string>
 
     <string name="google_maps_key">AIzaSyCZ3E-xEQqcWccJqAQaAR2zo_4DZshOCT0</string>
+    <string name="message_preview_body">This is going to be the Message</string>
 
     <string-array name="card_type">
         <item>Visa</item>
