@@ -45,13 +45,12 @@
 
     <ImageView
         android:id="@+id/ivProfileImage"
-        android:layout_width="231dp"
-        android:layout_height="91dp"
+        android:layout_width="300dp"
+        android:layout_height="140dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
-        android:tint="@color/white"
-        app:srcCompat="@drawable/logo_icon_small" />
+        app:srcCompat="@drawable/logolight" />
 
     <Button
         android:id="@+id/btnSignup"

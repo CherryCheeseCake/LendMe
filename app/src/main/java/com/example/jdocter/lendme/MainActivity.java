@@ -54,8 +54,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.jdocter.lendme.R.color.transparent;
-
 
 public class MainActivity extends AppCompatActivity implements TrendingFragment.Callback{
 
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.whiteopaque));
-        actionBar.setIcon(R.drawable.taglogo);
+        actionBar.setIcon(R.drawable.logodark);
 //        actionBar.setIcon(R.drawable.lend_me_logo);
 
 
@@ -250,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         if (fragmentClass == HomeFragment.class) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.opaqueborder));
-            actionBar.setIcon(R.drawable.taglogo);
+            actionBar.setIcon(R.drawable.logodark);
             drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.hamburgerBlack));
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
             frameSmall.removeAllViews();

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragments.NotificationFragment">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvNotification"
         android:layout_width="match_parent"
@@ -12,10 +13,13 @@
         android:orientation="horizontal"
         android:paddingTop="?attr/actionBarSize"
         android:clipToPadding="false"
-        android:background="@color/white"
+        android:background="@color/transparent"
         android:overScrollMode="never">
 
     </android.support.v7.widget.RecyclerView>
+
+
+
 
 <!--    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
         android:id="@+id/notificationHeader"

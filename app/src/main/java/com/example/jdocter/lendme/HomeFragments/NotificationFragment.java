@@ -28,6 +28,7 @@ public class NotificationFragment extends Fragment {
     private SimpleNotificationAdapter adapter;
     private SwipeController swipeController;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class NotificationFragment extends Fragment {
 //        recyclerHeader.attachTo(rvNotification);
 
         loadAllTransactions();
+
 
     }
 

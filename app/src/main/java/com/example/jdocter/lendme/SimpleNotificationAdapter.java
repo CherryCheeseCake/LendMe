@@ -29,7 +29,7 @@ public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotifi
     public static final String TAG = "NotificationAdapter";
 
     private List<Transaction> mTransactions;
-    private static final float buttonWidth = 400;
+    private static final float buttonWidth = 460;
     public static final int ITEM_HOLD = 0; // 0 this is a "transaction" that represents a user putting their own item on hold
     public static final int BORROWER_INITIATED = 1;
     public static final int LENDER_ACCEPTED = 2;
@@ -77,10 +77,8 @@ public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotifi
         String startDateString = simpleDate(transaction.getStartDate());
         String endDateString = simpleDate(transaction.getEndDate());
         String borrower = null;
-        String lender = null;
         try {
             borrower = ((User) transaction.getBorrower().fetch()).getFullName();
-            lender = ((User) transaction.getLender().fetch()).getFullName();
         } catch (ParseException e) {
             Log.e("NotificationAdapter", "Failed to fetch user data");
         }
@@ -162,7 +160,15 @@ public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotifi
                 }
                 case MotionEvent.ACTION_UP:
                 {
-                    long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
+                    x2 = event.getX();
+                    dx = x2-x1;
+
+                    if(dx < - MAX_CLICK_DISTANCE) view.setTranslationX(-buttonWidth);
+                    if(dx > MAX_CLICK_DISTANCE) view.setTranslationX(0);
+
+                }
+                case MotionEvent.ACTION_CANCEL:
+                {
                     x2 = event.getX();
                     dx = x2-x1;
 
