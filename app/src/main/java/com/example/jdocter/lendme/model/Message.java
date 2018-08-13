@@ -14,11 +14,14 @@ public class Message extends ParseObject {
     public static final String receiverKey="Receiver";
     public static final String updatedAtKey = "updatedAt";
     public static final String messageKey="message";
+    public static final String createdAtKey="createdAt";
 
 
-    @Override
-    public Date getUpdatedAt() {
-        return getDate(updatedAtKey);
+    public Date getUpdatedKey() {
+        return getUpdatedAt();
+    }
+    public Date getCreatedKey(){
+        return getCreatedAt();
     }
 
     public String getSenderId(){
@@ -59,6 +62,10 @@ public class Message extends ParseObject {
             return this;
         }
 
+        public Message.Query dec() {
+            orderByDescending("createdAt");
+            return this;
+        }
         public Message.Query bySender(ParseUser user){
             whereEqualTo(senderKey, user);
             return this;
