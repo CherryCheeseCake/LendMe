@@ -34,7 +34,6 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -54,6 +53,8 @@ public class ItemCalendarActivity extends AppCompatActivity {
     private String itemImageUrl;
     private String username;
     private String borrowerUrl;
+    private ArrayList<Integer> availableDays;
+
 
 
 
@@ -91,6 +92,8 @@ public class ItemCalendarActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         itemImageUrl = mPost.getImage().getUrl();
+        availableDays = (ArrayList<Integer>)mPost.getAvailableDays();
+
 
         List<ParseObject> transactions = new ArrayList<>();
 
@@ -162,6 +165,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
         cal1.setTime(startEndDates.get(0));
         Calendar cal2 = new GregorianCalendar();
         cal2.setTime(startEndDates.get(startEndDates.size()-1));
+        cal2.add(Calendar.DAY_OF_YEAR, 1);
         String date = DateUtils.formatDateRange(this, cal1.getTimeInMillis(), cal2.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE |
                 DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_ALL);
 
@@ -208,8 +212,14 @@ public class ItemCalendarActivity extends AppCompatActivity {
         lastYear.add(Calendar.YEAR, -1);
 
         ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        calendar.deactivateDates(list);
+        for (int i=1; i<=7;i++){
+
+            list.add(i);
+
+        }
+        list.removeAll(availableDays);
+
+
 
 
 
@@ -217,7 +227,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
                 .withSelectedDate(new Date())
                 // deactivates given dates, non selectable
-                .withDeactivateDates(new ArrayList<>(Collections.singletonList(7)))
+                .withDeactivateDates(list)
                 // highlight dates in red color, mean they are aleady used.
                 .withHighlightedDates(finalArrayList);
 
