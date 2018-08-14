@@ -3,6 +3,7 @@ package com.example.jdocter.lendme;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jdocter.lendme.model.Message;
 import com.parse.ParseException;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
     List<Message> mMessage;
@@ -43,12 +46,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         //populate the views according to this data
         try {
-            viewHolder.tvSenderUsername.setText(message.getSender().fetchIfNeeded().getUsername());
+            String str="@"+message.getSender().fetchIfNeeded().getUsername();
+            viewHolder.tvSenderUsername.setText(str);
         } catch (ParseException e) {
 
         }
         viewHolder.tvMessageContent.setText(message.getMessageKey());
-        //viewHolder.tvDate.setText(message.getUpdatedAt());
 
 
         String profileUrl = null;
@@ -62,8 +65,26 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 .apply(new RequestOptions().transform(new CircleTransform(context)))
                 .into(viewHolder.ivSenderProfileImage);
 
-        //Glide.with(context).load(message.getSender().getParseFile("profileImage").getUrl()).into(viewHolder.ivSenderProfileImage);
-        //Glide.with(context).load(message.getSender().get).into(viewHolder.ivSenderProfileImage);
+        //Prints date that the message was created
+        viewHolder.tvDate.setText(getRelativeTimeAgo(message.getCreatedKey().toString()));
+        //viewHolder.tvDate.setText(getRelativeTimeAgo(message.getUpdatedKey().toString()));
+    }
+
+    public String getRelativeTimeAgo(String rawJsonDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDate;
     }
 
     @Override

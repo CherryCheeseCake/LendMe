@@ -56,7 +56,7 @@ public class MessageFragment extends Fragment {
     }
     private void loadMessages(ParseUser user){
         final Message.Query messageQuery=new Message.Query();
-        messageQuery.byReceiver(user);
+        messageQuery.byReceiver(user).dec();
 
         messageQuery.findInBackground(new FindCallback<Message>() {
             @Override

@@ -3,6 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="@dimen/pad_15dp">
+
+    <ImageView
+        android:id="@+id/ivSenderProfileImage"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/profile"/>
+
+    <TextView
+        android:id="@+id/tvSenderUsername"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/ivSenderProfileImage"
+        android:layout_alignTop="@+id/ivSenderProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/txt_15sp"
+        android:text="Username"/>
+
+    <TextView
+        android:id="@+id/tvMessageContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pad_5dp"
+        android:layout_below="@+id/tvSenderUsername"
+        android:layout_alignLeft="@+id/tvSenderUsername"
+        android:text="@string/message_preview_body"
+        />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="August, 14 2018"
+        android:textSize="12sp"/>
+
+</RelativeLayout>
+<!--
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="110dp"
     android:layout_margin="@dimen/pad_5dp">
 
@@ -36,6 +84,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="August, 17 2018" />
+        android:text="August, 14 2018" />
 
-</RelativeLayout>
+</RelativeLayout>-->
