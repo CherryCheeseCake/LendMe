@@ -198,6 +198,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             transaction.setStatusCode(CANCELED_LENDER);
                             mTransactions.remove(position);
                             notifyItemRemoved(position);
+
+
                             Toast toast = Toast.makeText(view.getContext(),"Transaction denied.",Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -361,6 +363,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
     }
+
+
 
     @Override
     public int getItemCount() {
