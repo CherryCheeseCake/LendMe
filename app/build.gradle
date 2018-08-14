@@ -24,6 +24,13 @@ android {
         }
     }
 }
+
+repositories {
+    maven {
+        url  "https://dl.bintray.com/jingyirose/calendarRange"
+    }
+}
+
 ext {
     permissionDispatcherVersion = "3.2.0"
     googlePlayVersion = "15.0.0"//map
@@ -88,8 +95,8 @@ dependencies {
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
 
-    implementation 'com.savvi.datepicker:rangepicker:1.2.0'
-    //implementation 'me.roseliu:calendarlibrary:0.1.0'
+    //implementation 'com.savvi.datepicker:rangepicker:1.2.0'
+    implementation 'me.roseliu:calendarlibrary:1.0.2'
 
 
 

@@ -10,14 +10,14 @@ import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.model.Transaction;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.savvi.rangedatepicker.CalendarPickerView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import me.roseliu.calendarlibrary.CalendarPickerView;
 
 
 public class CalenderFragment extends Fragment {
@@ -57,11 +57,15 @@ public class CalenderFragment extends Fragment {
             userTransactions.add(t);
         }
         ArrayList<Date> multirangelist = new ArrayList<Date>();
-        multirangelist.add(userTransactions.get(0).getStartDate());
-        multirangelist.add(userTransactions.get(0).getEndDate());
+        for(int i =0; i<=3; i++){
+            multirangelist.add(userTransactions.get(i).getStartDate());
+            multirangelist.add(userTransactions.get(i).getEndDate());
+
+        }
+
         calendar.init(lastYear.getTime(), nextYear.getTime(),new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
                 //.inMode(CalendarPickerView.SelectionMode.MULTIPLE_RANGE)
-                .inMode(CalendarPickerView.SelectionMode.RANGE)
+                .inMode(CalendarPickerView.SelectionMode.MULTIPLE_RANGE)
                 .withSelectedDates(multirangelist)
                 .displayOnly();
 
