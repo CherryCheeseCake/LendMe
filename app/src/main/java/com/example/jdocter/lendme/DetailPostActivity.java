@@ -28,6 +28,8 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -45,14 +47,14 @@ public class DetailPostActivity extends AppCompatActivity {
     Button btRequest;
     ImageButton ibLikes;
     TextView txvUser;
+    Button btDistance;
 
     boolean isImageFitToScreen;
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
     private final int REQUEST_CODE = 20;
-    private Double userLatitude=0.0;
-    private Double userLongitude=0.0;
+    private ParseGeoPoint userGeo;
     private static String ownerIdKey = "ownerId";
     private static String objectIdKey = "objectId";
     private final static String userIdTag = "userId";
@@ -73,6 +75,7 @@ public class DetailPostActivity extends AppCompatActivity {
         btRequest = (Button) findViewById(R.id.btRequest);
         ibLikes = (ImageButton) findViewById(R.id.ibLikes);
         txvUser = (TextView) findViewById(R.id.textView);
+        btDistance = (Button) findViewById(R.id.btDistance);
 
         isImageFitToScreen = false;
         final String objectId = getIntent().getStringExtra("objectId");
@@ -181,6 +184,15 @@ public class DetailPostActivity extends AppCompatActivity {
             });
 
             final ParseGeoPoint parseGeoPoint = post.getParseGeoPoint("location");
+            userGeo=ParseUser.getCurrentUser().getParseGeoPoint("location");
+            Double distance = parseGeoPoint.distanceInMilesTo(userGeo);
+            Double truncated = BigDecimal.valueOf(distance)
+                    .setScale(1, RoundingMode.HALF_UP)
+                    .doubleValue();
+
+            btDistance.setText(truncated.toString()+" miles");
+
+
             setUpMapIfNeeded(parseGeoPoint);
 
             ivItemImage.setClickable(true);
@@ -219,10 +231,6 @@ public class DetailPostActivity extends AppCompatActivity {
                         LatLng place = new LatLng(v,v1);
 
 
-                        ParseGeoPoint userGeo;
-                        userLatitude=39.9;
-                        userLongitude=-116.0;
-                        LatLng userLiveLocation = new LatLng(userLatitude,userLongitude);
 
                         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
@@ -234,7 +242,7 @@ public class DetailPostActivity extends AppCompatActivity {
                         map.setMaxZoomPreference(25.0f);
                         CameraPosition cameraPosition = new CameraPosition.Builder()
                                 .target(place)      // Sets the center of the map to Mountain View
-                                .zoom(17)                   // Sets the zoom
+                                .zoom(14)                   // Sets the zoom
                                 //.bearing(90)                // Sets the orientation of the camera to east
                                 //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
                                 .build();                   // Creates a CameraPosition from the builder

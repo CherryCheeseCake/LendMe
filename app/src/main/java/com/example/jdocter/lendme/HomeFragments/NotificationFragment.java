@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.jdocter.lendme.R;
 import com.example.jdocter.lendme.SimpleNotificationAdapter;
@@ -27,6 +28,7 @@ public class NotificationFragment extends Fragment {
     private RecyclerView rvNotification;
     private SimpleNotificationAdapter adapter;
     private SwipeController swipeController;
+    private ProgressBar pBar;
 
 
     @Override
@@ -40,6 +42,7 @@ public class NotificationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        pBar = view.findViewById(R.id.pBar);
         rvNotification = view.findViewById(R.id.rvNotification);
         transactions = new ArrayList<>();
         adapter = new SimpleNotificationAdapter(transactions);
@@ -82,6 +85,9 @@ public class NotificationFragment extends Fragment {
                 for (Transaction t : objects) {
                     transactions.add(t);
                     adapter.notifyItemInserted(transactions.size()-1);
+
+                    pBar.setVisibility(View.GONE);
+
                 }
             }
         });

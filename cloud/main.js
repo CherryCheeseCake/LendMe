@@ -66,6 +66,7 @@ Parse.Cloud.define('pushChannelTest', function(request, response) {
   var params = request.params;
   var user = request.user;
   var customData = params.customData;
+  var confirm = params.confirm;
   var receiver = params.receiver;
   if (!customData) {
     response.error("Missing customData!")
