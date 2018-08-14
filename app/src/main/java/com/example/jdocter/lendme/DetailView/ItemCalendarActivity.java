@@ -135,7 +135,7 @@ public class ItemCalendarActivity extends AppCompatActivity {
                 }
                 //push
 
-                Toast toast = Toast.makeText(ItemCalendarActivity.this,"Post Sucess!",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(ItemCalendarActivity.this,"Request Sent!",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 Intent i = new Intent(ItemCalendarActivity.this, MainActivity.class);
