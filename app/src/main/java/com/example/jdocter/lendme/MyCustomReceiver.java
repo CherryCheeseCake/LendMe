@@ -61,11 +61,17 @@ public class MyCustomReceiver extends BroadcastReceiver {
                 while (itr.hasNext()) {
                     String key = (String) itr.next();
                     String value = json.getString(key);
+                    JSONObject object = new JSONObject(value);
                     Log.d(TAG, "..." + key + " => " + value);
                     // Extract custom push data
                     if (key.equals("customdata")) {
                         // create a local notification
-                        createNotification(context, json);
+
+                        if(object.has("message")){
+                            createConfirmNotification(context,json);
+                        }else{
+                            createNotification(context, json);
+                        }
                     }
 //                    else if (key.equals("launch")) {
 //                        // Handle push notification by invoking activity directly
@@ -83,8 +89,22 @@ public class MyCustomReceiver extends BroadcastReceiver {
     }
 
     public static final int NOTIFICATION_ID = 45;
+    public static final int NOTIFICATION_ID_CONFIRM = 50;
 
 
+    public void createConfirmNotification(Context context, JSONObject jsonObject) throws JSONException {
+        initChannels(context);
+        String values = jsonObject.getString("customdata");
+        JSONObject object = new JSONObject(values);
+        String message = object.getString("message");
+        NotificationCompat.Builder mBuilder =
+                // Builder class for devices targeting API 26+ requires a channel ID
+                new NotificationCompat.Builder(context, "default")
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle("LendMe notification")
+                        .setContentText(message);
+        notificationManager.notify(NOTIFICATION_ID_CONFIRM, mBuilder.build());
+    }
 
     public void createNotification(Context context, JSONObject jsonObject) throws JSONException {
         initChannels(context);

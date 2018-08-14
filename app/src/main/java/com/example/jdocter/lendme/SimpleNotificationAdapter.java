@@ -17,11 +17,16 @@ import android.widget.Toast;
 import com.example.jdocter.lendme.model.Post;
 import com.example.jdocter.lendme.model.Transaction;
 import com.example.jdocter.lendme.model.User;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotificationAdapter.ViewHolder> {
@@ -94,6 +99,12 @@ public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotifi
                 transaction.setStatusCode(CANCELED_LENDER);
                 mTransactions.remove(position);
                 notifyItemRemoved(position);
+                //TODO Create a notification to the borrower
+                try {
+                    pushNotification(false);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Toast toast = Toast.makeText(view.getContext(),"Transaction denied.",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -104,6 +115,12 @@ public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotifi
             public void onClick(View view) {
                 transaction.setStatusCode(LENDER_ACCEPTED);
                 notifyItemChanged(position);
+                //TODO Create a notification to the borrower
+                try {
+                    pushNotification(true);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Toast toast = Toast.makeText(view.getContext(),"Transaction confirmed!",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -112,6 +129,22 @@ public class SimpleNotificationAdapter extends RecyclerView.Adapter<SimpleNotifi
 
 
 
+    }
+
+
+    public void pushNotification(boolean ifAccepted) throws JSONException {
+        JSONObject payload = new JSONObject();
+        if(ifAccepted){
+            payload.put("message", "Your request has been accepted");
+        }else{
+            payload.put("message", "Sorry, your request has been declined");
+        }
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("customData", payload.toString());
+
+
+        ParseCloud.callFunctionInBackground("pushChannelTest", data);
     }
 
     @Override
