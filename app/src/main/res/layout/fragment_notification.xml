@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragments.NotificationFragment">
 
+    <ProgressBar
+        android:id="@+id/pBar"
+        android:outlineAmbientShadowColor="@color/darkGrey"
+        style="?android:attr/progressBarStyleLarge"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ProgressBar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvNotification"
