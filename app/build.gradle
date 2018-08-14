@@ -1,11 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-//repositories {
-//    maven {
-//        url  "https://dl.bintray.com/jingyirose/calendarRange"
-//    }
-//}
 
 android {
     compileSdkVersion 28
@@ -25,11 +20,7 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url  "https://dl.bintray.com/jingyirose/calendarRange"
-    }
-}
+
 
 ext {
     permissionDispatcherVersion = "3.2.0"
@@ -95,8 +86,8 @@ dependencies {
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
 
-    //implementation 'com.savvi.datepicker:rangepicker:1.2.0'
-    implementation 'me.roseliu:calendarlibrary:1.0.2'
+    implementation 'com.savvi.datepicker:rangepicker:1.2.0'
+
 
 
 

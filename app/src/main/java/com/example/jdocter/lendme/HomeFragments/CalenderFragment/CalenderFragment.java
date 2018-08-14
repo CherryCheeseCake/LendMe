@@ -21,7 +21,6 @@ import java.util.Locale;
 
 
 
-
 public class CalenderFragment extends Fragment {
 
     CalendarPickerView calendar;
@@ -55,19 +54,17 @@ public class CalenderFragment extends Fragment {
             e.printStackTrace();
         }
 
-        for (Transaction t: objects) {
-            userTransactions.add(t);
-        }
-        ArrayList<Date> multirangelist = new ArrayList<Date>();
-        for(int i =0; i<=3; i++){
-            multirangelist.add(userTransactions.get(i).getStartDate());
-            multirangelist.add(userTransactions.get(i).getEndDate());
 
-        }
+        ArrayList<Date> multirangelist = new ArrayList<Date>();
+
+        multirangelist.add(objects.get(0).getStartDate());
+        multirangelist.add(objects.get(0).getEndDate());
+
+
 
         calendar.init(lastYear.getTime(), nextYear.getTime(),new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
                 //.inMode(CalendarPickerView.SelectionMode.MULTIPLE_RANGE)
-                .inMode(CalendarPickerView.SelectionMode.MULTIPLE_RANGE)
+                .inMode(CalendarPickerView.SelectionMode.RANGE)
                 .withSelectedDates(multirangelist)
                 .displayOnly();
 
